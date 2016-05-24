@@ -40,11 +40,22 @@ namespace EscolaIdiomas
             else
                 MessageBox.Show("Erro");*/
 
-            if (!Pessoa.VerificaData(msk_nascAluno.Text.Trim()))
-                MessageBox.Show("Erro");
+            string ANO = msk_nascAluno.Text;
+            ANO = ANO[4].ToString() + ANO[5].ToString() + ANO[6].ToString() +
+                  ANO[7].ToString();
+            if (!Pessoa.VerificaIdade(int.Parse(ANO)))
+                MessageBox.Show("menor");
             else
-                MessageBox.Show("ok");
-
+                MessageBox.Show("maior");
         }
-   }
+
+        private void btn_fotoAluno_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog d = new OpenFileDialog();
+            if (d.ShowDialog() == DialogResult.OK)
+            {
+                pic_fotoAluno.Image = Image.FromFile(d.FileName);
+            }
+        }
+    }
 }

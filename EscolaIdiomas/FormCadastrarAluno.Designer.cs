@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCadastrarAluno));
             this.pic_fotoAluno = new System.Windows.Forms.PictureBox();
             this.txt_nomeAluno = new System.Windows.Forms.TextBox();
             this.cod_aluno = new System.Windows.Forms.TextBox();
@@ -81,9 +82,11 @@
             // pic_fotoAluno
             // 
             this.pic_fotoAluno.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pic_fotoAluno.InitialImage = ((System.Drawing.Image)(resources.GetObject("pic_fotoAluno.InitialImage")));
             this.pic_fotoAluno.Location = new System.Drawing.Point(366, 38);
             this.pic_fotoAluno.Name = "pic_fotoAluno";
             this.pic_fotoAluno.Size = new System.Drawing.Size(118, 157);
+            this.pic_fotoAluno.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pic_fotoAluno.TabIndex = 0;
             this.pic_fotoAluno.TabStop = false;
             // 
@@ -436,6 +439,7 @@
             this.btn_fotoAluno.TabIndex = 33;
             this.btn_fotoAluno.Text = "Escolher Foto";
             this.btn_fotoAluno.UseVisualStyleBackColor = true;
+            this.btn_fotoAluno.Click += new System.EventHandler(this.btn_fotoAluno_Click);
             // 
             // label12
             // 

@@ -104,6 +104,27 @@ namespace EscolaIdiomas
             return true;
         }
 
+        public static bool Bissexto(string ANO)
+        {
+            string f = ANO[2].ToString() + ANO[3];
+            bool bissexto = false;
+
+            if ((int.Parse(ANO) % 4) == 0)
+            {
+                if (!(f[0] == 0 && f[1] == 0))
+                {
+                    bissexto = true;
+                }
+                else
+                {
+                    if (int.Parse(ANO) % 400 == 0)
+                        bissexto = true;
+                }
+            }
+
+            return bissexto;
+        }
+
         public static bool VerificaData(string DATA)
         {
             if (DATA.Length != 8) return false;
@@ -115,15 +136,14 @@ namespace EscolaIdiomas
 
             if (mes > 12) return false;
 
-            if (ano < 1900) return false;
-
-            if (ano > DateTime.Now.Year) return false;
+            if (ano < 1900 || ano > DateTime.Now.Year) return false;
 
             if (mes < 07)
             {
                 if (mes == 02)
-                    if (DateTime.IsLeapYear(ano) && dia > 29)
-                        return false;
+                {
+                    if (DateTime.IsLeapYear(ano) && dia > 29) { return false; }
+                }
                 else
                     if (dia > 28) return false;
 
@@ -149,6 +169,19 @@ namespace EscolaIdiomas
             }
             
             return true;
+        }
+
+        public static bool VerificaIdade(int ANO)
+        {
+            if (DateTime.Now.Year - ANO < 18) return false;
+            return true;
+        }
+    }
+
+    public class Foto
+    {
+        public static void InserirImagem()
+        {
         }
     }
 }
