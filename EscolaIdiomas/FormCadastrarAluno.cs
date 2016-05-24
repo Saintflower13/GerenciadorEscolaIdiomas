@@ -39,7 +39,12 @@ namespace EscolaIdiomas
                 MessageBox.Show("Ok");
             else
                 MessageBox.Show("Erro");*/
-            
+
+            if (!Pessoa.VerificaData(msk_nascAluno.Text.Trim()))
+                MessageBox.Show("Erro");
+            else
+                MessageBox.Show("ok");
+
         }
    }
 }

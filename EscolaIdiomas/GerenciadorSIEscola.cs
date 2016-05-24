@@ -106,7 +106,49 @@ namespace EscolaIdiomas
 
         public static bool VerificaData(string DATA)
         {
+            if (DATA.Length != 8) return false;
 
+            int dia = int.Parse(DATA[0].ToString() + DATA[1].ToString());
+            int mes = int.Parse(DATA[2].ToString() + DATA[3].ToString());
+            int ano = int.Parse(DATA[4].ToString() + DATA[5].ToString() +
+                                DATA[6].ToString() + DATA[7].ToString());
+
+            if (mes > 12) return false;
+
+            if (ano < 1900) return false;
+
+            if (ano > DateTime.Now.Year) return false;
+
+            if (mes < 07)
+            {
+                if (mes == 02)
+                    if (DateTime.IsLeapYear(ano) && dia > 29)
+                        return false;
+                else
+                    if (dia > 28) return false;
+
+                if ((mes % 2) == 0)
+                {
+                    if (dia > 30) return false;
+                }    
+                else
+                    if (dia > 31) return false;
+            }
+
+            if (mes == 07)
+                if (dia > 31) return false;
+
+            if (mes > 7)
+            {
+                if ((mes % 2) == 0)
+                {
+                    if (dia > 31) return false;
+                }
+                else
+                    if (dia > 30) return false;
+            }
+            
+            return true;
         }
     }
 }
