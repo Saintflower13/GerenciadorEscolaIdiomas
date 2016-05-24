@@ -103,5 +103,10 @@ namespace EscolaIdiomas
             if ((DDD.Length < 2) || (TEL.Length < 8)) return false;
             return true;
         }
+
+        public static bool VerificaData(string DATA)
+        {
+
+        }
     }
 }
