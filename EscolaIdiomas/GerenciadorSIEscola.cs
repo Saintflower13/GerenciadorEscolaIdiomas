@@ -9,9 +9,9 @@ namespace EscolaIdiomas
 {
     public class Pessoa
     {
-        public static bool VerificaLetras(string LETRAS)
+        public static bool VerificaSoLetras(string LETRAS)
         {
-            Regex regex = new Regex(@"^[a-zA-Z\s]+$");
+            Regex regex = new Regex(@"^[a-zA-Zà-ùÀ-Ù\s]+$");
             if (regex.IsMatch(LETRAS))
                 return true;
             return false;
@@ -103,5 +103,30 @@ namespace EscolaIdiomas
             if ((DDD.Length < 2) || (TEL.Length < 8)) return false;
             return true;
         }
+
+        public static bool VerificaDDDeTelefoneALT(string DDD, string TEL)
+        {
+            if (DDD.Length == 0 && TEL.Length == 0)
+                return true;
+            else
+            {
+                if ((DDD.Length < 2) || (TEL.Length < 8)) return false;
+            }
+
+            return true;
+        }
+
+        public static bool VerificaIdade(int ANO)
+        {
+            if ((DateTime.Now.Year - ANO) < 18)
+                return false;
+            else
+                return true;
+        }
+    }
+
+    public class EnviarMensagens
+    {
+
     }
 }

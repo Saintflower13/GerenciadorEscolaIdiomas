@@ -35,7 +35,7 @@
             this.msk_cpfAluno = new System.Windows.Forms.MaskedTextBox();
             this.msk_nascAluno = new System.Windows.Forms.MaskedTextBox();
             this.txt_emailAluno = new System.Windows.Forms.TextBox();
-            this.endereco_aluno = new System.Windows.Forms.TextBox();
+            this.txt_enderecoAluno = new System.Windows.Forms.TextBox();
             this.txt_cidadeAluno = new System.Windows.Forms.TextBox();
             this.txt_bairroAluno = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -84,6 +84,7 @@
             this.pic_fotoAluno.Location = new System.Drawing.Point(366, 38);
             this.pic_fotoAluno.Name = "pic_fotoAluno";
             this.pic_fotoAluno.Size = new System.Drawing.Size(118, 157);
+            this.pic_fotoAluno.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pic_fotoAluno.TabIndex = 0;
             this.pic_fotoAluno.TabStop = false;
             // 
@@ -98,6 +99,7 @@
             // 
             // cod_aluno
             // 
+            this.cod_aluno.Enabled = false;
             this.cod_aluno.Location = new System.Drawing.Point(401, 12);
             this.cod_aluno.Name = "cod_aluno";
             this.cod_aluno.Size = new System.Drawing.Size(83, 20);
@@ -129,6 +131,7 @@
             this.msk_nascAluno.Size = new System.Drawing.Size(67, 20);
             this.msk_nascAluno.TabIndex = 5;
             this.msk_nascAluno.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.msk_nascAluno.Leave += new System.EventHandler(this.msk_nascAluno_Leave);
             // 
             // txt_emailAluno
             // 
@@ -138,13 +141,13 @@
             this.txt_emailAluno.Size = new System.Drawing.Size(293, 20);
             this.txt_emailAluno.TabIndex = 6;
             // 
-            // endereco_aluno
+            // txt_enderecoAluno
             // 
-            this.endereco_aluno.Location = new System.Drawing.Point(75, 142);
-            this.endereco_aluno.MaxLength = 50;
-            this.endereco_aluno.Name = "endereco_aluno";
-            this.endereco_aluno.Size = new System.Drawing.Size(272, 20);
-            this.endereco_aluno.TabIndex = 7;
+            this.txt_enderecoAluno.Location = new System.Drawing.Point(75, 142);
+            this.txt_enderecoAluno.MaxLength = 50;
+            this.txt_enderecoAluno.Name = "txt_enderecoAluno";
+            this.txt_enderecoAluno.Size = new System.Drawing.Size(272, 20);
+            this.txt_enderecoAluno.TabIndex = 7;
             // 
             // txt_cidadeAluno
             // 
@@ -436,6 +439,7 @@
             this.btn_fotoAluno.TabIndex = 33;
             this.btn_fotoAluno.Text = "Escolher Foto";
             this.btn_fotoAluno.UseVisualStyleBackColor = true;
+            this.btn_fotoAluno.Click += new System.EventHandler(this.btn_fotoAluno_Click);
             // 
             // label12
             // 
@@ -518,7 +522,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txt_bairroAluno);
             this.Controls.Add(this.txt_cidadeAluno);
-            this.Controls.Add(this.endereco_aluno);
+            this.Controls.Add(this.txt_enderecoAluno);
             this.Controls.Add(this.txt_emailAluno);
             this.Controls.Add(this.msk_nascAluno);
             this.Controls.Add(this.msk_cpfAluno);
@@ -549,7 +553,7 @@
         private System.Windows.Forms.MaskedTextBox msk_cpfAluno;
         private System.Windows.Forms.MaskedTextBox msk_nascAluno;
         private System.Windows.Forms.TextBox txt_emailAluno;
-        private System.Windows.Forms.TextBox endereco_aluno;
+        private System.Windows.Forms.TextBox txt_enderecoAluno;
         private System.Windows.Forms.TextBox txt_cidadeAluno;
         private System.Windows.Forms.TextBox txt_bairroAluno;
         private System.Windows.Forms.Label label1;

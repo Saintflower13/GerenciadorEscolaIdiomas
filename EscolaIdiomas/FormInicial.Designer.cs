@@ -30,6 +30,7 @@
         {
             this.Menu = new System.Windows.Forms.MenuStrip();
             this.cadastrarAlunoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.enviarMensagensToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -37,19 +38,27 @@
             // 
             this.Menu.Dock = System.Windows.Forms.DockStyle.Right;
             this.Menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cadastrarAlunoToolStripMenuItem});
-            this.Menu.Location = new System.Drawing.Point(1225, 0);
+            this.cadastrarAlunoToolStripMenuItem,
+            this.enviarMensagensToolStripMenuItem});
+            this.Menu.Location = new System.Drawing.Point(1215, 0);
             this.Menu.Name = "Menu";
-            this.Menu.Size = new System.Drawing.Size(119, 721);
+            this.Menu.Size = new System.Drawing.Size(129, 721);
             this.Menu.TabIndex = 0;
             this.Menu.Text = "menuStrip1";
             // 
             // cadastrarAlunoToolStripMenuItem
             // 
             this.cadastrarAlunoToolStripMenuItem.Name = "cadastrarAlunoToolStripMenuItem";
-            this.cadastrarAlunoToolStripMenuItem.Size = new System.Drawing.Size(106, 19);
+            this.cadastrarAlunoToolStripMenuItem.Size = new System.Drawing.Size(116, 19);
             this.cadastrarAlunoToolStripMenuItem.Text = "Cadastrar Aluno...";
             this.cadastrarAlunoToolStripMenuItem.Click += new System.EventHandler(this.cadastrarAlunoToolStripMenuItem_Click);
+            // 
+            // enviarMensagensToolStripMenuItem
+            // 
+            this.enviarMensagensToolStripMenuItem.Name = "enviarMensagensToolStripMenuItem";
+            this.enviarMensagensToolStripMenuItem.Size = new System.Drawing.Size(116, 19);
+            this.enviarMensagensToolStripMenuItem.Text = "Enviar Mensagens...";
+            this.enviarMensagensToolStripMenuItem.Click += new System.EventHandler(this.enviarMensagensToolStripMenuItem_Click);
             // 
             // FormInicial
             // 
@@ -75,6 +84,7 @@
 
         private System.Windows.Forms.MenuStrip Menu;
         private System.Windows.Forms.ToolStripMenuItem cadastrarAlunoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem enviarMensagensToolStripMenuItem;
     }
 }
 

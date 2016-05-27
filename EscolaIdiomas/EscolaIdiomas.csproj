@@ -58,11 +58,41 @@
     <Compile Include="FormCadastrarResponsavel.Designer.cs">
       <DependentUpon>FormCadastrarResponsavel.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormEnviarMensagem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEnviarMensagem.Designer.cs">
+      <DependentUpon>FormEnviarMensagem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormEnviarParaAlunos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEnviarParaAlunos.Designer.cs">
+      <DependentUpon>FormEnviarParaAlunos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormEnviarParaProfessores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEnviarParaProfessores.Designer.cs">
+      <DependentUpon>FormEnviarParaProfessores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormEnviarParaTodos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEnviarParaTodos.Designer.cs">
+      <DependentUpon>FormEnviarParaTodos.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormInicial.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormInicial.Designer.cs">
       <DependentUpon>FormInicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPesquisarResponsavel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPesquisarResponsavel.Designer.cs">
+      <DependentUpon>FormPesquisarResponsavel.cs</DependentUpon>
     </Compile>
     <Compile Include="GerenciadorSIEscola.cs" />
     <Compile Include="Program.cs" />
@@ -73,8 +103,23 @@
     <EmbeddedResource Include="FormCadastrarResponsavel.resx">
       <DependentUpon>FormCadastrarResponsavel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormEnviarMensagem.resx">
+      <DependentUpon>FormEnviarMensagem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEnviarParaAlunos.resx">
+      <DependentUpon>FormEnviarParaAlunos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEnviarParaProfessores.resx">
+      <DependentUpon>FormEnviarParaProfessores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEnviarParaTodos.resx">
+      <DependentUpon>FormEnviarParaTodos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormInicial.resx">
       <DependentUpon>FormInicial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPesquisarResponsavel.resx">
+      <DependentUpon>FormPesquisarResponsavel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

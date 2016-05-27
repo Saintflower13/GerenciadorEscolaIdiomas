@@ -23,5 +23,12 @@ namespace EscolaIdiomas
             form.MdiParent = this;
             form.Show();
         }
+
+        private void enviarMensagensToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormEnviarMensagem form = new FormEnviarMensagem();
+            form.MdiParent = this;
+            form.Show();
+        }
     }
 }
