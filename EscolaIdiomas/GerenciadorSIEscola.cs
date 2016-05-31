@@ -46,8 +46,6 @@ namespace EscolaIdiomas
             {
                 case "11111111111":
                     return false;
-                case "00000000000":
-                    return false;
                 case "22222222222":
                     return false;
                 case "33333333333":

@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Text.RegularExpressions;
 
 namespace EscolaIdiomas
 {
     public partial class FormCadastrarAluno : Form
     {
+        public string caminhoImagem = "";
+
         public FormCadastrarAluno()
         {
             InitializeComponent();
@@ -20,41 +21,57 @@ namespace EscolaIdiomas
 
         private void btn_salvarAluno_Click(object sender, EventArgs e)
         {
-            string Ano = "";
-            Ano = msk_nascAluno.Text.Trim();
-            Ano = Ano[4].ToString() + Ano[5].ToString() + Ano[6].ToString() +
-                  Ano[7].ToString();
+            string nomeALuno = txt_nomeAluno.Text.Trim(),
+                   rg = msk_rgALuno.Text.Trim(),
+                   cpf = msk_cpfAluno.Text.Trim(),
+                   nasc = msk_nascAluno.Text.Trim(),
+                   email = txt_emailAluno.Text.Trim(),
+                   dddAluno = msk_dddAluno.Text.Trim(),
+                   telAluno = msk_telAluno.Text.Trim(),
+                   dddAltAluno = msk_dddAltAluno.Text.Trim(),
+                   telAltAluno = msk_telAltAluno.Text.Trim(),
+                   endereco = txt_enderecoAluno.Text.Trim(),
+                   bairro = txt_bairroAluno.Text.Trim(),
+                   cidade = txt_cidadeAluno.Text.Trim(),
+                   nomeMae = txt_nomeMae.Text.Trim(),
+                   dddMae = msk_dddMae.Text.Trim(),
+                   telMae = msk_telMae.Text.Trim(),
+                   nomePai = txt_nomePai.Text.Trim(),
+                   dddPai = msk_dddPai.Text.Trim(),
+                   telPai = msk_telPai.Text.Trim();
 
+            char sexo = ' ';
+            
             // Realiza as verificações obrigatórias
-            if (Pessoa.VerificaSoLetras(txt_nomeAluno.Text.Trim()) &&
-                Pessoa.VerificaRG(msk_rgALuno.Text.Trim()) &&
-                Pessoa.VerificaCPF(msk_cpfAluno.Text.Trim()) &&
-                Pessoa.VerificaEmail(txt_emailAluno.Text.Trim()) &&
-                Pessoa.VerificaDDDeTelefone(msk_dddAluno.Text.Trim(), msk_telAluno.Text.Trim()) &&
-                Pessoa.VerificaDDDeTelefoneALT(msk_dddAltAluno.Text.Trim(), msk_telAltAluno.Text.Trim()) &&
-                Pessoa.VerificaSoLetras(txt_enderecoAluno.Text.Trim()) &&
-                Pessoa.VerificaSoLetras(txt_bairroAluno.Text.Trim()) &&
-                Pessoa.VerificaSoLetras(txt_cidadeAluno.Text.Trim()) &&
+            if (Pessoa.VerificaSoLetras(nomeALuno) && Pessoa.VerificaRG(rg) &&
+                Pessoa.VerificaCPF(cpf) && Pessoa.VerificaEmail(email) &&
+                Pessoa.VerificaDDDeTelefone(dddAluno, telAluno) &&
+                Pessoa.VerificaDDDeTelefoneALT(dddAltAluno, telAltAluno) &&
+                Pessoa.VerificaSoLetras(endereco) && Pessoa.VerificaSoLetras(bairro) &&
+                Pessoa.VerificaSoLetras(cidade) &&
                 rd_F.Checked || rd_M.Checked)
             {
+                if (rd_F.Checked) sexo = 'f';
+                if (rd_M.Checked) sexo = 'm';
+
                 // Verifica se o GroupBox está habilitado. 
                 //Se for maior de idade o GrupoResponsáveisLegais estará desabilitado.
                 if (GrupoResponsaveisLegais.Enabled)
                 {
                     // Verifica inserção dos pais
-                    if (txt_nomeMae.Text.Length == 0 && txt_nomePai.Text.Length == 0)
+                    if (nomeMae.Length == 0 && nomePai.Length == 0)
                     {
-                        MessageBox.Show("Aluno menor de idade!\n" +
+                        MessageBox.Show("Aluno menor de idade!\n\n" +
                                         "Informe dados de ao menos um responsável legal.", 
                                         "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
                     }
 
                     // Verifica dados da mãe
-                    if (txt_nomeMae.Text.Length != 0)
+                    if (nomeMae.Length != 0)
                     {
-                        if (!(Pessoa.VerificaSoLetras(txt_nomeMae.Text.Trim()) && 
-                            Pessoa.VerificaDDDeTelefone(msk_dddMae.Text.Trim(), msk_telMae.Text.Trim())))
+                        if (!(Pessoa.VerificaSoLetras(nomeMae) && 
+                            Pessoa.VerificaDDDeTelefone(dddMae, telMae)))
                         {
                             MessageBox.Show("Dados da mãe incorretos ou incompletos!", 
                                             "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -63,12 +80,11 @@ namespace EscolaIdiomas
                     }
 
                     // Verifica dados do pai
-                    if (txt_nomePai.Text.Length != 0)
+                    if (nomePai.Length != 0)
                     {
-                        if (!(Pessoa.VerificaSoLetras(txt_nomeMae.Text.Trim()) &&
-                            Pessoa.VerificaDDDeTelefone(msk_dddMae.Text.Trim(), msk_telMae.Text.Trim())))
+                        if (!(Pessoa.VerificaSoLetras(nomeMae) && Pessoa.VerificaDDDeTelefone(dddMae, telMae)))
                         {
-                            MessageBox.Show("Dados da mãe incorretos ou incompletos!", 
+                            MessageBox.Show("Dados do pai incorretos ou incompletos!", 
                                             "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             return;
                         }
@@ -78,6 +94,11 @@ namespace EscolaIdiomas
                 // Verifica se o aluno é responsável financeiro
                 if (rd_S.Checked)
                 {
+                    string Ano = "";
+                    Ano = msk_nascAluno.Text.Trim();
+                    Ano = Ano[6].ToString() + Ano[7].ToString() + Ano[8].ToString() +
+                          Ano[9].ToString();
+
                     if (!Pessoa.VerificaIdade(int.Parse(Ano)))
                     {
                         MessageBox.Show("Não é permitido responsabilizar financeiramente " + 
@@ -87,8 +108,21 @@ namespace EscolaIdiomas
                     }
                     else
                     {
-                        MessageBox.Show("Ok");
-                        return; 
+                        string telefoneAlt = dddAltAluno + telAltAluno,
+                               telefone = dddAluno + telAluno;
+
+                        if (GerenciadorBanco.CadastrarAluno(0, nomeALuno, rg, cpf, nasc, sexo,
+                            email, telefone, telefoneAlt, endereco, bairro, cidade, nomeMae,
+                            nomePai, telMae, telPai, caminhoImagem))
+                        {
+                            MessageBox.Show("Aluno cadastrado com sucesso!");
+                            return;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Erro ao cadastrar aluno!");
+                            return;
+                        }
                     }
                     
                 }
@@ -104,9 +138,24 @@ namespace EscolaIdiomas
                    
                     if (resultado.Equals(DialogResult.Yes))
                     {
-                        FormCadastrarAluno form = new FormCadastrarAluno();
-                        form.Show();
-                        return;
+                        FormCadastrarResponsavel form = new FormCadastrarResponsavel();
+                        form.ShowDialog();
+
+                        string telefoneAlt = dddAltAluno + telAltAluno;
+                        string telefone = dddAluno + telAluno;
+
+                        if (GerenciadorBanco.CadastrarAluno(form.codResp, nomeALuno, rg, cpf, nasc, sexo,
+                            email, telefone, telefoneAlt, endereco, bairro, cidade, nomeMae,
+                            nomePai, telMae, telPai, caminhoImagem))
+                        {
+                            MessageBox.Show("Aluno cadastrado com sucesso!");
+                            return;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Erro ao cadastrar aluno!");
+                            return;
+                        }
                     }
 
                     if (resultado.Equals(DialogResult.No))
@@ -130,16 +179,20 @@ namespace EscolaIdiomas
             if (p.ShowDialog() == DialogResult.OK)
             {
                 pic_fotoAluno.ImageLocation = p.FileName;
+                caminhoImagem = p.FileName;
             }
 
         }
 
         private void msk_nascAluno_Leave(object sender, EventArgs e)
         {
+            if (msk_nascAluno.Text.Length == 0)
+                return;
+
             string Ano = "";
             Ano = msk_nascAluno.Text.Trim();
-            Ano = Ano[4].ToString() + Ano[5].ToString() + Ano[6].ToString() +
-                  Ano[7].ToString();
+            Ano = Ano[6].ToString() + Ano[7].ToString() + Ano[8].ToString() +
+                  Ano[9].ToString();
 
             if (!Pessoa.VerificaIdade(int.Parse(Ano)))
                 GrupoResponsaveisLegais.Enabled = true;

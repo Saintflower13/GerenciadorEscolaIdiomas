@@ -99,7 +99,6 @@
             // 
             // cod_aluno
             // 
-            this.cod_aluno.Enabled = false;
             this.cod_aluno.Location = new System.Drawing.Point(401, 12);
             this.cod_aluno.Name = "cod_aluno";
             this.cod_aluno.Size = new System.Drawing.Size(83, 20);
@@ -130,7 +129,6 @@
             this.msk_nascAluno.Name = "msk_nascAluno";
             this.msk_nascAluno.Size = new System.Drawing.Size(67, 20);
             this.msk_nascAluno.TabIndex = 5;
-            this.msk_nascAluno.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             this.msk_nascAluno.Leave += new System.EventHandler(this.msk_nascAluno_Leave);
             // 
             // txt_emailAluno
@@ -533,7 +531,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "FormCadastrarAluno";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Cadastrar Aluno";
             ((System.ComponentModel.ISupportInitialize)(this.pic_fotoAluno)).EndInit();
             this.GrupoResponsaveisLegais.ResumeLayout(false);
             this.GrupoResponsaveisLegais.PerformLayout();

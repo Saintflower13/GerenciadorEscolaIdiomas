@@ -94,6 +94,7 @@
     <Compile Include="FormPesquisarResponsavel.Designer.cs">
       <DependentUpon>FormPesquisarResponsavel.cs</DependentUpon>
     </Compile>
+    <Compile Include="GerenciadorBanco.cs" />
     <Compile Include="GerenciadorSIEscola.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
