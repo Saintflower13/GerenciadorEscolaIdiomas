@@ -1,6 +1,6 @@
 ﻿namespace EscolaIdiomas
 {
-    partial class FormCadastrarAluno
+    partial class FormAluno
     {
         /// <summary>
         /// Required designer variable.
@@ -99,6 +99,7 @@
             // 
             // cod_aluno
             // 
+            this.cod_aluno.Enabled = false;
             this.cod_aluno.Location = new System.Drawing.Point(401, 12);
             this.cod_aluno.Name = "cod_aluno";
             this.cod_aluno.Size = new System.Drawing.Size(83, 20);
@@ -490,7 +491,7 @@
             this.msk_dddAltAluno.Size = new System.Drawing.Size(20, 20);
             this.msk_dddAltAluno.TabIndex = 37;
             // 
-            // FormCadastrarAluno
+            // FormAluno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -529,7 +530,7 @@
             this.Controls.Add(this.txt_nomeAluno);
             this.Controls.Add(this.pic_fotoAluno);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "FormCadastrarAluno";
+            this.Name = "FormAluno";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             ((System.ComponentModel.ISupportInitialize)(this.pic_fotoAluno)).EndInit();
             this.GrupoResponsaveisLegais.ResumeLayout(false);

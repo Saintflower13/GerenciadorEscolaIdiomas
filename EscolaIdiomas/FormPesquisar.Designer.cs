@@ -1,6 +1,6 @@
 ﻿namespace EscolaIdiomas
 {
-    partial class FormPesquisarResponsavel
+    partial class FormPesquisar
     {
         /// <summary>
         /// Required designer variable.
@@ -28,20 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txt_nomeResponsavel = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.msk_cpfResponsavel = new System.Windows.Forms.MaskedTextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.msk_cpf = new System.Windows.Forms.MaskedTextBox();
+            this.dgv_pesquisa = new System.Windows.Forms.DataGridView();
+            this.cmb_nome = new System.Windows.Forms.ComboBox();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_pesquisa)).BeginInit();
             this.SuspendLayout();
-            // 
-            // txt_nomeResponsavel
-            // 
-            this.txt_nomeResponsavel.Location = new System.Drawing.Point(56, 16);
-            this.txt_nomeResponsavel.Name = "txt_nomeResponsavel";
-            this.txt_nomeResponsavel.Size = new System.Drawing.Size(256, 20);
-            this.txt_nomeResponsavel.TabIndex = 0;
             // 
             // label1
             // 
@@ -61,47 +54,55 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "CPF:";
             // 
-            // msk_cpfResponsavel
+            // msk_cpf
             // 
-            this.msk_cpfResponsavel.Location = new System.Drawing.Point(364, 16);
-            this.msk_cpfResponsavel.Mask = "000.000.000-00";
-            this.msk_cpfResponsavel.Name = "msk_cpfResponsavel";
-            this.msk_cpfResponsavel.Size = new System.Drawing.Size(83, 20);
-            this.msk_cpfResponsavel.TabIndex = 3;
+            this.msk_cpf.Location = new System.Drawing.Point(364, 16);
+            this.msk_cpf.Mask = "000.000.000-00";
+            this.msk_cpf.Name = "msk_cpf";
+            this.msk_cpf.Size = new System.Drawing.Size(83, 20);
+            this.msk_cpf.TabIndex = 3;
             // 
-            // dataGridView1
+            // dgv_pesquisa
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(15, 59);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(453, 210);
-            this.dataGridView1.TabIndex = 4;
+            this.dgv_pesquisa.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_pesquisa.Location = new System.Drawing.Point(15, 59);
+            this.dgv_pesquisa.Name = "dgv_pesquisa";
+            this.dgv_pesquisa.Size = new System.Drawing.Size(453, 210);
+            this.dgv_pesquisa.TabIndex = 4;
             // 
-            // FormPesquisarResponsavel
+            // cmb_nome
+            // 
+            this.cmb_nome.FormattingEnabled = true;
+            this.cmb_nome.Location = new System.Drawing.Point(57, 16);
+            this.cmb_nome.Name = "cmb_nome";
+            this.cmb_nome.Size = new System.Drawing.Size(254, 21);
+            this.cmb_nome.TabIndex = 5;
+            this.cmb_nome.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.cmb_nomes_PreviewKeyDown);
+            // 
+            // FormPesquisar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(480, 281);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.msk_cpfResponsavel);
+            this.Controls.Add(this.cmb_nome);
+            this.Controls.Add(this.dgv_pesquisa);
+            this.Controls.Add(this.msk_cpf);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txt_nomeResponsavel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "FormPesquisarResponsavel";
+            this.Name = "FormPesquisar";
             this.Text = "Pesquisar Responsavel";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_pesquisa)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txt_nomeResponsavel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.MaskedTextBox msk_cpfResponsavel;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.MaskedTextBox msk_cpf;
+        private System.Windows.Forms.DataGridView dgv_pesquisa;
+        private System.Windows.Forms.ComboBox cmb_nome;
     }
 }

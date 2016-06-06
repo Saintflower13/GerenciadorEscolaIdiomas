@@ -10,13 +10,15 @@ using System.Windows.Forms;
 
 namespace EscolaIdiomas
 {
-    public partial class FormCadastrarAluno : Form
+    public partial class FormAluno : Form
     {
-        public string caminhoImagem = "";
+        public string caminhoImagem = @"C:\Projeto\user.png";
 
-        public FormCadastrarAluno()
+        public FormAluno(string texto)
         {
             InitializeComponent();
+            pic_fotoAluno.ImageLocation = @"C:\Projeto\user.png";
+            this.Text = texto;
         }
 
         private void btn_salvarAluno_Click(object sender, EventArgs e)
@@ -43,12 +45,12 @@ namespace EscolaIdiomas
             char sexo = ' ';
             
             // Realiza as verificações obrigatórias
-            if (Pessoa.VerificaSoLetras(nomeALuno) && Pessoa.VerificaRG(rg) &&
-                Pessoa.VerificaCPF(cpf) && Pessoa.VerificaEmail(email) &&
-                Pessoa.VerificaDDDeTelefone(dddAluno, telAluno) &&
-                Pessoa.VerificaDDDeTelefoneALT(dddAltAluno, telAltAluno) &&
-                Pessoa.VerificaSoLetras(endereco) && Pessoa.VerificaSoLetras(bairro) &&
-                Pessoa.VerificaSoLetras(cidade) &&
+            if (Verifica.SoLetras(nomeALuno) && Verifica.RG(rg) &&
+                Verifica.CPF(cpf) && Verifica.Email(email) &&
+                Verifica.DDDeTelefone(dddAluno, telAluno) &&
+                Verifica.DDDeTelefoneALT(dddAltAluno, telAltAluno) &&
+                Verifica.SoLetras(endereco) && Verifica.SoLetras(bairro) &&
+                Verifica.SoLetras(cidade) &&
                 rd_F.Checked || rd_M.Checked)
             {
                 if (rd_F.Checked) sexo = 'f';
@@ -70,8 +72,8 @@ namespace EscolaIdiomas
                     // Verifica dados da mãe
                     if (nomeMae.Length != 0)
                     {
-                        if (!(Pessoa.VerificaSoLetras(nomeMae) && 
-                            Pessoa.VerificaDDDeTelefone(dddMae, telMae)))
+                        if (!(Verifica.SoLetras(nomeMae) &&
+                            Verifica.DDDeTelefone(dddMae, telMae)))
                         {
                             MessageBox.Show("Dados da mãe incorretos ou incompletos!", 
                                             "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -82,7 +84,7 @@ namespace EscolaIdiomas
                     // Verifica dados do pai
                     if (nomePai.Length != 0)
                     {
-                        if (!(Pessoa.VerificaSoLetras(nomeMae) && Pessoa.VerificaDDDeTelefone(dddMae, telMae)))
+                        if (!(Verifica.SoLetras(nomeMae) && Verifica.DDDeTelefone(dddMae, telMae)))
                         {
                             MessageBox.Show("Dados do pai incorretos ou incompletos!", 
                                             "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -99,7 +101,7 @@ namespace EscolaIdiomas
                     Ano = Ano[6].ToString() + Ano[7].ToString() + Ano[8].ToString() +
                           Ano[9].ToString();
 
-                    if (!Pessoa.VerificaIdade(int.Parse(Ano)))
+                    if (!Verifica.Maioridade(int.Parse(Ano)))
                     {
                         MessageBox.Show("Não é permitido responsabilizar financeiramente " + 
                                         "menores de idade", "Erro!",
@@ -138,7 +140,7 @@ namespace EscolaIdiomas
                    
                     if (resultado.Equals(DialogResult.Yes))
                     {
-                        FormCadastrarResponsavel form = new FormCadastrarResponsavel();
+                        FormResponsavel form = new FormResponsavel();
                         form.ShowDialog();
 
                         string telefoneAlt = dddAltAluno + telAltAluno;
@@ -160,7 +162,7 @@ namespace EscolaIdiomas
 
                     if (resultado.Equals(DialogResult.No))
                     {
-                        FormPesquisarResponsavel form = new FormPesquisarResponsavel();
+                        FormPesquisar form = new FormPesquisar();
                         form.Show();
                         return;
                     }
@@ -194,7 +196,7 @@ namespace EscolaIdiomas
             Ano = Ano[6].ToString() + Ano[7].ToString() + Ano[8].ToString() +
                   Ano[9].ToString();
 
-            if (!Pessoa.VerificaIdade(int.Parse(Ano)))
+            if (!Verifica.Maioridade(int.Parse(Ano)))
                 GrupoResponsaveisLegais.Enabled = true;
             else
                 GrupoResponsaveisLegais.Enabled = false;

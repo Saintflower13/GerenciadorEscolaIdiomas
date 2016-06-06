@@ -1,6 +1,6 @@
 ﻿namespace EscolaIdiomas
 {
-    partial class FormCadastrarResponsavel
+    partial class FormResponsavel
     {
         /// <summary>
         /// Required designer variable.

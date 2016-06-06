@@ -10,13 +10,14 @@ using System.Windows.Forms;
 
 namespace EscolaIdiomas
 {
-    public partial class FormCadastrarResponsavel : Form
+    public partial class FormResponsavel : Form
     {
         public int codResp;
 
-        public FormCadastrarResponsavel()
+        public FormResponsavel()
         {
             InitializeComponent();
+            this.Text = "Cadastrar Responsável";
         }
 
         private void btn_salvarResp_Click(object sender, EventArgs e)
@@ -33,13 +34,17 @@ namespace EscolaIdiomas
                    bairro = txt_bairroResp.Text.Trim(),
                    cidade = txt_cidadeResp.Text.Trim();
             char sexo = ' ';
+            string Ano = "";
+            Ano = msk_nascResp.Text.Trim();
+            Ano = Ano[6].ToString() + Ano[7].ToString() + Ano[8].ToString() +
+                  Ano[9].ToString();
 
-            if (Pessoa.VerificaSoLetras(nome) && Pessoa.VerificaRG(rg) &&
-               Pessoa.VerificaCPF(cpf) && Pessoa.VerificaDDDeTelefone(dddResp, telResp) &&
-               Pessoa.VerificaDDDeTelefoneALT(dddAltResp, telAltResp) &&
-               Pessoa.VerificaSoLetras(endereco) && Pessoa.VerificaSoLetras(bairro) &&
-               Pessoa.VerificaSoLetras(cidade) &&
-               rd_F.Checked || rd_M.Checked)
+            if (Verifica.SoLetras(nome) && Verifica.RG(rg) &&
+                Verifica.CPF(cpf) && Verifica.DDDeTelefone(dddResp, telResp) &&
+                Verifica.DDDeTelefoneALT(dddAltResp, telAltResp) &&
+                Verifica.SoLetras(endereco) && Verifica.SoLetras(bairro) &&
+                Verifica.SoLetras(cidade) && Verifica.Maioridade(int.Parse(Ano)) &&
+                rd_F.Checked || rd_M.Checked)
             {
                 if (rd_F.Checked) sexo = 'f';
                 if (rd_M.Checked) sexo = 'm';

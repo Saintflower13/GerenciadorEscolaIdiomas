@@ -10,11 +10,15 @@ using System.Windows.Forms;
 
 namespace EscolaIdiomas
 {
-    public partial class FormPesquisarResponsavel : Form
+    public partial class FormPesquisar : Form
     {
-        public FormPesquisarResponsavel()
+        public FormPesquisar()
         {
             InitializeComponent();
+        }
+
+        private void cmb_nomes_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
         }
     }
 }

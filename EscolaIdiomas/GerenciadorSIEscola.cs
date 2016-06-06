@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.Net.Mail;
 
 namespace EscolaIdiomas
 {
-    public class Pessoa
+    public class Verifica
     {
-        public static bool VerificaSoLetras(string LETRAS)
+        public static bool SoLetras(string LETRAS)
         {
             Regex regex = new Regex(@"^[a-zA-Zà-ùÀ-Ù\s]+$");
             if (regex.IsMatch(LETRAS))
@@ -17,7 +18,7 @@ namespace EscolaIdiomas
             return false;
         }
 
-        public static bool VerificaRG(string RG)
+        public static bool RG(string RG)
         {
             int soma = 0, j = 9;
 
@@ -35,7 +36,7 @@ namespace EscolaIdiomas
             return false;
         }
 
-        public static bool VerificaCPF(string CPF)
+        public static bool CPF(string CPF)
         {
             string r = "";
             int j = 10, soma = 0;
@@ -87,7 +88,7 @@ namespace EscolaIdiomas
             return true;
         }
 
-        public static bool VerificaEmail(string EMAIL)
+        public static bool Email(string EMAIL)
         {
             Regex regex = new Regex(@"\w+@\w+\.\w+(\.\w)?");
 
@@ -96,13 +97,13 @@ namespace EscolaIdiomas
             return false;
         }
 
-        public static bool VerificaDDDeTelefone(string DDD, string TEL)
+        public static bool DDDeTelefone(string DDD, string TEL)
         {
             if ((DDD.Length < 2) || (TEL.Length < 8)) return false;
             return true;
         }
 
-        public static bool VerificaDDDeTelefoneALT(string DDD, string TEL)
+        public static bool DDDeTelefoneALT(string DDD, string TEL)
         {
             if (DDD.Length == 0 && TEL.Length == 0)
                 return true;
@@ -114,17 +115,23 @@ namespace EscolaIdiomas
             return true;
         }
 
-        public static bool VerificaIdade(int ANO)
+        public static bool Maioridade(int ANO)
         {
             if ((DateTime.Now.Year - ANO) < 18)
                 return false;
             else
                 return true;
         }
-    }
 
-    public class EnviarMensagens
-    {
+        public static bool Moeda(string FORMATO)
+        {
+            if (FORMATO.Length == 0)
+                return false;
 
+            Regex regex = new Regex(@"^(\d{1,3}){1}(\.\d{3})*(\,\d{2})?$");
+            if (regex.IsMatch(FORMATO))
+                return true;
+            return false;
+        }
     }
 }
