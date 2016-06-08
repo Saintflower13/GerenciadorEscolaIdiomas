@@ -15,6 +15,7 @@ namespace EscolaIdiomas
         public FormCurso()
         {
             InitializeComponent();
+            txt_codCurso.Text = (GerenciadorBanco.GetCodCurso() + 1).ToString();
         }
 
         private void btn_salvarCurso_Click(object sender, EventArgs e)
@@ -26,7 +27,7 @@ namespace EscolaIdiomas
                    rescisao = txt_vRescisao.Text.Trim(),
                    meses = txt_meses.Text.Trim(),
                    horas = msk_horas.Text.Trim(),
-                   aulaSem = cmb_dias.SelectedIndex.ToString();
+                   aulaSem = (cmb_dias.SelectedIndex + 1).ToString();
             int modulos = int.Parse(txt_modulos.Text.Trim());
 
             if (!(nome.Length != 0 && Verifica.Moeda(matricula) && Verifica.Moeda(total) &&
@@ -39,7 +40,13 @@ namespace EscolaIdiomas
                 return;
             }
 
-            FormModulo form = new FormModulo(modulos, nome, matricula, total, rescisao, meses, horas, aulaSem, multa);
+            int codCurso = GerenciadorBanco.GetCodCurso() + 1;
+
+            if (!(GerenciadorBanco.CadastrarCurso(codCurso, nome, meses, horas, modulos, aulaSem, matricula,
+                                            float.Parse(total), float.Parse(multa), float.Parse(rescisao))))
+                return;
+            
+            FormModulo form = new FormModulo(modulos, codCurso);
             form.ShowDialog();
         }
 
@@ -95,6 +102,11 @@ namespace EscolaIdiomas
                 e.Handled = true;
                 return;
             }
+        }
+
+        private void txt_nomeCurso_TextChanged(object sender, EventArgs e)
+        {
+            txt_codCurso.Text = (GerenciadorBanco.GetCodCurso() + 1).ToString();
         }
     }
 }

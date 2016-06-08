@@ -45,6 +45,13 @@ namespace EscolaIdiomas
             form.MdiParent = this;
             form.Show();
         }
+
+        private void cadastrarTurmaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormTurma form = new FormTurma();
+            form.MdiParent = this;
+            form.Show();
+        }
     }
 }
 

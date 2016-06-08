@@ -35,6 +35,7 @@
             this.enviarMensagemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastrarProfessorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastrarCursoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cadastrarTurmaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,7 +48,8 @@
             this.alterarAlunoToolStripMenuItem,
             this.enviarMensagemToolStripMenuItem,
             this.cadastrarProfessorToolStripMenuItem,
-            this.cadastrarCursoToolStripMenuItem});
+            this.cadastrarCursoToolStripMenuItem,
+            this.cadastrarTurmaToolStripMenuItem});
             this.Menu.Location = new System.Drawing.Point(1208, 0);
             this.Menu.Name = "Menu";
             this.Menu.Size = new System.Drawing.Size(136, 721);
@@ -94,6 +96,13 @@
             this.cadastrarCursoToolStripMenuItem.Text = "Cadastrar Curso";
             this.cadastrarCursoToolStripMenuItem.Click += new System.EventHandler(this.cadastrarCursoToolStripMenuItem_Click);
             // 
+            // cadastrarTurmaToolStripMenuItem
+            // 
+            this.cadastrarTurmaToolStripMenuItem.Name = "cadastrarTurmaToolStripMenuItem";
+            this.cadastrarTurmaToolStripMenuItem.Size = new System.Drawing.Size(123, 19);
+            this.cadastrarTurmaToolStripMenuItem.Text = "Cadastrar Turma";
+            this.cadastrarTurmaToolStripMenuItem.Click += new System.EventHandler(this.cadastrarTurmaToolStripMenuItem_Click);
+            // 
             // FormInicial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -123,6 +132,7 @@
         private System.Windows.Forms.ToolStripMenuItem enviarMensagemToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cadastrarProfessorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cadastrarCursoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cadastrarTurmaToolStripMenuItem;
     }
 }
 

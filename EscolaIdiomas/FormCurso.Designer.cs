@@ -67,6 +67,7 @@
             this.txt_nomeCurso.Name = "txt_nomeCurso";
             this.txt_nomeCurso.Size = new System.Drawing.Size(228, 22);
             this.txt_nomeCurso.TabIndex = 0;
+            this.txt_nomeCurso.TextChanged += new System.EventHandler(this.txt_nomeCurso_TextChanged);
             // 
             // txt_codCurso
             // 
