@@ -50,7 +50,6 @@
             this.cmb_professor = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.btn_salvar = new System.Windows.Forms.Button();
-            this.cmb_codProf = new System.Windows.Forms.ComboBox();
             this.GroupoDias.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,6 +60,7 @@
             this.cmb_cursos.Name = "cmb_cursos";
             this.cmb_cursos.Size = new System.Drawing.Size(218, 21);
             this.cmb_cursos.TabIndex = 0;
+            this.cmb_cursos.DropDown += new System.EventHandler(this.cmb_cursos_DropDown);
             this.cmb_cursos.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.cmb_cursos_PreviewKeyDown);
             // 
             // cmb_modulos
@@ -253,9 +253,9 @@
             this.cmb_professor.FormattingEnabled = true;
             this.cmb_professor.Location = new System.Drawing.Point(30, 243);
             this.cmb_professor.Name = "cmb_professor";
-            this.cmb_professor.Size = new System.Drawing.Size(190, 21);
+            this.cmb_professor.Size = new System.Drawing.Size(241, 21);
             this.cmb_professor.TabIndex = 13;
-            this.cmb_professor.Leave += new System.EventHandler(this.cmb_professor_Leave);
+            this.cmb_professor.DropDown += new System.EventHandler(this.cmb_professor_DropDown);
             this.cmb_professor.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.cmb_professor_PreviewKeyDown);
             // 
             // label7
@@ -270,28 +270,19 @@
             // 
             // btn_salvar
             // 
-            this.btn_salvar.Location = new System.Drawing.Point(311, 292);
+            this.btn_salvar.Location = new System.Drawing.Point(293, 243);
             this.btn_salvar.Name = "btn_salvar";
-            this.btn_salvar.Size = new System.Drawing.Size(88, 23);
+            this.btn_salvar.Size = new System.Drawing.Size(95, 23);
             this.btn_salvar.TabIndex = 15;
             this.btn_salvar.Text = "Salvar";
             this.btn_salvar.UseVisualStyleBackColor = true;
             this.btn_salvar.Click += new System.EventHandler(this.btn_salvar_Click);
             // 
-            // cmb_codProf
-            // 
-            this.cmb_codProf.FormattingEnabled = true;
-            this.cmb_codProf.Location = new System.Drawing.Point(230, 243);
-            this.cmb_codProf.Name = "cmb_codProf";
-            this.cmb_codProf.Size = new System.Drawing.Size(121, 21);
-            this.cmb_codProf.TabIndex = 16;
-            // 
             // FormTurma
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(411, 327);
-            this.Controls.Add(this.cmb_codProf);
+            this.ClientSize = new System.Drawing.Size(411, 316);
             this.Controls.Add(this.btn_salvar);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.cmb_professor);
@@ -342,6 +333,5 @@
         private System.Windows.Forms.ComboBox cmb_professor;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btn_salvar;
-        private System.Windows.Forms.ComboBox cmb_codProf;
     }
 }

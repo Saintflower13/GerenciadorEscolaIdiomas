@@ -10,11 +10,16 @@ namespace EscolaIdiomas
 {
     public class Verifica
     {
-        public static bool SoLetras(string LETRAS)
+        public static bool SoLetras(string CAMPO)
         {
-            Regex regex = new Regex(@"^[a-zA-Zà-ùÀ-Ù\s]+$");
-            if (regex.IsMatch(LETRAS))
+            //Regex regex = new Regex(@"^[a-zA-Zà-ùÀ-Ù\s]+$");
+            //if (regex.IsMatch(LETRAS))
+            //    return true;
+            //return false;
+
+            if (CAMPO.Length > 0)
                 return true;
+
             return false;
         }
 

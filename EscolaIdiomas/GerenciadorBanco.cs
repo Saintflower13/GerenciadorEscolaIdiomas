@@ -14,6 +14,11 @@ namespace EscolaIdiomas
     {
         static string strConexao = "Data Source=.\\SQLEXPRESS; Initial Catalog=MADRELINGUA; Integrated Security=SSPI;";
 
+        struct Prof
+        {
+            public string cod, nome;
+        };
+
         public static bool CadastrarAluno(int codResp, string nomeAluno, string rg, 
                                           string cpf, string nasc, char sexo,
                                           string email, string telefone, string telefoneAlt,
@@ -436,6 +441,8 @@ namespace EscolaIdiomas
 
         public static List<string> getLista(string parte_nome)
         {
+            Prof prof;
+
             SqlConnection conexao = new SqlConnection(strConexao);
             List<string> lista = new List<string>();
             try
@@ -445,12 +452,16 @@ namespace EscolaIdiomas
                 cmd.Connection = conexao;
                 cmd.CommandType = CommandType.Text;
 
-                cmd.CommandText = "SELECT TOP 5 nome_prof FROM Professor WHERE nome_prof LIKE @nome";
+                cmd.CommandText = "SELECT TOP 5 nome_prof, CONVERT(VARCHAR, cod_prof) FROM Professor WHERE nome_prof LIKE @nome";
                 cmd.Parameters.Add(new SqlParameter("@nome", parte_nome + "%"));
 
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
-                    lista.Add(dr.GetString(0));
+                {
+                    prof.nome = dr.GetString(0);
+                    prof.cod = dr.GetString(1);
+                    lista.Add(prof.nome + " (código " + prof.cod + ")");
+                }
 
                 conexao.Close();
             }
@@ -461,10 +472,12 @@ namespace EscolaIdiomas
             return lista;
         }
 
-        public static List<int> getCodsProfs(string nomeProf)
+        public static List<string> getListaTotalProf()
         {
+            Prof prof;
+
             SqlConnection conexao = new SqlConnection(strConexao);
-            List<int> lista = new List<int>();
+            List<string> lista = new List<string>();
             try
             {
                 conexao.Open();
@@ -472,12 +485,42 @@ namespace EscolaIdiomas
                 cmd.Connection = conexao;
                 cmd.CommandType = CommandType.Text;
 
-                cmd.CommandText = "SELECT TOP 5 cod_prof FROM Professor WHERE nome_prof LIKE @nome";
-                cmd.Parameters.Add(new SqlParameter("@nome", nomeProf + "%"));
+                cmd.CommandText = "SELECT nome_prof, CONVERT(VARCHAR, cod_prof) FROM Professor";
 
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
-                    lista.Add((int)dr.GetSqlInt16(0));
+                {
+                    prof.nome = dr.GetString(0);
+                    prof.cod = dr.GetString(1);
+
+                    lista.Add(prof.nome + " (código " + prof.cod + ")");
+                }
+
+                conexao.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return lista;
+        }
+
+        public static List<string> getListaTotalCurso()
+        {
+            SqlConnection conexao = new SqlConnection(strConexao);
+            List<string> lista = new List<string>();
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandType = CommandType.Text;
+
+                cmd.CommandText = "SELECT nome_curso FROM Curso";
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                    lista.Add(dr.GetString(0));
 
                 conexao.Close();
             }

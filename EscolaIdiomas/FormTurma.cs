@@ -13,7 +13,6 @@ namespace EscolaIdiomas
     public partial class FormTurma : Form
     {
         string diasSemana = "";
-        bool cmbProfessorLeave = false;
 
         public FormTurma()
         {
@@ -25,13 +24,16 @@ namespace EscolaIdiomas
             string curso = (string)cmb_cursos.SelectedItem;
             string professor = (string)cmb_professor.SelectedItem;
 
-
+           // if (Verifica.SoLetras())
             MessageBox.Show(diasSemana + "\n" + curso + "\n" + professor);
         }
         
         private void cmb_cursos_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            if (e.KeyData == Keys.Up || e.KeyData == Keys.Down || cmb_cursos.Text.Length <= 1 || e.KeyData == Keys.Left || e.KeyData == Keys.Right)
+            if (e.KeyData == Keys.Up || e.KeyData == Keys.Down || cmb_cursos.Text.Length == 0 || e.KeyData == Keys.Left || e.KeyData == Keys.Right)
+                return;
+
+            if (e.KeyValue == 8)
                 return;
 
             string[] nomes = GerenciadorBanco.getListaCursos(cmb_cursos.Text).ToArray();
@@ -43,7 +45,10 @@ namespace EscolaIdiomas
 
         private void cmb_professor_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            if (e.KeyData == Keys.Up || e.KeyData == Keys.Down || cmb_professor.Text.Length <= 1 || e.KeyData == Keys.Left || e.KeyData == Keys.Right)
+            if (e.KeyData == Keys.Up || e.KeyData == Keys.Down || e.KeyData == Keys.Left || e.KeyData == Keys.Right || cmb_professor.Text.Length == 0)
+                return;
+
+            if (e.KeyValue == 8)
                 return;
 
             string[] nomes = GerenciadorBanco.getLista(cmb_professor.Text).ToArray();
@@ -51,6 +56,28 @@ namespace EscolaIdiomas
             cmb_professor.Items.Clear();
             cmb_professor.Items.AddRange(nomes);
             cmb_professor.SelectionStart = cmb_professor.Text.Length;
+        }
+
+        private void cmb_professor_DropDown(object sender, EventArgs e)
+        {
+            if (cmb_professor.Text.Length > 0)
+                return;
+
+            string[] prof_total = GerenciadorBanco.getListaTotalProf().ToArray();
+            cmb_professor.Items.Clear();
+            cmb_professor.Items.AddRange(prof_total);
+            return;
+        }
+
+        private void cmb_cursos_DropDown(object sender, EventArgs e)
+        {
+            if (cmb_cursos.Text.Length > 0)
+                return;
+
+            string[] nomes_cursos = GerenciadorBanco.getListaTotalCurso().ToArray();
+            cmb_cursos.Items.Clear();
+            cmb_cursos.Items.AddRange(nomes_cursos);
+            return;
         }
 
         private void ck_dmg_CheckedChanged(object sender, EventArgs e)
@@ -87,13 +114,6 @@ namespace EscolaIdiomas
         {
             diasSemana += ck_sab.Text + "\n";
         }
-
-        private void cmb_professor_Leave(object sender, EventArgs e)
-        {
-            string[] codigos = Convert.ToString(GerenciadorBanco.getCodsProfs((string)cmb_professor.SelectedItem).ToArray());
-            cmb_codProf.DroppedDown = true;
-            cmb_codProf.Items.Clear();
-            cmb_codProf.Items.AddRange(codigos);
-        }
+        
     }
 }
