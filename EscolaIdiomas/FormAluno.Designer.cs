@@ -111,7 +111,7 @@
             this.msk_rgALuno.Mask = "00.000.000-A";
             this.msk_rgALuno.Name = "msk_rgALuno";
             this.msk_rgALuno.Size = new System.Drawing.Size(76, 20);
-            this.msk_rgALuno.TabIndex = 3;
+            this.msk_rgALuno.TabIndex = 2;
             this.msk_rgALuno.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
             // msk_cpfAluno
@@ -120,7 +120,7 @@
             this.msk_cpfAluno.Mask = "000.000.000-00";
             this.msk_cpfAluno.Name = "msk_cpfAluno";
             this.msk_cpfAluno.Size = new System.Drawing.Size(87, 20);
-            this.msk_cpfAluno.TabIndex = 4;
+            this.msk_cpfAluno.TabIndex = 3;
             this.msk_cpfAluno.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
             // msk_nascAluno
@@ -129,7 +129,7 @@
             this.msk_nascAluno.Mask = "00/00/0000";
             this.msk_nascAluno.Name = "msk_nascAluno";
             this.msk_nascAluno.Size = new System.Drawing.Size(67, 20);
-            this.msk_nascAluno.TabIndex = 5;
+            this.msk_nascAluno.TabIndex = 4;
             this.msk_nascAluno.Leave += new System.EventHandler(this.msk_nascAluno_Leave);
             // 
             // txt_emailAluno
@@ -138,7 +138,7 @@
             this.txt_emailAluno.MaxLength = 100;
             this.txt_emailAluno.Name = "txt_emailAluno";
             this.txt_emailAluno.Size = new System.Drawing.Size(293, 20);
-            this.txt_emailAluno.TabIndex = 6;
+            this.txt_emailAluno.TabIndex = 7;
             // 
             // txt_enderecoAluno
             // 
@@ -146,7 +146,7 @@
             this.txt_enderecoAluno.MaxLength = 50;
             this.txt_enderecoAluno.Name = "txt_enderecoAluno";
             this.txt_enderecoAluno.Size = new System.Drawing.Size(272, 20);
-            this.txt_enderecoAluno.TabIndex = 7;
+            this.txt_enderecoAluno.TabIndex = 12;
             // 
             // txt_cidadeAluno
             // 
@@ -154,7 +154,7 @@
             this.txt_cidadeAluno.MaxLength = 20;
             this.txt_cidadeAluno.Name = "txt_cidadeAluno";
             this.txt_cidadeAluno.Size = new System.Drawing.Size(124, 20);
-            this.txt_cidadeAluno.TabIndex = 8;
+            this.txt_cidadeAluno.TabIndex = 14;
             // 
             // txt_bairroAluno
             // 
@@ -162,7 +162,7 @@
             this.txt_bairroAluno.MaxLength = 20;
             this.txt_bairroAluno.Name = "txt_bairroAluno";
             this.txt_bairroAluno.Size = new System.Drawing.Size(108, 20);
-            this.txt_bairroAluno.TabIndex = 9;
+            this.txt_bairroAluno.TabIndex = 13;
             // 
             // label1
             // 
@@ -269,7 +269,7 @@
             this.rd_F.Location = new System.Drawing.Point(276, 65);
             this.rd_F.Name = "rd_F";
             this.rd_F.Size = new System.Drawing.Size(31, 17);
-            this.rd_F.TabIndex = 26;
+            this.rd_F.TabIndex = 5;
             this.rd_F.TabStop = true;
             this.rd_F.Text = "F";
             this.rd_F.UseVisualStyleBackColor = true;
@@ -280,7 +280,7 @@
             this.rd_M.Location = new System.Drawing.Point(313, 65);
             this.rd_M.Name = "rd_M";
             this.rd_M.Size = new System.Drawing.Size(34, 17);
-            this.rd_M.TabIndex = 27;
+            this.rd_M.TabIndex = 6;
             this.rd_M.TabStop = true;
             this.rd_M.Text = "M";
             this.rd_M.UseVisualStyleBackColor = true;
@@ -311,7 +311,7 @@
             this.msk_telPai.Mask = "000000000";
             this.msk_telPai.Name = "msk_telPai";
             this.msk_telPai.Size = new System.Drawing.Size(60, 20);
-            this.msk_telPai.TabIndex = 42;
+            this.msk_telPai.TabIndex = 20;
             // 
             // msk_dddPai
             // 
@@ -319,7 +319,7 @@
             this.msk_dddPai.Mask = "00";
             this.msk_dddPai.Name = "msk_dddPai";
             this.msk_dddPai.Size = new System.Drawing.Size(20, 20);
-            this.msk_dddPai.TabIndex = 41;
+            this.msk_dddPai.TabIndex = 19;
             // 
             // msk_telMae
             // 
@@ -327,7 +327,7 @@
             this.msk_telMae.Mask = "000000000";
             this.msk_telMae.Name = "msk_telMae";
             this.msk_telMae.Size = new System.Drawing.Size(60, 20);
-            this.msk_telMae.TabIndex = 40;
+            this.msk_telMae.TabIndex = 17;
             // 
             // msk_dddMae
             // 
@@ -335,7 +335,7 @@
             this.msk_dddMae.Mask = "00";
             this.msk_dddMae.Name = "msk_dddMae";
             this.msk_dddMae.Size = new System.Drawing.Size(20, 20);
-            this.msk_dddMae.TabIndex = 39;
+            this.msk_dddMae.TabIndex = 16;
             // 
             // label16
             // 
@@ -379,7 +379,7 @@
             this.txt_nomePai.MaxLength = 100;
             this.txt_nomePai.Name = "txt_nomePai";
             this.txt_nomePai.Size = new System.Drawing.Size(239, 20);
-            this.txt_nomePai.TabIndex = 1;
+            this.txt_nomePai.TabIndex = 18;
             // 
             // txt_nomeMae
             // 
@@ -387,7 +387,7 @@
             this.txt_nomeMae.MaxLength = 100;
             this.txt_nomeMae.Name = "txt_nomeMae";
             this.txt_nomeMae.Size = new System.Drawing.Size(239, 20);
-            this.txt_nomeMae.TabIndex = 0;
+            this.txt_nomeMae.TabIndex = 15;
             // 
             // label17
             // 
@@ -404,7 +404,7 @@
             this.rd_S.Location = new System.Drawing.Point(6, 10);
             this.rd_S.Name = "rd_S";
             this.rd_S.Size = new System.Drawing.Size(32, 17);
-            this.rd_S.TabIndex = 30;
+            this.rd_S.TabIndex = 21;
             this.rd_S.TabStop = true;
             this.rd_S.Text = "S";
             this.rd_S.UseVisualStyleBackColor = true;
@@ -415,17 +415,17 @@
             this.rd_N.Location = new System.Drawing.Point(45, 10);
             this.rd_N.Name = "rd_N";
             this.rd_N.Size = new System.Drawing.Size(33, 17);
-            this.rd_N.TabIndex = 31;
+            this.rd_N.TabIndex = 22;
             this.rd_N.TabStop = true;
             this.rd_N.Text = "N";
             this.rd_N.UseVisualStyleBackColor = true;
             // 
             // btn_salvarAluno
             // 
-            this.btn_salvarAluno.Location = new System.Drawing.Point(409, 376);
+            this.btn_salvarAluno.Location = new System.Drawing.Point(389, 376);
             this.btn_salvarAluno.Name = "btn_salvarAluno";
-            this.btn_salvarAluno.Size = new System.Drawing.Size(75, 23);
-            this.btn_salvarAluno.TabIndex = 32;
+            this.btn_salvarAluno.Size = new System.Drawing.Size(95, 23);
+            this.btn_salvarAluno.TabIndex = 23;
             this.btn_salvarAluno.Text = "Salvar";
             this.btn_salvarAluno.UseVisualStyleBackColor = true;
             this.btn_salvarAluno.Click += new System.EventHandler(this.btn_salvarAluno_Click);
@@ -465,7 +465,7 @@
             this.msk_dddAluno.Mask = "00";
             this.msk_dddAluno.Name = "msk_dddAluno";
             this.msk_dddAluno.Size = new System.Drawing.Size(20, 20);
-            this.msk_dddAluno.TabIndex = 35;
+            this.msk_dddAluno.TabIndex = 8;
             // 
             // msk_telAluno
             // 
@@ -473,7 +473,7 @@
             this.msk_telAluno.Mask = "000000000";
             this.msk_telAluno.Name = "msk_telAluno";
             this.msk_telAluno.Size = new System.Drawing.Size(60, 20);
-            this.msk_telAluno.TabIndex = 36;
+            this.msk_telAluno.TabIndex = 9;
             // 
             // msk_telAltAluno
             // 
@@ -481,7 +481,7 @@
             this.msk_telAltAluno.Mask = "000000000";
             this.msk_telAltAluno.Name = "msk_telAltAluno";
             this.msk_telAltAluno.Size = new System.Drawing.Size(60, 20);
-            this.msk_telAltAluno.TabIndex = 38;
+            this.msk_telAltAluno.TabIndex = 11;
             // 
             // msk_dddAltAluno
             // 
@@ -489,7 +489,7 @@
             this.msk_dddAltAluno.Mask = "00";
             this.msk_dddAltAluno.Name = "msk_dddAltAluno";
             this.msk_dddAltAluno.Size = new System.Drawing.Size(20, 20);
-            this.msk_dddAltAluno.TabIndex = 37;
+            this.msk_dddAltAluno.TabIndex = 10;
             // 
             // FormAluno
             // 
