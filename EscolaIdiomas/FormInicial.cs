@@ -56,6 +56,54 @@ namespace EscolaIdiomas
         private void pesqMatriculaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormConsultar form = new FormConsultar();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void FormInicial_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void consultarResponsavelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormConsultarResponsavel form = new FormConsultarResponsavel();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void consultarAlunoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormConsultarAluno form = new FormConsultarAluno();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void consultarProfessorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormConsultaProfessor form = new FormConsultaProfessor();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void consultaCursoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormConsultaCurso form = new FormConsultaCurso();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void consultaTurmasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormConsultaTurma form = new FormConsultaTurma();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void consultarModuloToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormConsultaModulo form = new FormConsultaModulo();
+            form.MdiParent = this;
             form.Show();
         }
     }

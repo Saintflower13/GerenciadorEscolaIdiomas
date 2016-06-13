@@ -52,6 +52,42 @@
     <Compile Include="FormAluno.Designer.cs">
       <DependentUpon>FormAluno.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormConsultaCurso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormConsultaCurso.Designer.cs">
+      <DependentUpon>FormConsultaCurso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormConsultaModulo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormConsultaModulo.Designer.cs">
+      <DependentUpon>FormConsultaModulo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormConsultaProfessor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormConsultaProfessor.Designer.cs">
+      <DependentUpon>FormConsultaProfessor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormConsultarAluno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormConsultarAluno.Designer.cs">
+      <DependentUpon>FormConsultarAluno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormConsultarResponsavel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormConsultarResponsavel.Designer.cs">
+      <DependentUpon>FormConsultarResponsavel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormConsultaTurma.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormConsultaTurma.Designer.cs">
+      <DependentUpon>FormConsultaTurma.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormCurso.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +160,24 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormAluno.resx">
       <DependentUpon>FormAluno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormConsultaCurso.resx">
+      <DependentUpon>FormConsultaCurso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormConsultaModulo.resx">
+      <DependentUpon>FormConsultaModulo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormConsultaProfessor.resx">
+      <DependentUpon>FormConsultaProfessor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormConsultarAluno.resx">
+      <DependentUpon>FormConsultarAluno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormConsultarResponsavel.resx">
+      <DependentUpon>FormConsultarResponsavel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormConsultaTurma.resx">
+      <DependentUpon>FormConsultaTurma.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormCurso.resx">
       <DependentUpon>FormCurso.cs</DependentUpon>

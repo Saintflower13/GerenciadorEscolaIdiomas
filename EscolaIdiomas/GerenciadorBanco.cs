@@ -729,5 +729,399 @@ namespace EscolaIdiomas
             }
         }
 
+        public static DataTable getResponsavel()
+        {
+            DataTable dt = null;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandText = "SELECT CONVERT(VARCHAR, cod_responsavel) AS 'Código do Responsavel', " +
+                                  "nome_responsavel AS 'Nome do Responsavel', " +
+                                  "cpf_responsavel AS 'CPF do Responsavel' FROM Responsavel ORDER BY cod_responsavel";
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
+        public static DataTable getResponsavelPorNome(string nome)
+        {
+            DataTable dt = null;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandText = "SELECT CONVERT(VARCHAR, cod_responsavel) AS 'Código do Responsavel', " +
+                                  "nome_responsavel AS 'Nome do Responsavel', " +
+                                  "cpf_responsavel AS 'CPF do Responsavel' FROM Responsavel " +
+                                  "WHERE nome_responsavel LIKE @nome ORDER BY cod_responsavel";
+                cmd.Parameters.Add(new SqlParameter("@nome", nome + "%"));
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
+        public static DataTable getAluno()
+        {
+            DataTable dt = null;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandText = "SELECT CONVERT(VARCHAR, cod_aluno) AS 'Código do Aluno', " +
+                                  "nome_aluno AS 'Nome do Aluno', " +
+                                  "cpf_aluno AS 'CPF do Aluno', " +
+                                  "CONVERT(VARCHAR, cod_responsavel) AS 'Código do Responsavel' " +
+                                  "FROM Aluno ORDER BY cod_responsavel";
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
+        public static DataTable getAlunoPorNome(string nome)
+        {
+            DataTable dt = null;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandText = "SELECT CONVERT(VARCHAR, cod_aluno) AS 'Código do Aluno', " +
+                                  "nome_aluno AS 'Nome do Aluno', " +
+                                  "cpf_aluno AS 'CPF do Aluno', " +
+                                  "CONVERT(VARCHAR, cod_responsavel) AS 'Código do Responsavel' FROM Aluno " +
+                                  "WHERE nome_aluno LIKE @nome ORDER BY cod_aluno";
+                cmd.Parameters.Add(new SqlParameter("@nome", nome + "%"));
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
+        public static DataTable getProfessor()
+        {
+            DataTable dt = null;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandText = "SELECT CONVERT(VARCHAR, cod_prof) AS 'Código do Professor', " +
+                                  "nome_prof AS 'Nome do Professor', " +
+                                  "cpf_prof AS 'CPF do Professor' FROM Professor ORDER BY cod_prof";
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
+        public static DataTable getProfessorPorNome(string nome)
+        {
+            DataTable dt = null;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandText = "SELECT CONVERT(VARCHAR, cod_prof) AS 'Código do Professor', " +
+                                  "nome_prof AS 'Nome do Professor', " +
+                                  "cpf_prof AS 'CPF do Professor' FROM Professor " +
+                                  "WHERE nome_prof LIKE @nome ORDER BY cod_prof" ;
+                cmd.Parameters.Add(new SqlParameter("@nome", nome + "%"));
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
+        public static DataTable getCurso()
+        {
+            DataTable dt = null;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandText = "SELECT CONVERT(VARCHAR, cod_curso) AS 'Código do Curso', " +
+                                  "nome_curso AS 'Nome do Curso' FROM Curso ORDER BY cod_curso";
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
+        public static DataTable getCursoPorNome(string nome)
+        {
+            DataTable dt = null;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandText = "SELECT CONVERT(VARCHAR, cod_curso) AS 'Código do curso', " +
+                                  "nome_curso AS 'Nome do Curso' FROM Curso " +
+                                  "WHERE nome_curso LIKE @nome ORDER BY cod_curso";
+                cmd.Parameters.Add(new SqlParameter("@nome", nome + "%"));
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
+        public static DataTable getTurma()
+        {
+            DataTable dt = null;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandText = "SELECT CONVERT(VARCHAR, cod_turma) AS 'Código da Turma' "+
+                                  "FROM Turma ORDER BY cod_turma";
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
+        public static DataTable getTurmaPorCurso(string nome)
+        {
+            DataTable dt = null;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandText = "SELECT CONVERT(VARCHAR, cod_turma) AS 'Código da Turma' " +
+                                  "FROM Turma INNER JOIN Curso ON Curso.cod_curso = Turma.cod_curso " +
+                                  "WHERE nome_curso LIKE @nome ORDER BY cod_turma";
+                cmd.Parameters.Add(new SqlParameter("@nome", nome + "%"));
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
+        public static DataTable getModulo()
+        {
+            DataTable dt = null;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandText = "SELECT CONVERT(VARCHAR, cod_modulo) AS 'Código do Módulo' " +
+                                  "FROM Modulo ORDER BY cod_modulo";
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
+        public static DataTable getModuloPorCurso(string nome)
+        {
+            DataTable dt = null;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandText = "SELECT CONVERT(VARCHAR, cod_modulo) AS 'Código do Modulo' " +
+                                  "FROM Modulo INNER JOIN Curso ON Curso.cod_curso = Modulo.cod_curso " +
+                                  "WHERE nome_curso LIKE @nome ORDER BY cod_modulo";
+                cmd.Parameters.Add(new SqlParameter("@nome", nome + "%"));
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
+
     }
 }

@@ -37,6 +37,12 @@
             this.cadastrarCursoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastrarTurmaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pesqMatriculaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultarResponsavelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultarAlunoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultarProfessorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultaCursoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultaTurmasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultarModuloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,10 +57,16 @@
             this.cadastrarProfessorToolStripMenuItem,
             this.cadastrarCursoToolStripMenuItem,
             this.cadastrarTurmaToolStripMenuItem,
-            this.pesqMatriculaToolStripMenuItem});
-            this.Menu.Location = new System.Drawing.Point(1208, 0);
+            this.pesqMatriculaToolStripMenuItem,
+            this.consultarResponsavelToolStripMenuItem,
+            this.consultarAlunoToolStripMenuItem,
+            this.consultarProfessorToolStripMenuItem,
+            this.consultaCursoToolStripMenuItem,
+            this.consultaTurmasToolStripMenuItem,
+            this.consultarModuloToolStripMenuItem});
+            this.Menu.Location = new System.Drawing.Point(1200, 0);
             this.Menu.Name = "Menu";
-            this.Menu.Size = new System.Drawing.Size(136, 721);
+            this.Menu.Size = new System.Drawing.Size(144, 721);
             this.Menu.TabIndex = 0;
             this.Menu.Text = "menuStrip1";
             // 
@@ -112,6 +124,48 @@
             this.pesqMatriculaToolStripMenuItem.Text = "Pesq Matricula";
             this.pesqMatriculaToolStripMenuItem.Click += new System.EventHandler(this.pesqMatriculaToolStripMenuItem_Click);
             // 
+            // consultarResponsavelToolStripMenuItem
+            // 
+            this.consultarResponsavelToolStripMenuItem.Name = "consultarResponsavelToolStripMenuItem";
+            this.consultarResponsavelToolStripMenuItem.Size = new System.Drawing.Size(131, 19);
+            this.consultarResponsavelToolStripMenuItem.Text = "Consultar Responsavel";
+            this.consultarResponsavelToolStripMenuItem.Click += new System.EventHandler(this.consultarResponsavelToolStripMenuItem_Click);
+            // 
+            // consultarAlunoToolStripMenuItem
+            // 
+            this.consultarAlunoToolStripMenuItem.Name = "consultarAlunoToolStripMenuItem";
+            this.consultarAlunoToolStripMenuItem.Size = new System.Drawing.Size(131, 19);
+            this.consultarAlunoToolStripMenuItem.Text = "Consultar Aluno";
+            this.consultarAlunoToolStripMenuItem.Click += new System.EventHandler(this.consultarAlunoToolStripMenuItem_Click);
+            // 
+            // consultarProfessorToolStripMenuItem
+            // 
+            this.consultarProfessorToolStripMenuItem.Name = "consultarProfessorToolStripMenuItem";
+            this.consultarProfessorToolStripMenuItem.Size = new System.Drawing.Size(131, 19);
+            this.consultarProfessorToolStripMenuItem.Text = "Consultar Professor";
+            this.consultarProfessorToolStripMenuItem.Click += new System.EventHandler(this.consultarProfessorToolStripMenuItem_Click);
+            // 
+            // consultaCursoToolStripMenuItem
+            // 
+            this.consultaCursoToolStripMenuItem.Name = "consultaCursoToolStripMenuItem";
+            this.consultaCursoToolStripMenuItem.Size = new System.Drawing.Size(131, 19);
+            this.consultaCursoToolStripMenuItem.Text = "Consulta Curso";
+            this.consultaCursoToolStripMenuItem.Click += new System.EventHandler(this.consultaCursoToolStripMenuItem_Click);
+            // 
+            // consultaTurmasToolStripMenuItem
+            // 
+            this.consultaTurmasToolStripMenuItem.Name = "consultaTurmasToolStripMenuItem";
+            this.consultaTurmasToolStripMenuItem.Size = new System.Drawing.Size(131, 19);
+            this.consultaTurmasToolStripMenuItem.Text = "Consulta Turmas";
+            this.consultaTurmasToolStripMenuItem.Click += new System.EventHandler(this.consultaTurmasToolStripMenuItem_Click);
+            // 
+            // consultarModuloToolStripMenuItem
+            // 
+            this.consultarModuloToolStripMenuItem.Name = "consultarModuloToolStripMenuItem";
+            this.consultarModuloToolStripMenuItem.Size = new System.Drawing.Size(131, 19);
+            this.consultarModuloToolStripMenuItem.Text = "Consultar Modulo";
+            this.consultarModuloToolStripMenuItem.Click += new System.EventHandler(this.consultarModuloToolStripMenuItem_Click);
+            // 
             // FormInicial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -125,6 +179,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gerenciamento Escolar";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.FormInicial_Load);
             this.Menu.ResumeLayout(false);
             this.Menu.PerformLayout();
             this.ResumeLayout(false);
@@ -143,6 +198,12 @@
         private System.Windows.Forms.ToolStripMenuItem cadastrarCursoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cadastrarTurmaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pesqMatriculaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consultarResponsavelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consultarAlunoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consultarProfessorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consultaCursoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consultaTurmasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consultarModuloToolStripMenuItem;
     }
 }
 
