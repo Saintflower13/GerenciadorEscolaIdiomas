@@ -39,11 +39,11 @@ namespace EscolaIdiomas
             Ano = Ano[6].ToString() + Ano[7].ToString() + Ano[8].ToString() +
                   Ano[9].ToString();
 
-            if (Verifica.SoLetras(nome) && Verifica.RG(rg) &&
+            if (Verifica.Vazio(nome) && Verifica.RG(rg) &&
                 Verifica.CPF(cpf) && Verifica.DDDeTelefone(dddResp, telResp) &&
                 Verifica.DDDeTelefoneALT(dddAltResp, telAltResp) &&
-                Verifica.SoLetras(endereco) && Verifica.SoLetras(bairro) &&
-                Verifica.SoLetras(cidade) && Verifica.Maioridade(int.Parse(Ano)) &&
+                Verifica.Vazio(endereco) && Verifica.Vazio(bairro) &&
+                Verifica.Vazio(cidade) && Verifica.Maioridade(nasc) &&
                 rd_F.Checked || rd_M.Checked)
             {
                 if (rd_F.Checked) sexo = 'f';

@@ -61,31 +61,35 @@
             this.cmb_cursos.Size = new System.Drawing.Size(218, 21);
             this.cmb_cursos.TabIndex = 0;
             this.cmb_cursos.DropDown += new System.EventHandler(this.cmb_cursos_DropDown);
+            this.cmb_cursos.Leave += new System.EventHandler(this.cmb_cursos_Leave);
             this.cmb_cursos.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.cmb_cursos_PreviewKeyDown);
             // 
             // cmb_modulos
             // 
             this.cmb_modulos.FormattingEnabled = true;
-            this.cmb_modulos.Location = new System.Drawing.Point(300, 48);
+            this.cmb_modulos.Location = new System.Drawing.Point(281, 48);
             this.cmb_modulos.Name = "cmb_modulos";
             this.cmb_modulos.Size = new System.Drawing.Size(70, 21);
             this.cmb_modulos.TabIndex = 1;
+            this.cmb_modulos.DropDown += new System.EventHandler(this.cmb_modulos_DropDown);
             // 
             // txt_minAlunos
             // 
             this.txt_minAlunos.Location = new System.Drawing.Point(57, 120);
-            this.txt_minAlunos.MaxLength = 100;
+            this.txt_minAlunos.MaxLength = 3;
             this.txt_minAlunos.Name = "txt_minAlunos";
             this.txt_minAlunos.Size = new System.Drawing.Size(35, 20);
             this.txt_minAlunos.TabIndex = 2;
+            this.txt_minAlunos.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_minAlunos_KeyPress);
             // 
             // txt_maxAlunos
             // 
             this.txt_maxAlunos.Location = new System.Drawing.Point(134, 120);
-            this.txt_maxAlunos.MaxLength = 100;
+            this.txt_maxAlunos.MaxLength = 3;
             this.txt_maxAlunos.Name = "txt_maxAlunos";
             this.txt_maxAlunos.Size = new System.Drawing.Size(35, 20);
             this.txt_maxAlunos.TabIndex = 3;
+            this.txt_maxAlunos.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_maxAlunos_KeyPress);
             // 
             // GroupoDias
             // 
@@ -256,6 +260,7 @@
             this.cmb_professor.Size = new System.Drawing.Size(241, 21);
             this.cmb_professor.TabIndex = 13;
             this.cmb_professor.DropDown += new System.EventHandler(this.cmb_professor_DropDown);
+            this.cmb_professor.Leave += new System.EventHandler(this.cmb_professor_Leave);
             this.cmb_professor.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.cmb_professor_PreviewKeyDown);
             // 
             // label7

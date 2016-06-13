@@ -36,6 +36,7 @@
             this.cadastrarProfessorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastrarCursoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastrarTurmaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pesqMatriculaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,7 +50,8 @@
             this.enviarMensagemToolStripMenuItem,
             this.cadastrarProfessorToolStripMenuItem,
             this.cadastrarCursoToolStripMenuItem,
-            this.cadastrarTurmaToolStripMenuItem});
+            this.cadastrarTurmaToolStripMenuItem,
+            this.pesqMatriculaToolStripMenuItem});
             this.Menu.Location = new System.Drawing.Point(1208, 0);
             this.Menu.Name = "Menu";
             this.Menu.Size = new System.Drawing.Size(136, 721);
@@ -103,6 +105,13 @@
             this.cadastrarTurmaToolStripMenuItem.Text = "Cadastrar Turma";
             this.cadastrarTurmaToolStripMenuItem.Click += new System.EventHandler(this.cadastrarTurmaToolStripMenuItem_Click);
             // 
+            // pesqMatriculaToolStripMenuItem
+            // 
+            this.pesqMatriculaToolStripMenuItem.Name = "pesqMatriculaToolStripMenuItem";
+            this.pesqMatriculaToolStripMenuItem.Size = new System.Drawing.Size(123, 19);
+            this.pesqMatriculaToolStripMenuItem.Text = "Pesq Matricula";
+            this.pesqMatriculaToolStripMenuItem.Click += new System.EventHandler(this.pesqMatriculaToolStripMenuItem_Click);
+            // 
             // FormInicial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -133,6 +142,7 @@
         private System.Windows.Forms.ToolStripMenuItem cadastrarProfessorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cadastrarCursoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cadastrarTurmaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pesqMatriculaToolStripMenuItem;
     }
 }
 

@@ -10,7 +10,7 @@ namespace EscolaIdiomas
 {
     public class Verifica
     {
-        public static bool SoLetras(string CAMPO)
+        public static bool Vazio(string CAMPO)
         {
             //Regex regex = new Regex(@"^[a-zA-Zà-ùÀ-Ù\s]+$");
             //if (regex.IsMatch(LETRAS))
@@ -120,9 +120,11 @@ namespace EscolaIdiomas
             return true;
         }
 
-        public static bool Maioridade(int ANO)
+        public static bool Maioridade(string DATA)
         {
-            if ((DateTime.Now.Year - ANO) < 18)
+            int dias = DateTime.Now.Day - GerenciadorBanco.GetDia(DATA);
+
+            if (GerenciadorBanco.GetIdade(DATA, dias) < 18)
                 return false;
             else
                 return true;
@@ -136,6 +138,32 @@ namespace EscolaIdiomas
             Regex regex = new Regex(@"^(\d{1,3}){1}(\.\d{3})*(\,\d{2})?$");
             if (regex.IsMatch(FORMATO))
                 return true;
+            return false;
+        }
+
+        public static bool CursoExiste(string CURSO)
+        {
+            List<string> listaCursos = GerenciadorBanco.getListaTotalCurso();
+
+            for (int i = 0; i < listaCursos.Count(); ++i)
+            {
+                if (listaCursos[i] == CURSO)
+                    return true;
+            }
+
+            return false;
+        }
+
+        public static bool ProfessorExiste(string PROFESSOR)
+        {
+            List<string> listaProf = GerenciadorBanco.getListaTotalProf();
+
+            for (int i = 0; i < listaProf.Count(); ++i)
+            {
+                if (listaProf[i] == PROFESSOR)
+                    return true;
+            }
+
             return false;
         }
     }

@@ -310,6 +310,72 @@ namespace EscolaIdiomas
             }
         }
 
+        public static int GetIdade(string dataNasc, int dias)
+        {
+            int idade = 0;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+
+                cmd.CommandText = "SET DATEFORMAT DMY " +
+                                  "DECLARE @idade AS INT " +
+                                  "DECLARE @dt_nascimento AS DATETIME " +
+                                  "SET @dt_nascimento = @dataNasc " +
+                                  "DECLARE @dt_atual AS DATE " +
+                                  "SET @dt_atual = GETDATE() " +
+                                  "DECLARE @dias AS INT " +
+                                  "SET @dias = @vDias " +
+                                  "IF (SELECT DATEADD(YEAR, @dias, @dt_nascimento)) > @dt_atual " +
+                                  " SET @idade = DATEDIFF(YEAR, @dt_nascimento, @dt_atual) - 1 " +
+                                  "ELSE " +
+                                  " SET @idade = DATEDIFF(YEAR, @dt_nascimento, @dt_atual) " +
+                                  "SELECT @idade";
+
+                cmd.Parameters.Add(new SqlParameter("@dataNasc", dataNasc));
+                cmd.Parameters.Add(new SqlParameter("@vDias", dias));
+
+                cmd.CommandType = CommandType.Text;
+                idade = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+            return idade;
+        }
+
+        public static string GetAno(string DATA)
+        {
+            string Ano = "";
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+
+                cmd.CommandText = "SELECT YEAR(DATA)";
+                cmd.CommandType = CommandType.Text;
+                Ano = Convert.ToString(cmd.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+            return Ano;
+        }
+
         public static int GetCodResp()
         {
             int id = 0;
@@ -409,7 +475,62 @@ namespace EscolaIdiomas
             {
                 conexao.Close();
             }
+
             return id;
+        }
+
+        public static int GetQtdMod(string nomeCurso)
+        {
+            int qtdMod = 0;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+
+                cmd.CommandText = "SELECT qtd_modulos FROM Curso WHERE nome_curso = @nomeCurso";
+                cmd.Parameters.Add(new SqlParameter("@nomeCurso", nomeCurso));
+                cmd.CommandType = CommandType.Text;
+                qtdMod = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+            return qtdMod;
+        }
+
+        public static int GetDia(string data)
+        {
+            int dia = 0;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+
+                cmd.CommandText = "SET DATEFORMAT DMY " +
+                                  "SELECT DAY(@data);";
+                cmd.Parameters.Add(new SqlParameter("@data", dia));
+                cmd.CommandType = CommandType.Text;
+                dia = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+
+            return dia;
         }
 
         public static List<string> getListaCursos(string parte_nome)
@@ -429,13 +550,46 @@ namespace EscolaIdiomas
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                     lista.Add(dr.GetString(0));
-
-                conexao.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+            finally
+            {
+                conexao.Close();
+            }
+
+            return lista;
+        }
+
+        public static List<string> getQtdModulos(string nomeCurso)
+        {
+            SqlConnection conexao = new SqlConnection(strConexao);
+            List<string> lista = new List<string>();
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandType = CommandType.Text;
+
+                cmd.CommandText = "SELECT CONVERT(VARCHAR, cod_modulo) FROM Modulo INNER JOIN Curso ON Modulo.cod_curso = Curso.cod_curso WHERE nome_curso = @nome";
+                cmd.Parameters.Add(new SqlParameter("@nome", nomeCurso));
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                    lista.Add(dr.GetString(0));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+
             return lista;
         }
 
@@ -462,13 +616,16 @@ namespace EscolaIdiomas
                     prof.cod = dr.GetString(1);
                     lista.Add(prof.nome + " (código " + prof.cod + ")");
                 }
-
-                conexao.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+            finally
+            {
+                conexao.Close();
+            }
+
             return lista;
         }
 
@@ -495,13 +652,16 @@ namespace EscolaIdiomas
 
                     lista.Add(prof.nome + " (código " + prof.cod + ")");
                 }
-
-                conexao.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+            finally
+            {
+                conexao.Close();
+            }
+
             return lista;
         }
 
@@ -521,14 +681,53 @@ namespace EscolaIdiomas
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                     lista.Add(dr.GetString(0));
-
-                conexao.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+            finally
+            {
+
+                conexao.Close();
+            }
             return lista;
         }
+
+        public static DataTable getMatriculas()
+        {
+            DataTable dt = null;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandText = "SELECT CONVERT(VARCHAR, cod_matricula) AS 'Código da Matricula', " +
+                                  "CONVERT(VARCHAR, cod_curso) AS 'Código do Curso', " +
+                                  "vencimento_parcela AS 'Vencimento da Parcela', " +
+                                  "nome_aluno AS 'Nome do Aluno' FROM MATRICULA INNER JOIN Aluno " +
+                                  "ON Matricula.cod_aluno = Aluno.cod_aluno INNER JOIN Turma " +
+                                  "ON Turma.cod_curso = Matricula.cod_turma";
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
     }
 }

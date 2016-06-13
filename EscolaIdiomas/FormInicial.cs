@@ -52,6 +52,12 @@ namespace EscolaIdiomas
             form.MdiParent = this;
             form.Show();
         }
+
+        private void pesqMatriculaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormConsultar form = new FormConsultar();
+            form.Show();
+        }
     }
 }
 

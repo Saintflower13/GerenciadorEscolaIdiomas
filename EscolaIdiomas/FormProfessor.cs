@@ -39,18 +39,13 @@ namespace EscolaIdiomas
                    admissao = msk_admissaoProf.Text.Trim();
             char sexo = ' ';
 
-            string Ano = "";
-            Ano = msk_nascProf.Text.Trim();
-            Ano = Ano[6].ToString() + Ano[7].ToString() + Ano[8].ToString() +
-                  Ano[9].ToString();
-
-            if (Verifica.SoLetras(nome) && Verifica.RG(rg) &&
+            if (Verifica.Vazio(nome) && Verifica.RG(rg) &&
                 Verifica.CPF(cpf) && Verifica.Email(email) &&
                 Verifica.DDDeTelefone(ddd, tel) &&
                 Verifica.DDDeTelefoneALT(dddAlt, telAlt) &&
-                Verifica.SoLetras(endereco) && Verifica.SoLetras(bairro) &&
-                Verifica.SoLetras(cidade) && admissao.Length == 10 &&
-                Verifica.Maioridade(int.Parse(Ano)) &&
+                Verifica.Vazio(endereco) && Verifica.Vazio(bairro) &&
+                Verifica.Vazio(cidade) && admissao.Length == 10 &&
+                Verifica.Maioridade(nasc) &&
                 rd_F.Checked || rd_M.Checked)
             {
                 if (rd_F.Checked) sexo = 'f';

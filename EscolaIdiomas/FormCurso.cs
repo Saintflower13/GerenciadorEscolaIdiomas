@@ -50,6 +50,7 @@ namespace EscolaIdiomas
             form.ShowDialog();
         }
 
+        // 48 a 57, números. 8, backspace. 46, ponto final. 44, virgula.
         private void txt_vMatricula_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 46 && e.KeyChar != 44))

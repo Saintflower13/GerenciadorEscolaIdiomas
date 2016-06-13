@@ -45,12 +45,12 @@ namespace EscolaIdiomas
             char sexo = ' ';
             
             // Realiza as verificações obrigatórias
-            if (Verifica.SoLetras(nomeALuno) && Verifica.RG(rg) &&
+            if (Verifica.Vazio(nomeALuno) && Verifica.RG(rg) &&
                 Verifica.CPF(cpf) && Verifica.Email(email) &&
                 Verifica.DDDeTelefone(dddAluno, telAluno) &&
                 Verifica.DDDeTelefoneALT(dddAltAluno, telAltAluno) &&
-                Verifica.SoLetras(endereco) && Verifica.SoLetras(bairro) &&
-                Verifica.SoLetras(cidade) &&
+                Verifica.Vazio(endereco) && Verifica.Vazio(bairro) &&
+                Verifica.Vazio(cidade) &&
                 rd_F.Checked || rd_M.Checked)
             {
                 if (rd_F.Checked) sexo = 'f';
@@ -72,7 +72,7 @@ namespace EscolaIdiomas
                     // Verifica dados da mãe
                     if (nomeMae.Length != 0)
                     {
-                        if (!(Verifica.SoLetras(nomeMae) &&
+                        if (!(Verifica.Vazio(nomeMae) &&
                             Verifica.DDDeTelefone(dddMae, telMae)))
                         {
                             MessageBox.Show("Dados da mãe incorretos ou incompletos!", 
@@ -84,7 +84,7 @@ namespace EscolaIdiomas
                     // Verifica dados do pai
                     if (nomePai.Length != 0)
                     {
-                        if (!(Verifica.SoLetras(nomeMae) && Verifica.DDDeTelefone(dddMae, telMae)))
+                        if (!(Verifica.Vazio(nomeMae) && Verifica.DDDeTelefone(dddMae, telMae)))
                         {
                             MessageBox.Show("Dados do pai incorretos ou incompletos!", 
                                             "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -101,7 +101,7 @@ namespace EscolaIdiomas
                     Ano = Ano[6].ToString() + Ano[7].ToString() + Ano[8].ToString() +
                           Ano[9].ToString();
 
-                    if (!Verifica.Maioridade(int.Parse(Ano)))
+                    if (!Verifica.Maioridade(nasc))
                     {
                         MessageBox.Show("Não é permitido responsabilizar financeiramente " + 
                                         "menores de idade", "Erro!",
@@ -162,7 +162,7 @@ namespace EscolaIdiomas
 
                     if (resultado.Equals(DialogResult.No))
                     {
-                        FormPesquisar form = new FormPesquisar();
+                        FormConsultar form = new FormConsultar();
                         form.Show();
                         return;
                     }
@@ -188,18 +188,32 @@ namespace EscolaIdiomas
 
         private void msk_nascAluno_Leave(object sender, EventArgs e)
         {
-            if (msk_nascAluno.Text.Length == 0)
+            if (msk_nascAluno.Text.Trim().Length == 0)
                 return;
 
-            string Ano = "";
-            Ano = msk_nascAluno.Text.Trim();
-            Ano = Ano[6].ToString() + Ano[7].ToString() + Ano[8].ToString() +
-                  Ano[9].ToString();
+            string Ano = GerenciadorBanco.GetAno(msk_nascAluno.Text.Trim());
 
-            if (!Verifica.Maioridade(int.Parse(Ano)))
+            if (!Verifica.Maioridade(msk_nascAluno.Text.Trim()))
+            {
                 GrupoResponsaveisLegais.Enabled = true;
+                MessageBox.Show("Menor");
+            }
             else
+            {
                 GrupoResponsaveisLegais.Enabled = false;
+                MessageBox.Show("Maior");
+            }
+        }
+
+
+        private void txt_nomeAluno_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) &&
+                (e.KeyChar < 192 || e.KeyChar > 255) && e.KeyChar != 8)
+            {
+                e.Handled = true;
+                return;
+            }
         }
     }
 }

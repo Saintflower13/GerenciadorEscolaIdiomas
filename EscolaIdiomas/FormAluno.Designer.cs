@@ -96,6 +96,7 @@
             this.txt_nomeAluno.Name = "txt_nomeAluno";
             this.txt_nomeAluno.Size = new System.Drawing.Size(293, 20);
             this.txt_nomeAluno.TabIndex = 1;
+            this.txt_nomeAluno.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_nomeAluno_KeyPress);
             // 
             // cod_aluno
             // 
