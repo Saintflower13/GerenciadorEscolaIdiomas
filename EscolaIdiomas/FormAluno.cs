@@ -19,6 +19,7 @@ namespace EscolaIdiomas
             InitializeComponent();
             pic_fotoAluno.ImageLocation = @"C:\Projeto\user.png";
             this.Text = texto;
+            txt_codAluno.Text = (GerenciadorBanco.GetCodAluno() + 1).ToString();
         }
 
         private void btn_salvarAluno_Click(object sender, EventArgs e)
@@ -43,102 +44,101 @@ namespace EscolaIdiomas
                    telPai = msk_telPai.Text.Trim();
 
             char sexo = ' ';
-            
-            // Realiza as verificações obrigatórias
-            if (Verifica.Vazio(nomeALuno) && Verifica.RG(rg) &&
-                Verifica.CPF(cpf) && Verifica.Email(email) &&
-                Verifica.DDDeTelefone(dddAluno, telAluno) &&
-                Verifica.DDDeTelefoneALT(dddAltAluno, telAltAluno) &&
-                Verifica.Vazio(endereco) && Verifica.Vazio(bairro) &&
-                Verifica.Vazio(cidade) &&
-                rd_F.Checked || rd_M.Checked)
-            {
-                if (rd_F.Checked) sexo = 'f';
-                if (rd_M.Checked) sexo = 'm';
 
-                // Verifica se o GroupBox está habilitado. 
-                //Se for maior de idade o GrupoResponsáveisLegais estará desabilitado.
-                if (GrupoResponsaveisLegais.Enabled)
+            // Realiza as verificações obrigatórias
+            if (!(nomeALuno.Length > 0 && rg.Length > 0 &&
+                  cpf.Length > 0 && email.Length > 0 &&
+                  Verifica.DDDeTelefone(dddAluno, telAluno) &&
+                  Verifica.DDDeTelefoneALT(dddAltAluno, telAltAluno) &&
+                  rd_F.Checked || rd_M.Checked))
+            {
+
+                MessageBox.Show("Verifique se todos os campos foram preenchidos corretamente " +
+                                "e se nenhum campo obrigatório foi deixado em branco",
+                                "Erro! Campos com erros!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            if (rd_F.Checked) sexo = 'f';
+            if (rd_M.Checked) sexo = 'm';
+
+            // Verifica se o GroupBox está habilitado. 
+            //Se for maior de idade o GrupoResponsáveisLegais estará desabilitado.
+            if (GrupoResponsaveisLegais.Enabled)
+            {
+                // Verifica se dados dos pais estão preenchidos
+                if (nomeMae.Length == 0 && nomePai.Length == 0)
                 {
-                    // Verifica inserção dos pais
-                    if (nomeMae.Length == 0 && nomePai.Length == 0)
+                    MessageBox.Show("Informe dados de ao menos um responsável legal.",
+                                    "Erro! Aluno menor de idade!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+                // Verifica dados da mãe
+                if (nomeMae.Length != 0)
+                {
+                    if (!(nomeMae.Length > 0 && Verifica.DDDeTelefone(dddMae, telMae)))
                     {
-                        MessageBox.Show("Aluno menor de idade!\n\n" +
-                                        "Informe dados de ao menos um responsável legal.", 
+                        MessageBox.Show("Dados da mãe incorretos e/ou incompletos!", 
                                         "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
                     }
-
-                    // Verifica dados da mãe
-                    if (nomeMae.Length != 0)
-                    {
-                        if (!(Verifica.Vazio(nomeMae) &&
-                            Verifica.DDDeTelefone(dddMae, telMae)))
-                        {
-                            MessageBox.Show("Dados da mãe incorretos ou incompletos!", 
-                                            "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            return;
-                        }
-                    }
-
-                    // Verifica dados do pai
-                    if (nomePai.Length != 0)
-                    {
-                        if (!(Verifica.Vazio(nomeMae) && Verifica.DDDeTelefone(dddMae, telMae)))
-                        {
-                            MessageBox.Show("Dados do pai incorretos ou incompletos!", 
-                                            "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            return;
-                        }
-                    }
                 }
 
-                // Verifica se o aluno é responsável financeiro
-                if (rd_S.Checked)
+                // Verifica dados do pai
+                if (nomePai.Length != 0)
                 {
-                    string Ano = "";
-                    Ano = msk_nascAluno.Text.Trim();
-                    Ano = Ano[6].ToString() + Ano[7].ToString() + Ano[8].ToString() +
-                          Ano[9].ToString();
-
-                    if (!Verifica.Maioridade(nasc))
+                    if (!(nomePai.Length > 0 && Verifica.DDDeTelefone(dddPai, telPai)))
                     {
-                        MessageBox.Show("Não é permitido responsabilizar financeiramente " + 
-                                        "menores de idade", "Erro!",
-                                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show("Dados do pai incorretos ou incompletos!", 
+                                       "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+                }
+            }
+
+            // Verifica se o aluno é responsável financeiro
+            if (rd_S.Checked)
+            {
+                if (!Verifica.Maioridade(nasc))
+                {
+                    MessageBox.Show("Não é permitido responsabilizar financeiramente " + 
+                                    "menores de idade", "Erro! Aluno menor de idade!",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                else
+                {
+                    string telefoneAlt = dddAltAluno + telAltAluno,
+                           telefone = dddAluno + telAluno;
+
+                    if (GerenciadorBanco.CadastrarAluno(0, nomeALuno, rg, cpf, nasc, sexo,
+                        email, telefone, telefoneAlt, endereco, bairro, cidade, nomeMae,
+                        nomePai, telMae, telPai, caminhoImagem))
+                    {
+                        MessageBox.Show("Aluno cadastrado com sucesso!");
                         return;
                     }
                     else
                     {
-                        string telefoneAlt = dddAltAluno + telAltAluno,
-                               telefone = dddAluno + telAluno;
-
-                        if (GerenciadorBanco.CadastrarAluno(0, nomeALuno, rg, cpf, nasc, sexo,
-                            email, telefone, telefoneAlt, endereco, bairro, cidade, nomeMae,
-                            nomePai, telMae, telPai, caminhoImagem))
-                        {
-                            MessageBox.Show("Aluno cadastrado com sucesso!");
-                            return;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Erro ao cadastrar aluno!");
-                            return;
-                        }
+                        MessageBox.Show("Erro ao cadastrar aluno!", "Erro",
+                                         MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
                     }
-                    
                 }
+                    
+            }
 
-                // Verifica se o aluno não é responsável financeiro
-                if (rd_N.Checked)
-                {
-                    DialogResult resultado = 
-                    MessageBox.Show("Deseja cadastrar um novo responsável financeiro?\n\n" +
-                                    "Se clicar em Não uma página para pesquisar responsáveis " +
-                                    "já cadastrados será exibida.", "Cadastrar novo responsável?",
-                                    MessageBoxButtons.YesNoCancel);
+            // Verifica se o aluno não é responsável financeiro
+            if (rd_N.Checked)
+            {
+                DialogResult resultado = 
+                MessageBox.Show("Deseja cadastrar um novo responsável financeiro?\n\n" +
+                                "Se clicar em Não uma página para pesquisar responsáveis " +
+                                "já cadastrados será exibida.", "Cadastrar novo responsável?",
+                                 MessageBoxButtons.YesNoCancel);
                    
-                    if (resultado.Equals(DialogResult.Yes))
+                if (resultado.Equals(DialogResult.Yes))
                     {
                         FormResponsavel form = new FormResponsavel();
                         form.ShowDialog();
@@ -155,24 +155,19 @@ namespace EscolaIdiomas
                         }
                         else
                         {
-                            MessageBox.Show("Erro ao cadastrar aluno!");
+                            MessageBox.Show("Erro ao cadastrar aluno!", "Erro!",
+                                             MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             return;
                         }
                     }
 
                     if (resultado.Equals(DialogResult.No))
                     {
-                        FormConsultar form = new FormConsultar();
+                        FormConsultarResponsavel form = new FormConsultarResponsavel();
                         form.Show();
                         return;
                     }
                 }
-
-            }
-            else
-                MessageBox.Show("Verifique se todos os campos foram preenchidos corretamente " +
-                                "e se nenhum campo obrigatório foi deixado em branco", 
-                                "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private void btn_fotoAluno_Click(object sender, EventArgs e)
@@ -206,10 +201,51 @@ namespace EscolaIdiomas
         }
 
 
+        // 65 a 90, letras caixa alta. 97 a 122, letras caixa baixas. 8, backspace. 32, espaço.
         private void txt_nomeAluno_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) &&
-                (e.KeyChar < 192 || e.KeyChar > 255) && e.KeyChar != 8)
+                (e.KeyChar < 192 || e.KeyChar > 255) && e.KeyChar != 8 && e.KeyChar != 32)
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void txt_nomeMae_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) &&
+                (e.KeyChar < 192 || e.KeyChar > 255) && e.KeyChar != 8 && e.KeyChar != 32)
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void txt_nomePai_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) &&
+                (e.KeyChar < 192 || e.KeyChar > 255) && e.KeyChar != 8 && e.KeyChar != 32)
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void txt_bairroAluno_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) &&
+                (e.KeyChar < 192 || e.KeyChar > 255) && e.KeyChar != 8 && e.KeyChar != 32)
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void txt_cidadeAluno_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) &&
+                (e.KeyChar < 192 || e.KeyChar > 255) && e.KeyChar != 8 && e.KeyChar != 32)
             {
                 e.Handled = true;
                 return;

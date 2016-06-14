@@ -30,7 +30,7 @@
         {
             this.pic_fotoAluno = new System.Windows.Forms.PictureBox();
             this.txt_nomeAluno = new System.Windows.Forms.TextBox();
-            this.cod_aluno = new System.Windows.Forms.TextBox();
+            this.txt_codAluno = new System.Windows.Forms.TextBox();
             this.msk_rgALuno = new System.Windows.Forms.MaskedTextBox();
             this.msk_cpfAluno = new System.Windows.Forms.MaskedTextBox();
             this.msk_nascAluno = new System.Windows.Forms.MaskedTextBox();
@@ -98,13 +98,13 @@
             this.txt_nomeAluno.TabIndex = 1;
             this.txt_nomeAluno.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_nomeAluno_KeyPress);
             // 
-            // cod_aluno
+            // txt_codAluno
             // 
-            this.cod_aluno.Enabled = false;
-            this.cod_aluno.Location = new System.Drawing.Point(401, 12);
-            this.cod_aluno.Name = "cod_aluno";
-            this.cod_aluno.Size = new System.Drawing.Size(83, 20);
-            this.cod_aluno.TabIndex = 2;
+            this.txt_codAluno.Enabled = false;
+            this.txt_codAluno.Location = new System.Drawing.Point(401, 12);
+            this.txt_codAluno.Name = "txt_codAluno";
+            this.txt_codAluno.Size = new System.Drawing.Size(83, 20);
+            this.txt_codAluno.TabIndex = 2;
             // 
             // msk_rgALuno
             // 
@@ -156,6 +156,7 @@
             this.txt_cidadeAluno.Name = "txt_cidadeAluno";
             this.txt_cidadeAluno.Size = new System.Drawing.Size(124, 20);
             this.txt_cidadeAluno.TabIndex = 14;
+            this.txt_cidadeAluno.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_cidadeAluno_KeyPress);
             // 
             // txt_bairroAluno
             // 
@@ -164,6 +165,7 @@
             this.txt_bairroAluno.Name = "txt_bairroAluno";
             this.txt_bairroAluno.Size = new System.Drawing.Size(108, 20);
             this.txt_bairroAluno.TabIndex = 13;
+            this.txt_bairroAluno.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_bairroAluno_KeyPress);
             // 
             // label1
             // 
@@ -381,6 +383,7 @@
             this.txt_nomePai.Name = "txt_nomePai";
             this.txt_nomePai.Size = new System.Drawing.Size(239, 20);
             this.txt_nomePai.TabIndex = 18;
+            this.txt_nomePai.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_nomePai_KeyPress);
             // 
             // txt_nomeMae
             // 
@@ -389,6 +392,7 @@
             this.txt_nomeMae.Name = "txt_nomeMae";
             this.txt_nomeMae.Size = new System.Drawing.Size(239, 20);
             this.txt_nomeMae.TabIndex = 15;
+            this.txt_nomeMae.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_nomeMae_KeyPress);
             // 
             // label17
             // 
@@ -527,7 +531,7 @@
             this.Controls.Add(this.msk_nascAluno);
             this.Controls.Add(this.msk_cpfAluno);
             this.Controls.Add(this.msk_rgALuno);
-            this.Controls.Add(this.cod_aluno);
+            this.Controls.Add(this.txt_codAluno);
             this.Controls.Add(this.txt_nomeAluno);
             this.Controls.Add(this.pic_fotoAluno);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -547,7 +551,7 @@
 
         private System.Windows.Forms.PictureBox pic_fotoAluno;
         private System.Windows.Forms.TextBox txt_nomeAluno;
-        private System.Windows.Forms.TextBox cod_aluno;
+        private System.Windows.Forms.TextBox txt_codAluno;
         private System.Windows.Forms.MaskedTextBox msk_rgALuno;
         private System.Windows.Forms.MaskedTextBox msk_cpfAluno;
         private System.Windows.Forms.MaskedTextBox msk_nascAluno;

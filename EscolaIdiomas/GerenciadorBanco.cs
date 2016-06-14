@@ -426,6 +426,31 @@ namespace EscolaIdiomas
             return id;
         }
 
+        public static int GetCodAluno()
+        {
+            int cod = 0;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+
+                cmd.CommandText = "SELECT TOP 1 cod_aluno FROM Aluno ORDER BY cod_aluno DESC";
+                cmd.CommandType = CommandType.Text;
+                cod = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+            return cod;
+        }
+
         public static int GetCodModulo(string CodCurso)
         {
             int id = 0;
