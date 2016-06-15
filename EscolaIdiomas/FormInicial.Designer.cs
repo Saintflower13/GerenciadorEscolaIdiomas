@@ -44,6 +44,7 @@
             this.consultaTurmasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultarModuloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.matriculaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pagamentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,7 +66,8 @@
             this.consultaCursoToolStripMenuItem,
             this.consultaTurmasToolStripMenuItem,
             this.consultarModuloToolStripMenuItem,
-            this.matriculaToolStripMenuItem});
+            this.matriculaToolStripMenuItem,
+            this.pagamentoToolStripMenuItem});
             this.Menu.Location = new System.Drawing.Point(1200, 0);
             this.Menu.Name = "Menu";
             this.Menu.Size = new System.Drawing.Size(144, 721);
@@ -175,6 +177,13 @@
             this.matriculaToolStripMenuItem.Text = "Matricula";
             this.matriculaToolStripMenuItem.Click += new System.EventHandler(this.matriculaToolStripMenuItem_Click);
             // 
+            // pagamentoToolStripMenuItem
+            // 
+            this.pagamentoToolStripMenuItem.Name = "pagamentoToolStripMenuItem";
+            this.pagamentoToolStripMenuItem.Size = new System.Drawing.Size(131, 19);
+            this.pagamentoToolStripMenuItem.Text = "Pagamento";
+            this.pagamentoToolStripMenuItem.Click += new System.EventHandler(this.pagamentoToolStripMenuItem_Click);
+            // 
             // FormInicial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -214,6 +223,7 @@
         private System.Windows.Forms.ToolStripMenuItem consultaTurmasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem consultarModuloToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem matriculaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pagamentoToolStripMenuItem;
     }
 }
 

@@ -114,6 +114,13 @@ namespace EscolaIdiomas
             form.MdiParent = this;
             form.Show();
         }
+
+        private void pagamentoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormPagamento form = new FormPagamento();
+            form.MdiParent = this;
+            form.Show();
+        }
     }
 }
 

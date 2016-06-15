@@ -280,7 +280,7 @@ namespace EscolaIdiomas
             }
         }
 
-        public static bool CadastrarTurma(int codMod, int qtdMin, int qtdMax, string diasSemana, string horarioInicial, int codProf)
+        public static bool CadastrarTurma(int codMod, int qtdMin, int qtdMax, string diasSemana, string horarioInicial, int codProf, string inicioAulas)
         {
             SqlConnection conexao = new SqlConnection(strConexao);
             try
@@ -288,13 +288,14 @@ namespace EscolaIdiomas
                 conexao.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexao;
-                cmd.CommandText = "INSERT INTO Turma(cod_modulo, qtd_min_aluno,  qtd_max_aluno, dias_semana, horario_inicial, cod_prof) " +
-                                  "VALUES (@codMod, @qtdMin, @qtdMax, @diasSemana, @horarioInicial, @codProf)";
+                cmd.CommandText = "INSERT INTO Turma(cod_modulo, qtd_min_aluno,  qtd_max_aluno, dias_semana, inicio_aulas, horario_inicial, cod_prof) " +
+                                  "VALUES (@codMod, @qtdMin, @qtdMax, @diasSemana, @inicioAulas, @horarioInicial, @codProf)";
 
                 cmd.Parameters.Add(new SqlParameter("@codMod", codMod));
                 cmd.Parameters.Add(new SqlParameter("@qtdMin", qtdMin));
                 cmd.Parameters.Add(new SqlParameter("@qtdMax", qtdMax));
                 cmd.Parameters.Add(new SqlParameter("@diasSemana", diasSemana));
+                cmd.Parameters.Add(new SqlParameter("@inicioAulas", inicioAulas));
                 cmd.Parameters.Add(new SqlParameter("@horarioInicial", horarioInicial));
                 cmd.Parameters.Add(new SqlParameter("@codProf", codProf));
 
@@ -351,7 +352,39 @@ namespace EscolaIdiomas
             }
         }
 
+        public static bool CadastrarPagamento(string diaVencimento, int codTurma, int codAluno)
+        {
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandText = "INSERT INTO Matricula (vencimento_parcela, cod_turma, cod_aluno) VALUES " +
+                                  "(@diaVencimento, @codTurma, @codAluno)";
 
+                cmd.Parameters.Add(new SqlParameter("@diaVencimento", diaVencimento));
+                cmd.Parameters.Add(new SqlParameter("@codTurma", codTurma));
+                cmd.Parameters.Add(new SqlParameter("@codAluno", codAluno));
+
+                cmd.CommandType = CommandType.Text;
+
+                cmd.ExecuteNonQuery();
+
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
 
 
         public static int GetIdade(string dataNasc, int dias)
@@ -422,7 +455,7 @@ namespace EscolaIdiomas
 
         public static int GetCodResp()
         {
-            int id = 0;
+            int cod = 0;
             SqlConnection conexao = new SqlConnection(strConexao);
             try
             {
@@ -432,7 +465,7 @@ namespace EscolaIdiomas
 
                 cmd.CommandText = "SELECT TOP 1 cod_responsavel FROM Responsavel ORDER BY cod_responsavel DESC";
                 cmd.CommandType = CommandType.Text;
-                id = Convert.ToInt32(cmd.ExecuteScalar());
+                cod = Convert.ToInt32(cmd.ExecuteScalar());
             }
             catch (Exception ex)
             {
@@ -442,7 +475,7 @@ namespace EscolaIdiomas
             {
                 conexao.Close();
             }
-            return id;
+            return cod;
         }
 
         public static int GetCodCurso()
@@ -987,6 +1020,149 @@ namespace EscolaIdiomas
             }
             return lista;
         }
+
+        // Para Pagamentos
+        public static List<string> getListaMatriculas()
+        {
+            string nomeAluno = "", codMatricula = "", nomeCurso = "";
+
+            SqlConnection conexao = new SqlConnection(strConexao);
+            List<string> lista = new List<string>();
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandType = CommandType.Text;
+
+                cmd.CommandText = "SELECT nome_aluno, CONVERT(VARCHAR, cod_matricula), nome_curso FROM Aluno INNER JOIN Matricula " +
+                                  "ON Aluno.cod_aluno = Matricula.cod_aluno INNER JOIN Turma " +
+                                  "ON Matricula.cod_turma = Turma.cod_turma INNER JOIN Modulo " +
+                                  "ON Modulo.cod_modulo = Turma.cod_modulo INNER JOIN Curso " +
+                                  "ON Curso.cod_curso = Modulo.cod_curso";
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    nomeAluno = dr.GetString(0);
+                    codMatricula = dr.GetString(1);
+                    nomeCurso = dr.GetString(2);
+
+                    lista.Add(nomeAluno + " | " + codMatricula + " | " + nomeCurso);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+
+            return lista;
+        }
+
+        public static string getParcela(string codMatricula)
+        {
+            string vParcela = "";
+
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandType = CommandType.Text;
+
+                cmd.CommandText = "SELECT CONVERT(VARCHAR, (valor_total / duracao_meses)) FROM Curso INNER JOIN Modulo " +
+                                  "ON Curso.cod_curso = Modulo.cod_curso INNER JOIN Turma " +
+                                  "ON Modulo.cod_modulo = Turma.cod_modulo INNER JOIN Matricula " +
+                                  "On Matricula.cod_turma = Turma.cod_turma " +
+                                  "WHERE Matricula.cod_matricula = @codMatricula";
+
+                cmd.Parameters.Add(new SqlParameter("@codMatricula", codMatricula));
+
+
+                vParcela = Convert.ToString(cmd.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+
+            return vParcela;
+        }
+
+        public static string getVencimento(string codMatricula)
+        {
+            string diaVencimento = "";
+
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandType = CommandType.Text;
+
+                cmd.CommandText = "SELECT CONVERT(VARCHAR, vencimento_parcela) From Matricula " +
+                                  "WHERE cod_matricula = @codMatricula";
+                cmd.Parameters.Add(new SqlParameter("@codMatricula", codMatricula));
+
+                diaVencimento = Convert.ToString(cmd.ExecuteScalar());
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+
+            return diaVencimento;
+        }
+
+        public static string getMulta(string codMatricula)
+        {
+            string multa = "";
+
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandType = CommandType.Text;
+
+                cmd.CommandText = "SELECT CONVERT(VARCHAR, valor_multa) FROM Matricula INNER JOIN Turma " +
+                                  "ON Matricula.cod_turma = Turma.cod_turma INNER JOIN Modulo " +
+                                  "ON Modulo.cod_modulo = Turma.cod_modulo INNER JOIN Curso " +
+                                  "On Curso.cod_curso = Modulo.cod_curso " +
+                                  "WHERE cod_matricula = @codMatricula";
+                cmd.Parameters.Add(new SqlParameter("@codMatricula", codMatricula));
+
+                multa = Convert.ToString(cmd.ExecuteScalar());
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+
+            return multa;
+        }
+
 
 
 

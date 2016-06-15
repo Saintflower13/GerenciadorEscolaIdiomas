@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgv_pesquisaModulo = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.txt_consultaModulo = new System.Windows.Forms.TextBox();
@@ -37,10 +39,25 @@
             // 
             // dgv_pesquisaModulo
             // 
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Blue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            this.dgv_pesquisaModulo.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgv_pesquisaModulo.BackgroundColor = System.Drawing.SystemColors.MenuBar;
+            this.dgv_pesquisaModulo.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dgv_pesquisaModulo.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_pesquisaModulo.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_pesquisaModulo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_pesquisaModulo.Location = new System.Drawing.Point(-1, 37);
+            this.dgv_pesquisaModulo.ColumnHeadersVisible = false;
+            this.dgv_pesquisaModulo.Location = new System.Drawing.Point(0, 37);
             this.dgv_pesquisaModulo.Name = "dgv_pesquisaModulo";
-            this.dgv_pesquisaModulo.Size = new System.Drawing.Size(474, 243);
+            this.dgv_pesquisaModulo.Size = new System.Drawing.Size(473, 243);
             this.dgv_pesquisaModulo.TabIndex = 0;
             // 
             // label1

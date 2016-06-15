@@ -106,6 +106,12 @@
     <Compile Include="FormModulo.Designer.cs">
       <DependentUpon>FormModulo.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormPagamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPagamento.Designer.cs">
+      <DependentUpon>FormPagamento.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormProfessor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -193,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormModulo.resx">
       <DependentUpon>FormModulo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPagamento.resx">
+      <DependentUpon>FormPagamento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormProfessor.resx">
       <DependentUpon>FormProfessor.cs</DependentUpon>
