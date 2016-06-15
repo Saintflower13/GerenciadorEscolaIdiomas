@@ -13,6 +13,7 @@ namespace EscolaIdiomas
     public partial class FormAluno : Form
     {
         public string caminhoImagem = @"C:\Projeto\user.png";
+        public Button btn_salvar;
 
         public FormAluno(string texto)
         {

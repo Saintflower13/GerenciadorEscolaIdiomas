@@ -12,30 +12,64 @@ namespace EscolaIdiomas
 {
     public partial class FormTurma : Form
     {
-        List<string> diasSemana = new List<string>();
-        bool modulos = false;
+        public string diasSemana = "";
+        public int diasClicados = 0;
+        public int diasCadastrados;
+        public bool modulos = false;
 
         public FormTurma()
         {
             InitializeComponent();
         }
 
+        // Btn Salvar
         private void btn_salvar_Click(object sender, EventArgs e)
         {
-            string curso = (string)cmb_cursos.SelectedItem;
-            string professor = (string)cmb_professor.SelectedItem;
-            string minAluno = txt_minAlunos.Text.Trim(),
-                   maxAluno = txt_maxAlunos.Text.Trim(),
-                   horarioInicial = msk_horarioInicial.Text.Trim();
-
-            if (!(curso.Length > 0 && professor.Length > 0 && minAluno.Length > 0 &&
-                  maxAluno.Length > 0 && horarioInicial.Length > 0 && diasSemana.Count() > 0))
+            if (cmb_cursos.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selecione um curso válido da lista!");
                 return;
-            
-            MessageBox.Show(diasSemana[0] + "\n" + curso + "\n" + professor + "\n" + horarioInicial +
-                            "\nMin: " + minAluno + " Max: " + maxAluno);
+            }
+
+            if (cmb_modulos.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selecione um módulo válido da lista!");
+                return;
+            }
+
+            if (cmb_professor.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selecione um professor válido da lista!");
+                return;
+            }
+
+            string curso = (string)cmb_cursos.SelectedItem;
+            string[] professor = cmb_professor.SelectedItem.ToString().Split('(');
+            string horarioInicial = msk_horarioInicial.Text.Trim();
+            int minAluno = int.Parse(txt_minAlunos.Text.Trim());
+            int maxAluno = int.Parse(txt_maxAlunos.Text.Trim());
+            int modulos = int.Parse(cmb_modulos.SelectedItem.ToString());
+
+            if (!(txt_minAlunos.Text.Length > 0 && txt_maxAlunos.Text.Length >  0 && horarioInicial.Length == 5 && diasSemana.Count() > 0))
+            {
+                MessageBox.Show("Verifique se todos os campos foram preenchidos corretamente e/ou se nenhum campo foi deixado em branco.", "Erro!");
+                return;
+            }
+
+            if (diasClicados < diasCadastrados)
+            {
+                int dias = diasCadastrados - diasClicados;
+                MessageBox.Show("Faltam " + dias.ToString() + " dias para serem selecionados!");
+                return;
+            }
+
+            if (GerenciadorBanco.CadastrarTurma(modulos, minAluno, maxAluno, diasSemana, horarioInicial, GerenciadorBanco.GetCodProfPorNome(professor[0])))
+                MessageBox.Show("Turma cadastrada com sucesso!");
         }
         
+
+
+        // Preview Key Down
         private void cmb_cursos_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyData == Keys.Up || e.KeyData == Keys.Down || cmb_cursos.Text.Length == 0 || e.KeyData == Keys.Left || e.KeyData == Keys.Right)
@@ -59,13 +93,16 @@ namespace EscolaIdiomas
             if (e.KeyValue == 8)
                 return;
 
-            string[] nomes = GerenciadorBanco.getLista(cmb_professor.Text).ToArray();
+            string[] nomes = GerenciadorBanco.getListaProf(cmb_professor.Text).ToArray();
             cmb_professor.DroppedDown = nomes.Length > 0 ? true : false;
             cmb_professor.Items.Clear();
             cmb_professor.Items.AddRange(nomes);
             cmb_professor.SelectionStart = cmb_professor.Text.Length;
         }
 
+
+
+        // Drop Down
         private void cmb_professor_DropDown(object sender, EventArgs e)
         {
             if (cmb_professor.Text.Length > 0)
@@ -89,23 +126,26 @@ namespace EscolaIdiomas
         }
 
         private void cmb_cursos_Leave(object sender, EventArgs e)
-        {
+        { 
             if (cmb_cursos.SelectedIndex < 0)
                 return;
 
-            if (!(Verifica.CursoExiste(cmb_cursos.SelectedText)))
-            {
-                MessageBox.Show("Curso não cadastrado!");
-                return;
-            }
+            diasCadastrados = GerenciadorBanco.GetDiasPorSemana((string)cmb_cursos.SelectedItem);
 
             modulos = true;
         }
 
         private void cmb_modulos_DropDown(object sender, EventArgs e)
         {
-            if (!modulos) return;
+           //if (cmb_cursos. > 0)
+           //    if (Verifica.CursoExiste(cmb_cursos.SelectedText))
+           //    {
+           //        MessageBox.Show("Curso não existe");
+           //        return;
+           //    }
 
+            if (!modulos) return;
+            
             string[] lista = GerenciadorBanco.getQtdModulos(cmb_cursos.SelectedItem.ToString()).ToArray();
 
             cmb_modulos.Items.Clear();
@@ -114,42 +154,9 @@ namespace EscolaIdiomas
             modulos = false;
             return;
         }
+        
 
-        private void ck_dmg_CheckedChanged(object sender, EventArgs e)
-        {
-            diasSemana.Add(ck_dmg.Text);
-        }
-
-        private void ck_sgn_CheckedChanged(object sender, EventArgs e)
-        {
-            diasSemana.Add(ck_sgn.Text);
-        }
-
-        private void ck_ter_CheckedChanged(object sender, EventArgs e)
-        {
-            diasSemana.Add(ck_ter.Text);
-        }
-
-        private void ck_qrt_CheckedChanged(object sender, EventArgs e)
-        {
-            diasSemana.Add(ck_qrt.Text);
-        }
-
-        private void ck_qnt_CheckedChanged(object sender, EventArgs e)
-        {
-            diasSemana.Add(ck_qnt.Text);
-        }
-
-        private void ck_sxt_CheckedChanged(object sender, EventArgs e)
-        {
-            diasSemana.Add(ck_sxt.Text);
-        }
-
-        private void ck_sab_CheckedChanged(object sender, EventArgs e)
-        {
-            diasSemana.Add(ck_sab.Text);
-        }
-
+        // Key Press
         // 48 a 57, números. 8, backspace. 
         private void txt_maxAlunos_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -176,6 +183,147 @@ namespace EscolaIdiomas
                 MessageBox.Show("Professor não cadastrado!");
                 return;
             }
+        }
+
+        private void ck_dmg_CheckStateChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+        // Check Box
+        private void ck_dmg_Click(object sender, EventArgs e)
+        {
+            if (!ck_dmg.Checked)
+            {
+                diasClicados--;
+                return;
+            }
+
+            if (diasClicados >= diasCadastrados)
+            {
+                MessageBox.Show("Impossível cadastrar mais dias", "Limite de dias atingido!");
+                ck_dmg.Checked = false;
+                return;
+            }
+
+            diasSemana += ck_dmg.Text + "|";
+            diasClicados++;
+        }
+
+        private void ck_sgn_Click(object sender, EventArgs e)
+        {
+            if (!ck_sgn.Checked)
+            {
+                diasClicados--;
+                return;
+            }
+
+            if (diasClicados >= diasCadastrados)
+            {
+                MessageBox.Show("Impossível cadastrar mais dias", "Limite de dias atingido!");
+                ck_sgn.Checked = false;
+                return;
+            }
+
+            diasSemana += ck_sgn.Text + "|";
+            diasClicados++;
+        }
+
+        private void ck_ter_Click(object sender, EventArgs e)
+        {
+            if (!ck_ter.Checked)
+            {
+                diasClicados--;
+                return;
+            }
+
+            if (diasClicados >= diasCadastrados)
+            {
+                MessageBox.Show("Impossível cadastrar mais dias", "Limite de dias atingido!");
+                ck_ter.Checked = false;
+                return;
+            }
+
+            diasSemana += ck_ter.Text + "|";
+            diasClicados++;
+        }
+
+        private void ck_qrt_Click(object sender, EventArgs e)
+        {
+            if (!ck_qrt.Checked)
+            {
+                diasClicados--;
+                return;
+            }
+
+            if (diasClicados >= diasCadastrados)
+            {
+                MessageBox.Show("Impossível cadastrar mais dias", "Limite de dias atingido!");
+                ck_qrt.Checked = false;
+                return;
+            }
+
+            diasSemana += ck_qrt.Text + "|";
+            diasClicados++;
+        }
+
+        private void ck_qnt_Click(object sender, EventArgs e)
+        {
+            if (!ck_qnt.Checked)
+            {
+                diasClicados--;
+                return;
+            }
+
+            if (diasClicados >= diasCadastrados)
+            {
+                MessageBox.Show("Impossível cadastrar mais dias", "Limite de dias atingido!");
+                ck_qnt.Checked = false;
+                return;
+            }
+
+            diasSemana += ck_qnt.Text + "|";
+            diasClicados++;
+        }
+
+        private void ck_sxt_Click(object sender, EventArgs e)
+        {
+            if (!ck_sxt.Checked)
+            {
+                diasClicados--;
+                return;
+            }
+
+            if (diasClicados >= diasCadastrados)
+            {
+                MessageBox.Show("Impossível cadastrar mais dias", "Limite de dias atingido!");
+                ck_sxt.Checked = false;
+                return;
+            }
+
+            diasSemana += ck_sxt.Text + "|";
+            diasClicados++;
+        }
+
+        private void ck_sab_Click(object sender, EventArgs e)
+        {
+            if (!ck_sab.Checked)
+            {
+                diasClicados--;
+                return;
+            }
+
+            if (diasClicados >= diasCadastrados)
+            {
+                MessageBox.Show("Impossível cadastrar mais dias", "Limite de dias atingido!");
+                ck_sab.Checked = false;
+                return;
+            }
+
+            diasSemana += ck_sab.Text + "|";
+            diasClicados++;
         }
     }
 }

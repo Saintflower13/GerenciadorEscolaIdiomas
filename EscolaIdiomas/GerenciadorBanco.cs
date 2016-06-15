@@ -19,6 +19,14 @@ namespace EscolaIdiomas
             public string cod, nome;
         };
 
+        struct TurmaCurso
+        {
+            public string codTurma, nomeCurso;
+        };
+
+
+        //Cadastros
+
         public static bool CadastrarAluno(int codResp, string nomeAluno, string rg, 
                                           string cpf, string nasc, char sexo,
                                           string email, string telefone, string telefoneAlt,
@@ -246,7 +254,7 @@ namespace EscolaIdiomas
                 conexao.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexao;
-                cmd.CommandText = "INSERT INTO Modulo (cod_modulo, cod_curso, descricao_modulo) VALUES " +
+                cmd.CommandText = "INSERT INTO Modulo (cod_moduloVisual, cod_curso, descricao_modulo) VALUES " +
                                   "(@codModulo, @codCurso, @descricao)";
 
                 cmd.Parameters.Add(new SqlParameter("@codModulo", codModulo));
@@ -272,7 +280,7 @@ namespace EscolaIdiomas
             }
         }
 
-        public static bool CadastrarTurma(int codTurma, int codCurso, int qtdMin, int qtdMax, string diasSemana, string horarioInicial, int codProf)
+        public static bool CadastrarTurma(int codMod, int qtdMin, int qtdMax, string diasSemana, string horarioInicial, int codProf)
         {
             SqlConnection conexao = new SqlConnection(strConexao);
             try
@@ -280,11 +288,10 @@ namespace EscolaIdiomas
                 conexao.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexao;
-                cmd.CommandText = "INSERT INTO Turma(cod_turma, cod_curso, qtd_min_aluno,  qtd_max_aluno, dias_semana, horario_inicial, cod_prof) " +
-                                  "VALUES (@codTurma, @codCurso, @qtdMin, @qtdMax, @diasSemana, @horarioInicial, codProf)";
+                cmd.CommandText = "INSERT INTO Turma(cod_modulo, qtd_min_aluno,  qtd_max_aluno, dias_semana, horario_inicial, cod_prof) " +
+                                  "VALUES (@codMod, @qtdMin, @qtdMax, @diasSemana, @horarioInicial, @codProf)";
 
-                cmd.Parameters.Add(new SqlParameter("@codTurma", codTurma));
-                cmd.Parameters.Add(new SqlParameter("@codCurso", codCurso));
+                cmd.Parameters.Add(new SqlParameter("@codMod", codMod));
                 cmd.Parameters.Add(new SqlParameter("@qtdMin", qtdMin));
                 cmd.Parameters.Add(new SqlParameter("@qtdMax", qtdMax));
                 cmd.Parameters.Add(new SqlParameter("@diasSemana", diasSemana));
@@ -309,6 +316,43 @@ namespace EscolaIdiomas
                 conexao.Close();
             }
         }
+
+        public static bool CadastrarMatricula(string diaVencimento, int codTurma, int codAluno)
+        {
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandText = "INSERT INTO Matricula (vencimento_parcela, cod_turma, cod_aluno) VALUES " +
+                                  "(@diaVencimento, @codTurma, @codAluno)";
+
+                cmd.Parameters.Add(new SqlParameter("@diaVencimento", diaVencimento));
+                cmd.Parameters.Add(new SqlParameter("@codTurma", codTurma));
+                cmd.Parameters.Add(new SqlParameter("@codAluno", codAluno));
+
+                cmd.CommandType = CommandType.Text;
+
+                cmd.ExecuteNonQuery();
+
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
+
+
 
         public static int GetIdade(string dataNasc, int dias)
         {
@@ -451,9 +495,9 @@ namespace EscolaIdiomas
             return cod;
         }
 
-        public static int GetCodModulo(string CodCurso)
+        public static int GetCodProf()
         {
-            int id = 0;
+            int cod = 0;
             SqlConnection conexao = new SqlConnection(strConexao);
             try
             {
@@ -461,10 +505,9 @@ namespace EscolaIdiomas
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexao;
 
-                cmd.CommandText = "SELECT TOP 1 cod_modulo FROM Modulo WHERE cod_curso = @codCurso ORDER BY cod_modulo DESC";
-                cmd.Parameters.Add(new SqlParameter("@codCurso", CodCurso));
+                cmd.CommandText = "SELECT TOP 1 cod_prof FROM Professor ORDER BY cod_prof DESC";
                 cmd.CommandType = CommandType.Text;
-                id = Convert.ToInt32(cmd.ExecuteScalar());
+                cod = Convert.ToInt32(cmd.ExecuteScalar());
             }
             catch (Exception ex)
             {
@@ -474,7 +517,114 @@ namespace EscolaIdiomas
             {
                 conexao.Close();
             }
-            return id;
+            return cod;
+        }
+
+
+        
+
+        public static int GetCodCursoPorNome(string nome)
+        {
+            int cod = 0;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+
+                cmd.CommandText = "SELECT cod_curso FROM Curso WHERE nome_curso = @nome";
+                cmd.Parameters.Add(new SqlParameter("@codCurso", nome));
+                cmd.CommandType = CommandType.Text;
+                cod = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+            return cod;
+        }
+
+        public static int GetCodProfPorNome(string nome)
+        {
+            int cod = 0;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+
+                cmd.CommandText = "SELECT cod_prof FROM Professor WHERE nome_prof = @nome";
+                cmd.Parameters.Add(new SqlParameter("@nome", nome));
+                cmd.CommandType = CommandType.Text;
+                cod = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+            return cod;
+        }
+
+        public static int GetDiasPorSemana(string nome)
+        {
+            int dias = 0;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+
+                cmd.CommandText = "SELECT qtd_aulas_semanais FROM Curso WHERE nome_curso = @nome";
+                cmd.Parameters.Add(new SqlParameter("@nome", nome));
+                cmd.CommandType = CommandType.Text;
+                dias = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+            return dias;
+        }
+
+        public static int GetCodModulo(string CodCurso)
+        {
+            int cod = 0;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+
+                cmd.CommandText = "SELECT TOP 1 cod_moduloVisual FROM Modulo WHERE cod_curso = @codCurso ORDER BY cod_moduloVisual DESC";
+                cmd.Parameters.Add(new SqlParameter("@codCurso", CodCurso));
+                cmd.CommandType = CommandType.Text;
+                cod = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+            return cod;
         }
 
         public static int GetCodTurma(int codCurso)
@@ -558,35 +708,8 @@ namespace EscolaIdiomas
             return dia;
         }
 
-        public static List<string> getListaCursos(string parte_nome)
-        {
-            SqlConnection conexao = new SqlConnection(strConexao);
-            List<string> lista = new List<string>();
-            try
-            {
-                conexao.Open();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = conexao;
-                cmd.CommandType = CommandType.Text;
-
-                cmd.CommandText = "SELECT TOP 5 nome_curso FROM Curso WHERE nome_curso LIKE @nome";
-                cmd.Parameters.Add(new SqlParameter("@nome", parte_nome + "%"));
-
-                SqlDataReader dr = cmd.ExecuteReader();
-                while (dr.Read())
-                    lista.Add(dr.GetString(0));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                conexao.Close();
-            }
-
-            return lista;
-        }
+        
+        
 
         public static List<string> getQtdModulos(string nomeCurso)
         {
@@ -599,7 +722,7 @@ namespace EscolaIdiomas
                 cmd.Connection = conexao;
                 cmd.CommandType = CommandType.Text;
 
-                cmd.CommandText = "SELECT CONVERT(VARCHAR, cod_modulo) FROM Modulo INNER JOIN Curso ON Modulo.cod_curso = Curso.cod_curso WHERE nome_curso = @nome";
+                cmd.CommandText = "SELECT cod_moduloVisual FROM Modulo INNER JOIN Curso ON Modulo.cod_curso = Curso.cod_curso WHERE nome_curso = @nome";
                 cmd.Parameters.Add(new SqlParameter("@nome", nomeCurso));
 
                 SqlDataReader dr = cmd.ExecuteReader();
@@ -618,7 +741,7 @@ namespace EscolaIdiomas
             return lista;
         }
 
-        public static List<string> getLista(string parte_nome)
+        public static List<string> getListaProf(string parte_nome)
         {
             Prof prof;
 
@@ -641,6 +764,37 @@ namespace EscolaIdiomas
                     prof.cod = dr.GetString(1);
                     lista.Add(prof.nome + " (código " + prof.cod + ")");
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+
+            return lista;
+        }
+
+        public static List<string> getListaCursos(string parte_nome)
+        {
+            SqlConnection conexao = new SqlConnection(strConexao);
+            List<string> lista = new List<string>();
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandType = CommandType.Text;
+
+                cmd.CommandText = "SELECT TOP 5 nome_curso FROM Curso " +
+                                  "WHERE nome_curso LIKE @nome";
+                cmd.Parameters.Add(new SqlParameter("@nome", parte_nome + "%"));
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                    lista.Add(dr.GetString(0));
             }
             catch (Exception ex)
             {
@@ -701,7 +855,7 @@ namespace EscolaIdiomas
                 cmd.Connection = conexao;
                 cmd.CommandType = CommandType.Text;
 
-                cmd.CommandText = "SELECT nome_curso FROM Curso";
+                cmd.CommandText = "SELECT TOP 5 nome_curso FROM Curso";
 
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
@@ -719,6 +873,124 @@ namespace EscolaIdiomas
             return lista;
         }
 
+        public static List<string> getListaTotalTurma()
+        {
+            TurmaCurso turmacurso;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            List<string> lista = new List<string>();
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandType = CommandType.Text;
+
+                cmd.CommandText = "SELECT CONVERT(VARCHAR, cod_turma), nome_curso From Curso INNER JOIN Modulo On Curso.cod_curso = Modulo.cod_curso " + 
+                                  "INNER JOIN Turma ON Modulo.cod_modulo = Turma.cod_modulo ORDER BY nome_Curso, cod_turma";
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    turmacurso.codTurma = dr.GetString(0);
+                    turmacurso.nomeCurso = dr.GetString(1);
+
+                    lista.Add(turmacurso.codTurma + " | " + turmacurso.nomeCurso);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+
+                conexao.Close();
+            }
+            return lista;
+        }
+
+        public static List<string> getListaTotalNomeCodAluno()
+        {
+            string codAluno = "",
+                   nomeAluno = "",
+                   cpfAluno = "";
+
+            SqlConnection conexao = new SqlConnection(strConexao);
+            List<string> lista = new List<string>();
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandType = CommandType.Text;
+
+                cmd.CommandText = "SELECT CONVERT(VARCHAR, cod_aluno), nome_aluno, cpf_aluno FROM Aluno";
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    codAluno = dr.GetString(0);
+                    nomeAluno = dr.GetString(1);
+                    cpfAluno = dr.GetString(2);
+
+                    lista.Add(codAluno + " | " + nomeAluno + " | " + cpfAluno);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+
+                conexao.Close();
+            }
+            return lista;
+        }
+
+        public static List<string> getListaTotalNomeCodAlunoPorNome(string parte_nome)
+        {
+            string codAluno = "",
+                   nomeAluno = "",
+                   cpfAluno = ""; 
+
+            SqlConnection conexao = new SqlConnection(strConexao);
+            List<string> lista = new List<string>();
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandType = CommandType.Text;
+
+                cmd.CommandText = "SELECT CONVERT(VARCHAR, cod_aluno), nome_aluno, cpf_aluno FROM Aluno WHERE nome_aluno LIKE @nome";
+                cmd.Parameters.Add(new SqlParameter("@nome", parte_nome + "%"));
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    codAluno = dr.GetString(0);
+                    nomeAluno = dr.GetString(1);
+                    cpfAluno = dr.GetString(2);
+
+                    lista.Add(codAluno + " | " + nomeAluno + " | " + cpfAluno);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+
+                conexao.Close();
+            }
+            return lista;
+        }
+
+
+
+        // Consultas
         public static DataTable getMatriculas()
         {
             DataTable dt = null;
@@ -1092,8 +1364,11 @@ namespace EscolaIdiomas
                 conexao.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexao;
-                cmd.CommandText = "SELECT CONVERT(VARCHAR, cod_modulo) AS 'Código do Módulo' " +
-                                  "FROM Modulo ORDER BY cod_modulo";
+                cmd.CommandText = "SELECT nome_curso AS 'Curso', " +
+                                  "cod_modulo AS 'Código do Módulo', " +
+                                  "cod_moduloVisual AS 'Número do Módulo' " +
+                                  "FROM Modulo INNER JOIN Curso ON Modulo.cod_curso = Curso.cod_curso " +
+                                  "ORDER BY nome_curso";
                 cmd.CommandType = CommandType.Text;
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -1106,7 +1381,6 @@ namespace EscolaIdiomas
             {
                 MessageBox.Show(ex.Message);
                 return null;
-
             }
             finally
             {
@@ -1123,9 +1397,12 @@ namespace EscolaIdiomas
                 conexao.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexao;
-                cmd.CommandText = "SELECT CONVERT(VARCHAR, cod_modulo) AS 'Código do Modulo' " +
-                                  "FROM Modulo INNER JOIN Curso ON Curso.cod_curso = Modulo.cod_curso " +
-                                  "WHERE nome_curso LIKE @nome ORDER BY cod_modulo";
+                cmd.CommandText = "SELECT cod_modulo AS 'Código do Módulo', " +
+                                  "cod_moduloVisual AS 'Número do Módulo', " +
+                                  "descricao_modulo AS 'Descrição' " +
+                                  "FROM Modulo INNER JOIN Curso ON Modulo.cod_curso = Curso.cod_curso " +
+                                  "WHERE nome_curso LIKE @nome";
+
                 cmd.Parameters.Add(new SqlParameter("@nome", nome + "%"));
                 cmd.CommandType = CommandType.Text;
 

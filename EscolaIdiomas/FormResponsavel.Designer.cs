@@ -53,7 +53,7 @@
             this.txt_nomeResp = new System.Windows.Forms.TextBox();
             this.btn_salvarResp = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.cod_resp = new System.Windows.Forms.TextBox();
+            this.txt_codResp = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // msk_telAltResp
@@ -207,6 +207,7 @@
             this.txt_bairroResp.Name = "txt_bairroResp";
             this.txt_bairroResp.Size = new System.Drawing.Size(108, 20);
             this.txt_bairroResp.TabIndex = 46;
+            this.txt_bairroResp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_bairroResp_KeyPress);
             // 
             // txt_cidadeResp
             // 
@@ -215,6 +216,7 @@
             this.txt_cidadeResp.Name = "txt_cidadeResp";
             this.txt_cidadeResp.Size = new System.Drawing.Size(124, 20);
             this.txt_cidadeResp.TabIndex = 45;
+            this.txt_cidadeResp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_cidadeResp_KeyPress);
             // 
             // txt_enderecoResp
             // 
@@ -258,6 +260,7 @@
             this.txt_nomeResp.Name = "txt_nomeResp";
             this.txt_nomeResp.Size = new System.Drawing.Size(293, 20);
             this.txt_nomeResp.TabIndex = 39;
+            this.txt_nomeResp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_nomeResp_KeyPress);
             // 
             // btn_salvarResp
             // 
@@ -278,20 +281,20 @@
             this.label2.TabIndex = 65;
             this.label2.Text = "Código:";
             // 
-            // cod_resp
+            // txt_codResp
             // 
-            this.cod_resp.Enabled = false;
-            this.cod_resp.Location = new System.Drawing.Point(265, 10);
-            this.cod_resp.Name = "cod_resp";
-            this.cod_resp.Size = new System.Drawing.Size(83, 20);
-            this.cod_resp.TabIndex = 66;
+            this.txt_codResp.Enabled = false;
+            this.txt_codResp.Location = new System.Drawing.Point(265, 10);
+            this.txt_codResp.Name = "txt_codResp";
+            this.txt_codResp.Size = new System.Drawing.Size(83, 20);
+            this.txt_codResp.TabIndex = 66;
             // 
-            // FormCadastrarResponsavel
+            // FormResponsavel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(371, 234);
-            this.Controls.Add(this.cod_resp);
+            this.Controls.Add(this.txt_codResp);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btn_salvarResp);
             this.Controls.Add(this.msk_telAltResp);
@@ -317,7 +320,7 @@
             this.Controls.Add(this.msk_cpfResp);
             this.Controls.Add(this.msk_rgResp);
             this.Controls.Add(this.txt_nomeResp);
-            this.Name = "FormCadastrarResponsavel";
+            this.Name = "FormResponsavel";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastrar Responsável";
             this.ResumeLayout(false);
@@ -352,6 +355,6 @@
         private System.Windows.Forms.TextBox txt_nomeResp;
         private System.Windows.Forms.Button btn_salvarResp;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox cod_resp;
+        private System.Windows.Forms.TextBox txt_codResp;
     }
 }

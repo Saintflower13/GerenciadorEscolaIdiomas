@@ -48,6 +48,7 @@ namespace EscolaIdiomas
 
         private void cadastrarTurmaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            
             FormTurma form = new FormTurma();
             form.MdiParent = this;
             form.Show();
@@ -103,6 +104,13 @@ namespace EscolaIdiomas
         private void consultarModuloToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormConsultaModulo form = new FormConsultaModulo();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void matriculaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormMatricula form = new FormMatricula();
             form.MdiParent = this;
             form.Show();
         }

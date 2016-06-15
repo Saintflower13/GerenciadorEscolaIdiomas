@@ -58,7 +58,7 @@
             this.cmb_cursos.FormattingEnabled = true;
             this.cmb_cursos.Location = new System.Drawing.Point(30, 48);
             this.cmb_cursos.Name = "cmb_cursos";
-            this.cmb_cursos.Size = new System.Drawing.Size(218, 21);
+            this.cmb_cursos.Size = new System.Drawing.Size(241, 21);
             this.cmb_cursos.TabIndex = 0;
             this.cmb_cursos.DropDown += new System.EventHandler(this.cmb_cursos_DropDown);
             this.cmb_cursos.Leave += new System.EventHandler(this.cmb_cursos_Leave);
@@ -67,7 +67,7 @@
             // cmb_modulos
             // 
             this.cmb_modulos.FormattingEnabled = true;
-            this.cmb_modulos.Location = new System.Drawing.Point(281, 48);
+            this.cmb_modulos.Location = new System.Drawing.Point(293, 48);
             this.cmb_modulos.Name = "cmb_modulos";
             this.cmb_modulos.Size = new System.Drawing.Size(70, 21);
             this.cmb_modulos.TabIndex = 1;
@@ -117,7 +117,7 @@
             this.ck_sab.TabIndex = 6;
             this.ck_sab.Text = "Sab";
             this.ck_sab.UseVisualStyleBackColor = true;
-            this.ck_sab.CheckedChanged += new System.EventHandler(this.ck_sab_CheckedChanged);
+            this.ck_sab.Click += new System.EventHandler(this.ck_sab_Click);
             // 
             // ck_sxt
             // 
@@ -128,7 +128,7 @@
             this.ck_sxt.TabIndex = 5;
             this.ck_sxt.Text = "Sex";
             this.ck_sxt.UseVisualStyleBackColor = true;
-            this.ck_sxt.CheckedChanged += new System.EventHandler(this.ck_sxt_CheckedChanged);
+            this.ck_sxt.Click += new System.EventHandler(this.ck_sxt_Click);
             // 
             // ck_qnt
             // 
@@ -139,7 +139,7 @@
             this.ck_qnt.TabIndex = 4;
             this.ck_qnt.Text = "Qui";
             this.ck_qnt.UseVisualStyleBackColor = true;
-            this.ck_qnt.CheckedChanged += new System.EventHandler(this.ck_qnt_CheckedChanged);
+            this.ck_qnt.Click += new System.EventHandler(this.ck_qnt_Click);
             // 
             // ck_qrt
             // 
@@ -150,7 +150,7 @@
             this.ck_qrt.TabIndex = 3;
             this.ck_qrt.Text = "Qua";
             this.ck_qrt.UseVisualStyleBackColor = true;
-            this.ck_qrt.CheckedChanged += new System.EventHandler(this.ck_qrt_CheckedChanged);
+            this.ck_qrt.Click += new System.EventHandler(this.ck_qrt_Click);
             // 
             // ck_ter
             // 
@@ -161,7 +161,7 @@
             this.ck_ter.TabIndex = 2;
             this.ck_ter.Text = "Ter";
             this.ck_ter.UseVisualStyleBackColor = true;
-            this.ck_ter.CheckedChanged += new System.EventHandler(this.ck_ter_CheckedChanged);
+            this.ck_ter.Click += new System.EventHandler(this.ck_ter_Click);
             // 
             // ck_sgn
             // 
@@ -172,7 +172,7 @@
             this.ck_sgn.TabIndex = 1;
             this.ck_sgn.Text = "Seg";
             this.ck_sgn.UseVisualStyleBackColor = true;
-            this.ck_sgn.CheckedChanged += new System.EventHandler(this.ck_sgn_CheckedChanged);
+            this.ck_sgn.Click += new System.EventHandler(this.ck_sgn_Click);
             // 
             // ck_dmg
             // 
@@ -183,13 +183,13 @@
             this.ck_dmg.TabIndex = 0;
             this.ck_dmg.Text = "Dom";
             this.ck_dmg.UseVisualStyleBackColor = true;
-            this.ck_dmg.CheckedChanged += new System.EventHandler(this.ck_dmg_CheckedChanged);
+            this.ck_dmg.Click += new System.EventHandler(this.ck_dmg_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(30, 29);
+            this.label1.Location = new System.Drawing.Point(27, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(125, 16);
             this.label1.TabIndex = 6;
@@ -199,7 +199,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(297, 29);
+            this.label2.Location = new System.Drawing.Point(309, 29);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 16);
             this.label2.TabIndex = 7;

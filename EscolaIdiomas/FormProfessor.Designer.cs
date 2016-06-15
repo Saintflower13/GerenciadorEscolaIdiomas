@@ -53,7 +53,7 @@
             this.msk_nascProf = new System.Windows.Forms.MaskedTextBox();
             this.msk_cpfProf = new System.Windows.Forms.MaskedTextBox();
             this.msk_rgProf = new System.Windows.Forms.MaskedTextBox();
-            this.cod_prof = new System.Windows.Forms.TextBox();
+            this.txt_codProf = new System.Windows.Forms.TextBox();
             this.txt_nomeProf = new System.Windows.Forms.TextBox();
             this.pic_fotoProf = new System.Windows.Forms.PictureBox();
             this.btn_fotoProf = new System.Windows.Forms.Button();
@@ -236,6 +236,7 @@
             this.txt_bairroProf.Name = "txt_bairroProf";
             this.txt_bairroProf.Size = new System.Drawing.Size(108, 20);
             this.txt_bairroProf.TabIndex = 48;
+            this.txt_bairroProf.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_bairroProf_KeyPress);
             // 
             // txt_cidadeProf
             // 
@@ -244,6 +245,7 @@
             this.txt_cidadeProf.Name = "txt_cidadeProf";
             this.txt_cidadeProf.Size = new System.Drawing.Size(124, 20);
             this.txt_cidadeProf.TabIndex = 47;
+            this.txt_cidadeProf.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_cidadeProf_KeyPress);
             // 
             // txt_enderecoProf
             // 
@@ -287,13 +289,13 @@
             this.msk_rgProf.TabIndex = 42;
             this.msk_rgProf.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
-            // cod_prof
+            // txt_codProf
             // 
-            this.cod_prof.Enabled = false;
-            this.cod_prof.Location = new System.Drawing.Point(265, 24);
-            this.cod_prof.Name = "cod_prof";
-            this.cod_prof.Size = new System.Drawing.Size(83, 20);
-            this.cod_prof.TabIndex = 41;
+            this.txt_codProf.Enabled = false;
+            this.txt_codProf.Location = new System.Drawing.Point(265, 24);
+            this.txt_codProf.Name = "txt_codProf";
+            this.txt_codProf.Size = new System.Drawing.Size(83, 20);
+            this.txt_codProf.TabIndex = 41;
             // 
             // txt_nomeProf
             // 
@@ -303,6 +305,7 @@
             this.txt_nomeProf.Name = "txt_nomeProf";
             this.txt_nomeProf.Size = new System.Drawing.Size(293, 20);
             this.txt_nomeProf.TabIndex = 40;
+            this.txt_nomeProf.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_nomeProf_KeyPress);
             // 
             // pic_fotoProf
             // 
@@ -346,6 +349,7 @@
             // rd_A
             // 
             this.rd_A.AutoSize = true;
+            this.rd_A.Enabled = false;
             this.rd_A.Location = new System.Drawing.Point(13, 13);
             this.rd_A.Name = "rd_A";
             this.rd_A.Size = new System.Drawing.Size(32, 17);
@@ -357,6 +361,7 @@
             // rd_I
             // 
             this.rd_I.AutoSize = true;
+            this.rd_I.Enabled = false;
             this.rd_I.Location = new System.Drawing.Point(51, 13);
             this.rd_I.Name = "rd_I";
             this.rd_I.Size = new System.Drawing.Size(28, 17);
@@ -419,7 +424,7 @@
             this.Controls.Add(this.msk_nascProf);
             this.Controls.Add(this.msk_cpfProf);
             this.Controls.Add(this.msk_rgProf);
-            this.Controls.Add(this.cod_prof);
+            this.Controls.Add(this.txt_codProf);
             this.Controls.Add(this.txt_nomeProf);
             this.Controls.Add(this.pic_fotoProf);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -461,7 +466,7 @@
         private System.Windows.Forms.MaskedTextBox msk_nascProf;
         private System.Windows.Forms.MaskedTextBox msk_cpfProf;
         private System.Windows.Forms.MaskedTextBox msk_rgProf;
-        private System.Windows.Forms.TextBox cod_prof;
+        private System.Windows.Forms.TextBox txt_codProf;
         private System.Windows.Forms.TextBox txt_nomeProf;
         private System.Windows.Forms.PictureBox pic_fotoProf;
         private System.Windows.Forms.Button btn_fotoProf;

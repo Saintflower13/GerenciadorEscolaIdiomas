@@ -404,7 +404,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ComboBox cmb_dias;
+        public System.Windows.Forms.ComboBox cmb_dias;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button btn_salvarCurso;
         private System.Windows.Forms.TextBox txt_vMulta;

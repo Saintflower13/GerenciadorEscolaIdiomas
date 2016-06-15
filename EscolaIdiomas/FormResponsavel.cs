@@ -18,6 +18,7 @@ namespace EscolaIdiomas
         {
             InitializeComponent();
             this.Text = "Cadastrar Responsável";
+            txt_codResp.Text = (GerenciadorBanco.GetCodResp() + 1).ToString();
         }
 
         private void btn_salvarResp_Click(object sender, EventArgs e)
@@ -70,6 +71,36 @@ namespace EscolaIdiomas
                 MessageBox.Show("Verifique se todos os campos foram preenchidos corretamente " +
                                 "e se nenhum campo obrigatório foi deixado em branco",
                                 "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void txt_nomeResp_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) &&
+                (e.KeyChar < 192 || e.KeyChar > 255) && e.KeyChar != 8 && e.KeyChar != 32)
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void txt_bairroResp_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) &&
+                (e.KeyChar < 192 || e.KeyChar > 255) && e.KeyChar != 8 && e.KeyChar != 32)
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void txt_cidadeResp_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) &&
+                (e.KeyChar < 192 || e.KeyChar > 255) && e.KeyChar != 8 && e.KeyChar != 32)
+            {
+                e.Handled = true;
+                return;
+            }
         }
     }
 }
