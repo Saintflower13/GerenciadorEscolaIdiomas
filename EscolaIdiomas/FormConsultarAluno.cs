@@ -30,5 +30,29 @@ namespace EscolaIdiomas
             else
                 dgv_pesquisaAluno.DataSource = GerenciadorBanco.getAlunoPorNome(txt_nomeAluno.Text.Trim());
         }
+
+        //private void dgv_pesquisaAluno_MouseDoubleClick(object sender, MouseEventArgs e)
+        //{
+        //    DialogResult resultado =  MessageBox.Show("Deseja alterar aluno?", "Alterar ", MessageBoxButtons.YesNoCancel);
+
+        //    if (resultado.Equals(DialogResult.Yes))
+        //    {
+        //        string codAluno = dgv_pesquisaAluno[0, e.RowIndex].Value.ToString());
+        //        FormAlterarAluno form = new FormAlterarAluno();
+        //        form.Show();
+        //    }
+        //}
+
+        private void dgv_pesquisaAluno_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DialogResult resultado = MessageBox.Show("Deseja alterar aluno?", "Alterar ", MessageBoxButtons.YesNoCancel);
+
+            //if (resultado.Equals(DialogResult.Yes))
+            //{
+            //    string codAluno = dgv_pesquisaAluno[0, e.RowIndex].Value.ToString();
+            //    FormAlterarAluno form = new FormAlterarAluno();
+            //    form.Show();
+            //}
+        }
     }
 }

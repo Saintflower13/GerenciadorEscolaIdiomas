@@ -127,6 +127,13 @@ namespace EscolaIdiomas
             FormEnviarMensagem form = new FormEnviarMensagem();
             form.Show();
         }
+
+        private void alterarAlunoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //FormAlterarAluno form = new FormAlterarAluno();
+            //form.MdiParent = this;
+            //form.Show();
+        }
     }
 }
 

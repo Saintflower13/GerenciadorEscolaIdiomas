@@ -101,7 +101,7 @@ namespace EscolaIdiomas
             // Verifica se o aluno é responsável financeiro
             if (rd_S.Checked)
             {
-                if (!Verifica.Maioridade(nasc))
+                if (!Verifica.Maior(nasc))
                 {
                     MessageBox.Show("Não é permitido responsabilizar financeiramente " + 
                                     "menores de idade", "Erro! Aluno menor de idade!",
@@ -195,7 +195,7 @@ namespace EscolaIdiomas
 
             string Ano = GerenciadorBanco.GetAno(msk_nascAluno.Text.Trim());
 
-            if (!Verifica.Maioridade(msk_nascAluno.Text.Trim()))
+            if (!Verifica.Maior(msk_nascAluno.Text.Trim()))
                 GrupoResponsaveisLegais.Enabled = true;
             else
                 GrupoResponsaveisLegais.Enabled = false;

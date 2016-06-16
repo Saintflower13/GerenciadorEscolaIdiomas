@@ -120,11 +120,9 @@ namespace EscolaIdiomas
             return true;
         }
 
-        public static bool Maioridade(string DATA)
+        public static bool Maior(string dataNasc)
         {
-            int dias = DateTime.Now.Day - GerenciadorBanco.GetDia(DATA);
-
-            if (GerenciadorBanco.GetIdade(DATA, dias) < 18)
+            if (GerenciadorBanco.GetIdade(dataNasc) < 18)
                 return false;
             else
                 return true;

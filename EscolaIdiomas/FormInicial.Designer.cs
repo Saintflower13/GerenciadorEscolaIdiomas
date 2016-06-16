@@ -95,6 +95,7 @@
             this.alterarAlunoToolStripMenuItem.Name = "alterarAlunoToolStripMenuItem";
             this.alterarAlunoToolStripMenuItem.Size = new System.Drawing.Size(131, 19);
             this.alterarAlunoToolStripMenuItem.Text = "Alterar Aluno";
+            this.alterarAlunoToolStripMenuItem.Click += new System.EventHandler(this.alterarAlunoToolStripMenuItem_Click);
             // 
             // enviarMensagemToolStripMenuItem
             // 
@@ -179,6 +180,11 @@
             this.matriculaToolStripMenuItem.Size = new System.Drawing.Size(131, 19);
             this.matriculaToolStripMenuItem.Text = "Matricula";
             this.matriculaToolStripMenuItem.Click += new System.EventHandler(this.matriculaToolStripMenuItem_Click);
+            // 
+            // pagamentoToolStripMenuItem
+            // 
+            this.pagamentoToolStripMenuItem.Name = "pagamentoToolStripMenuItem";
+            this.pagamentoToolStripMenuItem.Size = new System.Drawing.Size(131, 4);
             // 
             // relatóriosToolStripMenuItem
             // 

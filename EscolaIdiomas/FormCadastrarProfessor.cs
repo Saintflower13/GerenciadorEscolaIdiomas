@@ -31,7 +31,7 @@ namespace EscolaIdiomas
                 Verifica.DDDeTelefone(msk_dddProf.Text.Trim(), msk_telProf.Text.Trim()) &&
                 Verifica.DDDeTelefoneALT(msk_dddAltProf.Text.Trim(), msk_telAltProf.Text.Trim()) &&
                 msk_admissaoProf.Text.Trim().Length == 10 &&
-                Verifica.Maioridade(msk_nascProf.Text.Trim()) &&
+                Verifica.Maior(msk_nascProf.Text.Trim()) &&
                 (rd_F.Checked || rd_M.Checked)))
             {
                 MessageBox.Show("Verifique se todos os campos foram preenchidos corretamente " +

@@ -44,7 +44,7 @@ namespace EscolaIdiomas
                 Verifica.CPF(cpf) && Verifica.DDDeTelefone(dddResp, telResp) &&
                 Verifica.DDDeTelefoneALT(dddAltResp, telAltResp) &&
                 Verifica.Vazio(endereco) && Verifica.Vazio(bairro) &&
-                Verifica.Vazio(cidade) && Verifica.Maioridade(nasc) &&
+                Verifica.Vazio(cidade) && Verifica.Maior(nasc) &&
                 rd_F.Checked || rd_M.Checked)
             {
                 if (rd_F.Checked) sexo = 'f';

@@ -390,7 +390,7 @@ namespace EscolaIdiomas
 
 
 
-        public static int GetIdade(string dataNasc, int dias)
+        public static int GetIdade(string dataNasc)
         {
             int idade = 0;
             SqlConnection conexao = new SqlConnection(strConexao);
@@ -401,21 +401,11 @@ namespace EscolaIdiomas
                 cmd.Connection = conexao;
 
                 cmd.CommandText = "SET DATEFORMAT DMY " +
-                                  "DECLARE @idade AS INT " +
-                                  "DECLARE @dt_nascimento AS DATETIME " +
-                                  "SET @dt_nascimento = @dataNasc " +
-                                  "DECLARE @dt_atual AS DATE " +
-                                  "SET @dt_atual = GETDATE() " +
-                                  "DECLARE @dias AS INT " +
-                                  "SET @dias = @vDias " +
-                                  "IF (SELECT DATEADD(YEAR, @dias, @dt_nascimento)) > @dt_atual " +
-                                  " SET @idade = DATEDIFF(YEAR, @dt_nascimento, @dt_atual) - 1 " +
-                                  "ELSE " +
-                                  " SET @idade = DATEDIFF(YEAR, @dt_nascimento, @dt_atual) " +
-                                  "SELECT @idade";
+                                  "DECLARE @data AS DATE " +
+                                  "SET @data = CONVERT(DATE, @dataNascimento) " +
+                                  "EXEC usp_CalculaIdade @data";
 
-                cmd.Parameters.Add(new SqlParameter("@dataNasc", dataNasc));
-                cmd.Parameters.Add(new SqlParameter("@vDias", dias));
+                cmd.Parameters.Add(new SqlParameter("@dataNascimento", dataNasc));
 
                 cmd.CommandType = CommandType.Text;
                 idade = Convert.ToInt32(cmd.ExecuteScalar());
@@ -1114,12 +1104,13 @@ namespace EscolaIdiomas
             return lista;
         }
 
-
-        // Para Pagamentos
-        public static List<string> getListaMatriculas()
+        // Pega dados do aluno por código
+        public static List<string> getInfoAluno(string codAluno)
         {
-            string nomeAluno = "", codMatricula = "", nomeCurso = "";
-
+            string cod = "", cod_responsavel = "", nome = "", cpf = "", rg = "", nasc = "", sexo = "", pai = "",
+                   mae = "", endereco = "", bairro = "", cidade = "", email = "", telefone = "", telefone_alternativo = "",
+                   telefonePai = "", telefoneMae = "", foto = "", situacao = "";
+            
             SqlConnection conexao = new SqlConnection(strConexao);
             List<string> lista = new List<string>();
             try
@@ -1129,20 +1120,38 @@ namespace EscolaIdiomas
                 cmd.Connection = conexao;
                 cmd.CommandType = CommandType.Text;
 
-                cmd.CommandText = "SELECT nome_aluno, CONVERT(VARCHAR, cod_matricula), nome_curso FROM Aluno INNER JOIN Matricula " +
-                                  "ON Aluno.cod_aluno = Matricula.cod_aluno INNER JOIN Turma " +
-                                  "ON Matricula.cod_turma = Turma.cod_turma INNER JOIN Modulo " +
-                                  "ON Modulo.cod_modulo = Turma.cod_modulo INNER JOIN Curso " +
-                                  "ON Curso.cod_curso = Modulo.cod_curso";
+                cmd.CommandText = "SELECT CONVERT(VARCHAR, cod_responsavel), CONVERT(VARCHAR, cod_aluno), " +
+                                  "nome_aluno, rg_aluno, cpf_aluno, nasc_aluno, sexo_aluno, email_aluno, " +
+                                  "tel_aluno, tel_alternativo_aluno, endereco_aluno, bairro_aluno, " +
+                                  "cidade_aluno, mae, tel_mae, pai, tel_pai, foto_aluno, situacao_aluno FROM Aluno WHERE cod_aluno = @codAluno";
+                cmd.Parameters.Add(new SqlParameter("@codAluno", codAluno));
 
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    nomeAluno = dr.GetString(0);
-                    codMatricula = dr.GetString(1);
-                    nomeCurso = dr.GetString(2);
+                    cod_responsavel = dr.GetString(0);
+                    cod = dr.GetString(1);
+                    nome = dr.GetString(2);
+                    rg = dr.GetString(3);
+                    cpf = dr.GetString(4);
+                    nasc = dr.GetString(5);
+                    sexo = dr.GetString(6);
+                    email = dr.GetString(7);
+                    telefone = dr.GetString(8);
+                    telefone_alternativo = dr.GetString(9);
+                    endereco = dr.GetString(10);
+                    bairro = dr.GetString(11);
+                    cidade = dr.GetString(12);
+                    mae = dr.GetString(13);
+                    telefoneMae = dr.GetString(14);
+                    pai = dr.GetString(15);
+                    telefonePai = dr.GetString(16);
+                    foto = dr.GetString(17);
+                    situacao = dr.GetString(18);
 
-                    lista.Add(nomeAluno + " | " + codMatricula + " | " + nomeCurso);
+                    lista.Add(cod_responsavel + "|" + cod + "|" + nome + "|" + rg + "|" + cpf + "|" + nasc + "|" + sexo + "|" + 
+                              email + "|" + telefone + "|" + telefone_alternativo + "|" + endereco + "|" + bairro + "|" +
+                              cidade + "|" + mae + "|" + telefoneMae + "|" + pai + "|" + telefonePai + "|" + foto + "|" + situacao);
                 }
             }
             catch (Exception ex)
@@ -1156,108 +1165,6 @@ namespace EscolaIdiomas
 
             return lista;
         }
-
-        public static string getParcela(string codMatricula)
-        {
-            string vParcela = "";
-
-            SqlConnection conexao = new SqlConnection(strConexao);
-            try
-            {
-                conexao.Open();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = conexao;
-                cmd.CommandType = CommandType.Text;
-
-                cmd.CommandText = "SELECT CONVERT(VARCHAR, (valor_total / duracao_meses)) FROM Curso INNER JOIN Modulo " +
-                                  "ON Curso.cod_curso = Modulo.cod_curso INNER JOIN Turma " +
-                                  "ON Modulo.cod_modulo = Turma.cod_modulo INNER JOIN Matricula " +
-                                  "On Matricula.cod_turma = Turma.cod_turma " +
-                                  "WHERE Matricula.cod_matricula = @codMatricula";
-
-                cmd.Parameters.Add(new SqlParameter("@codMatricula", codMatricula));
-
-
-                vParcela = Convert.ToString(cmd.ExecuteScalar());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                conexao.Close();
-            }
-
-            return vParcela;
-        }
-
-        public static string getVencimento(string codMatricula)
-        {
-            string diaVencimento = "";
-
-            SqlConnection conexao = new SqlConnection(strConexao);
-            try
-            {
-                conexao.Open();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = conexao;
-                cmd.CommandType = CommandType.Text;
-
-                cmd.CommandText = "SELECT CONVERT(VARCHAR, vencimento_parcela) From Matricula " +
-                                  "WHERE cod_matricula = @codMatricula";
-                cmd.Parameters.Add(new SqlParameter("@codMatricula", codMatricula));
-
-                diaVencimento = Convert.ToString(cmd.ExecuteScalar());
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                conexao.Close();
-            }
-
-            return diaVencimento;
-        }
-
-        public static string getMulta(string codMatricula)
-        {
-            string multa = "";
-
-            SqlConnection conexao = new SqlConnection(strConexao);
-            try
-            {
-                conexao.Open();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = conexao;
-                cmd.CommandType = CommandType.Text;
-
-                cmd.CommandText = "SELECT CONVERT(VARCHAR, valor_multa) FROM Matricula INNER JOIN Turma " +
-                                  "ON Matricula.cod_turma = Turma.cod_turma INNER JOIN Modulo " +
-                                  "ON Modulo.cod_modulo = Turma.cod_modulo INNER JOIN Curso " +
-                                  "On Curso.cod_curso = Modulo.cod_curso " +
-                                  "WHERE cod_matricula = @codMatricula";
-                cmd.Parameters.Add(new SqlParameter("@codMatricula", codMatricula));
-
-                multa = Convert.ToString(cmd.ExecuteScalar());
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                conexao.Close();
-            }
-
-            return multa;
-        }
-
-
 
 
         // Consultas

@@ -38,10 +38,11 @@
             // dgv_pesquisaAluno
             // 
             this.dgv_pesquisaAluno.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_pesquisaAluno.Location = new System.Drawing.Point(3, 35);
+            this.dgv_pesquisaAluno.Location = new System.Drawing.Point(1, 36);
             this.dgv_pesquisaAluno.Name = "dgv_pesquisaAluno";
-            this.dgv_pesquisaAluno.Size = new System.Drawing.Size(474, 243);
+            this.dgv_pesquisaAluno.Size = new System.Drawing.Size(472, 245);
             this.dgv_pesquisaAluno.TabIndex = 0;
+            this.dgv_pesquisaAluno.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_pesquisaAluno_CellContentDoubleClick);
             // 
             // txt_nomeAluno
             // 
