@@ -46,9 +46,9 @@ namespace EscolaIdiomas
                                       "INSERT INTO Aluno (nome_aluno, rg_aluno, cpf_aluno, " +
                                       "nasc_aluno, sexo_aluno, email_aluno, tel_aluno, tel_alternativo_aluno, " +
                                       "endereco_aluno, bairro_aluno, cidade_aluno, mae, tel_mae, " +
-                                      "pai, tel_pai, foto_aluno, situacao_aluno) VALUES " +
+                                      "pai, tel_pai, foto_aluno) VALUES " +
                                       "(@nomeAluno, @rg, @cpf, @nasc, @sexo, @email, @tel, @telAlt, " +
-                                      "@endereco, @bairro, @cidade, @mae, @telMae, @pai, @telPai, CONVERT(VARBINARY(MAX), @foto), @situacao)";
+                                      "@endereco, @bairro, @cidade, @mae, @telMae, @pai, @telPai, CONVERT(VARBINARY(MAX), @foto))";
 
                 }
                 else
@@ -57,9 +57,9 @@ namespace EscolaIdiomas
                                       "INSERT INTO Aluno (cod_responsavel, nome_aluno, rg_aluno, cpf_aluno, " +
                                       "nasc_aluno, sexo_aluno, email_aluno, tel_aluno, tel_alternativo_aluno, " +
                                       "endereco_aluno, bairro_aluno, cidade_aluno, mae, tel_mae, " +
-                                      "pai, tel_pai, foto_aluno, situacao_aluno) VALUES " +
+                                      "pai, tel_pai, foto_aluno) VALUES " +
                                       "(@codResp, @nomeAluno, @rg, @cpf, @nasc, @sexo, @email, @tel, @telAlt, " +
-                                      "@endereco, @bairro, @cidade, @mae, @telMae, @pai, @telPai, CONVERT(VARBINARY(MAX), @foto), @situacao)";
+                                      "@endereco, @bairro, @cidade, @mae, @telMae, @pai, @telPai, CONVERT(VARBINARY(MAX), @foto))";
 
                     cmd.Parameters.Add(new SqlParameter("@codResp", codResp));
                 }
@@ -80,7 +80,6 @@ namespace EscolaIdiomas
                 cmd.Parameters.Add(new SqlParameter("@pai", nomePai));
                 cmd.Parameters.Add(new SqlParameter("@telPai", telPai));
                 cmd.Parameters.Add(new SqlParameter("@foto", "SELECT * FROM OPENROWSET(BULK '"+foto+"', SINGLE_BLOB) a"));
-                cmd.Parameters.Add(new SqlParameter("@situacao", 'i'));
 
                 cmd.CommandType = CommandType.Text;
 
@@ -93,7 +92,6 @@ namespace EscolaIdiomas
             {
                 MessageBox.Show(ex.Message);
                 return false;
-
             }
             finally
             {
@@ -113,9 +111,12 @@ namespace EscolaIdiomas
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexao;
                 cmd.CommandText = "SET DATEFORMAT DMY " +
-                                  "INSERT INTO Responsavel VALUES " +
+                                  "INSERT INTO Responsavel " +
+                                  "(nome_responsavel, rg_responsavel, cpf_responsavel, nasc_responsavel, sexo_responsavel, " +
+                                  "tel_responsavel, tel_alternativo_responsavel, endereco_responsavel, bairro_responsavel, " +
+                                  "cidade_responsavel) VALUES " +
                                   "(@nome, @rg, @cpf, @nasc, @sexo, @tel, @telAlt, " +
-                                  "@endereco, @bairro, @cidade, @situacao)";
+                                  "@endereco, @bairro, @cidade)";
 
                 cmd.Parameters.Add(new SqlParameter("@nome", nome));
                 cmd.Parameters.Add(new SqlParameter("@rg", rg));
@@ -127,7 +128,6 @@ namespace EscolaIdiomas
                 cmd.Parameters.Add(new SqlParameter("@endereco", endereco));
                 cmd.Parameters.Add(new SqlParameter("@bairro", bairro));
                 cmd.Parameters.Add(new SqlParameter("@cidade", cidade));
-                cmd.Parameters.Add(new SqlParameter("@situacao", 'a'));
 
                 cmd.CommandType = CommandType.Text;
 
@@ -160,7 +160,7 @@ namespace EscolaIdiomas
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexao;
                 
-                cmd.CommandText = "SET DATEFORMAT DMY " +
+                cmd.CommandText =  "SET DATEFORMAT DMY " +
                                    "INSERT INTO Professor (nome_prof, rg_prof, cpf_prof, " +
                                    "nasc_prof, sexo_prof, email_prof, tel_prof, tel_alternativo_prof, " +
                                    "endereco_prof, bairro_prof, cidade_prof, admissao_prof, foto_prof) VALUES " +
@@ -200,7 +200,7 @@ namespace EscolaIdiomas
             }
         }
 
-        public static bool CadastrarCurso(int codCurso, string nome, string duracaoMeses, string duracaoHoras,  int modulos, 
+        public static bool CadastrarCurso(string nome, string descricao, string duracaoMeses, string duracaoHoras,  int modulos, 
                                           string aulasSemanais, string matricula, float valorTotal,
                                           float multa, float rescisao)
         {
@@ -211,13 +211,13 @@ namespace EscolaIdiomas
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexao;
                 cmd.CommandText = "SET DATEFORMAT DMY " +
-                                  "INSERT INTO Curso (cod_curso, nome_curso, duracao_meses, duracao_horas, qtd_modulos, qtd_aulas_semanais, " +
+                                  "INSERT INTO Curso (nome_curso, descricao_curso, duracao_meses, duracao_horas, qtd_modulos, qtd_aulas_semanais, " +
                                   "valor_matricula, valor_total, valor_multa, valor_rescisao) " +
                                   "VALUES " +
-                                  "(@cod, @nome, @meses, @horas, @modulos, @aSemanais, @vMatricula, @vTotal, @vMulta, @vRescisao)";
-
-                cmd.Parameters.Add(new SqlParameter("@cod", codCurso));
+                                  "(@nome, @descricao, @meses, @horas, @modulos, @aSemanais, @vMatricula, @vTotal, @vMulta, @vRescisao)";
+                
                 cmd.Parameters.Add(new SqlParameter("@nome", nome));
+                cmd.Parameters.Add(new SqlParameter("@descricao", descricao));
                 cmd.Parameters.Add(new SqlParameter("@meses", duracaoMeses));
                 cmd.Parameters.Add(new SqlParameter("@horas", duracaoHoras));
                 cmd.Parameters.Add(new SqlParameter("@modulos", modulos));
@@ -280,7 +280,7 @@ namespace EscolaIdiomas
             }
         }
 
-        public static bool CadastrarTurma(int codMod, int qtdMin, int qtdMax, string diasSemana, string horarioInicial, int codProf, string inicioAulas)
+        public static bool CadastrarTurma(int codMod, int qtdMax, string diasSemana, string horarioInicial, int codProf, string inicioAulas)
         {
             SqlConnection conexao = new SqlConnection(strConexao);
             try
@@ -288,11 +288,11 @@ namespace EscolaIdiomas
                 conexao.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexao;
-                cmd.CommandText = "INSERT INTO Turma(cod_modulo, qtd_min_aluno,  qtd_max_aluno, dias_semana, inicio_aulas, horario_inicial, cod_prof) " +
-                                  "VALUES (@codMod, @qtdMin, @qtdMax, @diasSemana, @inicioAulas, @horarioInicial, @codProf)";
+                cmd.CommandText = "SET DATEFORMAT DMY " +
+                                  "INSERT INTO Turma(cod_modulo, qtd_max_aluno, dias_semana, inicio_aulas, horario_inicial, cod_prof) " +
+                                  "VALUES (@codMod, @qtdMax, @diasSemana, @inicioAulas, @horarioInicial, @codProf)";
 
                 cmd.Parameters.Add(new SqlParameter("@codMod", codMod));
-                cmd.Parameters.Add(new SqlParameter("@qtdMin", qtdMin));
                 cmd.Parameters.Add(new SqlParameter("@qtdMax", qtdMax));
                 cmd.Parameters.Add(new SqlParameter("@diasSemana", diasSemana));
                 cmd.Parameters.Add(new SqlParameter("@inicioAulas", inicioAulas));
@@ -318,7 +318,7 @@ namespace EscolaIdiomas
             }
         }
 
-        public static bool CadastrarMatricula(string diaVencimento, int codTurma, int codAluno)
+        public static bool CadastrarMatricula(int codTurma, int codAluno)
         {
             SqlConnection conexao = new SqlConnection(strConexao);
             try
@@ -326,13 +326,11 @@ namespace EscolaIdiomas
                 conexao.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexao;
-                cmd.CommandText = "INSERT INTO Matricula (vencimento_parcela, cod_turma, cod_aluno) VALUES " +
-                                  "(@diaVencimento, @codTurma, @codAluno) " +
+                cmd.CommandText = "INSERT INTO Matricula (cod_turma, cod_aluno) VALUES (@codTurma, @codAluno) " +
                                   "UPDATE Aluno SET situacao_aluno = 'a' FROM Aluno INNER JOIN Matricula " +
                                   "ON ALuno.cod_aluno = Matricula.cod_aluno " +
                                   "WHERE Matricula.cod_aluno = @codAluno";
-
-                cmd.Parameters.Add(new SqlParameter("@diaVencimento", diaVencimento));
+                
                 cmd.Parameters.Add(new SqlParameter("@codTurma", codTurma));
                 cmd.Parameters.Add(new SqlParameter("@codAluno", codAluno));
 

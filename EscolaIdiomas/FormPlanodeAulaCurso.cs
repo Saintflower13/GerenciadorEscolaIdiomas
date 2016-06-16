@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace EscolaIdiomas
 {
-    public partial class FormEnviarParaProfessores : Form
+    public partial class FormPlanodeAulaCurso : Form
     {
-        public FormEnviarParaProfessores()
+        public FormPlanodeAulaCurso()
         {
             InitializeComponent();
         }

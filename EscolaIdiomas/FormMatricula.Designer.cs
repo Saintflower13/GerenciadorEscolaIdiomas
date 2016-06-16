@@ -30,8 +30,6 @@
         {
             this.cmb_codTurma = new System.Windows.Forms.ComboBox();
             this.cmb_aluno = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txt_dia = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.btn_salvar = new System.Windows.Forms.Button();
@@ -57,24 +55,6 @@
             this.cmb_aluno.DropDown += new System.EventHandler(this.cmb_aluno_DropDown);
             this.cmb_aluno.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_aluno_KeyPress);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 123);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(171, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Dia para vencimento das parcelas:";
-            // 
-            // txt_dia
-            // 
-            this.txt_dia.Location = new System.Drawing.Point(189, 120);
-            this.txt_dia.MaxLength = 2;
-            this.txt_dia.Name = "txt_dia";
-            this.txt_dia.Size = new System.Drawing.Size(23, 20);
-            this.txt_dia.TabIndex = 4;
-            this.txt_dia.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_dia_KeyPress);
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -95,11 +75,11 @@
             // 
             // btn_salvar
             // 
-            this.btn_salvar.Location = new System.Drawing.Point(228, 118);
+            this.btn_salvar.Location = new System.Drawing.Point(15, 118);
             this.btn_salvar.Name = "btn_salvar";
-            this.btn_salvar.Size = new System.Drawing.Size(125, 23);
+            this.btn_salvar.Size = new System.Drawing.Size(338, 23);
             this.btn_salvar.TabIndex = 10;
-            this.btn_salvar.Text = "Salvar";
+            this.btn_salvar.Text = "Matricular";
             this.btn_salvar.UseVisualStyleBackColor = true;
             this.btn_salvar.Click += new System.EventHandler(this.btn_salvar_Click);
             // 
@@ -111,8 +91,6 @@
             this.Controls.Add(this.btn_salvar);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.txt_dia);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.cmb_aluno);
             this.Controls.Add(this.cmb_codTurma);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -128,8 +106,6 @@
 
         private System.Windows.Forms.ComboBox cmb_codTurma;
         private System.Windows.Forms.ComboBox cmb_aluno;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txt_dia;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btn_salvar;

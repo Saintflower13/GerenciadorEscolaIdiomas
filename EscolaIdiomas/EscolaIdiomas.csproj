@@ -106,11 +106,11 @@
     <Compile Include="FormModulo.Designer.cs">
       <DependentUpon>FormModulo.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormPagamento.cs">
+    <Compile Include="FormPlanodeAulaCurso.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormPagamento.Designer.cs">
-      <DependentUpon>FormPagamento.cs</DependentUpon>
+    <Compile Include="FormPlanodeAulaCurso.Designer.cs">
+      <DependentUpon>FormPlanodeAulaCurso.cs</DependentUpon>
     </Compile>
     <Compile Include="FormProfessor.cs">
       <SubType>Form</SubType>
@@ -141,18 +141,6 @@
     </Compile>
     <Compile Include="FormEnviarParaAlunos.Designer.cs">
       <DependentUpon>FormEnviarParaAlunos.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormEnviarParaProfessores.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormEnviarParaProfessores.Designer.cs">
-      <DependentUpon>FormEnviarParaProfessores.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormEnviarParaTodos.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormEnviarParaTodos.Designer.cs">
-      <DependentUpon>FormEnviarParaTodos.cs</DependentUpon>
     </Compile>
     <Compile Include="FormInicial.cs">
       <SubType>Form</SubType>
@@ -206,8 +194,8 @@
     <EmbeddedResource Include="FormModulo.resx">
       <DependentUpon>FormModulo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormPagamento.resx">
-      <DependentUpon>FormPagamento.cs</DependentUpon>
+    <EmbeddedResource Include="FormPlanodeAulaCurso.resx">
+      <DependentUpon>FormPlanodeAulaCurso.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormProfessor.resx">
       <DependentUpon>FormProfessor.cs</DependentUpon>
@@ -223,12 +211,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormEnviarParaAlunos.resx">
       <DependentUpon>FormEnviarParaAlunos.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormEnviarParaProfessores.resx">
-      <DependentUpon>FormEnviarParaProfessores.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormEnviarParaTodos.resx">
-      <DependentUpon>FormEnviarParaTodos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormInicial.resx">
       <DependentUpon>FormInicial.cs</DependentUpon>

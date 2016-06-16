@@ -26,6 +26,20 @@ namespace EscolaIdiomas
 
         private void btn_salvarProf_Click(object sender, EventArgs e)
         {
+            if (!(txt_nomeProf.Text.Trim().Length > 0 && Verifica.RG(msk_rgProf.Text.Trim())
+                && Verifica.Email(txt_emailProf.Text.Trim()) &&
+                Verifica.DDDeTelefone(msk_dddProf.Text.Trim(), msk_telProf.Text.Trim()) &&
+                Verifica.DDDeTelefoneALT(msk_dddAltProf.Text.Trim(), msk_telAltProf.Text.Trim()) &&
+                msk_admissaoProf.Text.Trim().Length == 10 &&
+                Verifica.Maioridade(msk_nascProf.Text.Trim()) &&
+                (rd_F.Checked || rd_M.Checked)))
+            {
+                MessageBox.Show("Verifique se todos os campos foram preenchidos corretamente " +
+                                 "e se nenhum campo obrigatório foi deixado em branco",
+                                 "Erro! Campos com erros!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             string nome = txt_nomeProf.Text.Trim(),
                    rg = msk_rgProf.Text.Trim(),
                    cpf = msk_cpfProf.Text.Trim(),
@@ -40,18 +54,6 @@ namespace EscolaIdiomas
                    cidade = txt_cidadeProf.Text.Trim(),
                    admissao = msk_admissaoProf.Text.Trim();
             char sexo = ' ';
-
-            if (!(nome.Length > 0 && Verifica.RG(rg) &&
-                Verifica.CPF(cpf) && Verifica.Email(email) &&
-                Verifica.DDDeTelefone(ddd, tel) &&
-                Verifica.DDDeTelefoneALT(dddAlt, telAlt) && 
-                admissao.Length == 10 &&
-                Verifica.Maioridade(nasc) &&
-                (rd_F.Checked || rd_M.Checked)))
-            {
-                MessageBox.Show("Erro ao cadastrar professor!");
-                return;
-            }
            
             if (rd_F.Checked) sexo = 'f';
             if (rd_M.Checked) sexo = 'm';

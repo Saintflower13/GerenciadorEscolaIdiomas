@@ -30,14 +30,6 @@ namespace EscolaIdiomas
                 MessageBox.Show("Selecione um aluno válido da lista!", "Erro");
                 return;
             }
-
-            if (!(txt_dia.Text.Length == 2 && int.Parse(txt_dia.Text) < 31))
-            {
-                MessageBox.Show("Preencha corretamente dia para o vencimento da parcela!", "Erro");
-                return;
-            }
-
-            string dia = txt_dia.Text;
             string[] codTurma = cmb_codTurma.SelectedItem.ToString().Split('|');
             string[] codAluno = cmb_aluno.SelectedItem.ToString().Split('|');
 
@@ -53,7 +45,7 @@ namespace EscolaIdiomas
                 return;
             }
 
-            if (GerenciadorBanco.CadastrarMatricula(dia, int.Parse(codTurma[0]), int.Parse(codAluno[0])))
+            if (GerenciadorBanco.CadastrarMatricula(int.Parse(codTurma[0]), int.Parse(codAluno[0])))
                 MessageBox.Show("Aluno matriculado com sucesso!");
         }
 

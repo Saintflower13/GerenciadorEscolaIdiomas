@@ -115,17 +115,16 @@ namespace EscolaIdiomas
             form.Show();
         }
 
-        private void pagamentoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormPagamento form = new FormPagamento();
-            form.MdiParent = this;
-            form.Show();
-        }
-
         private void relatóriosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormRelatorio form = new FormRelatorio();
             form.MdiParent = this;
+            form.Show();
+        }
+
+        private void enviarMensagemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormEnviarMensagem form = new FormEnviarMensagem();
             form.Show();
         }
     }

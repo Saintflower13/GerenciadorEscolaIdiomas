@@ -16,10 +16,12 @@ namespace EscolaIdiomas
         public int diasClicados = 0;
         public int diasCadastrados;
         public bool modulos = false;
+        
 
         public FormTurma()
         {
             InitializeComponent();
+            rd_I.Checked = true;
         }
 
         // Btn Salvar
@@ -44,7 +46,7 @@ namespace EscolaIdiomas
             }
 
 
-            if (!(txt_minAlunos.Text.Length > 0 && txt_maxAlunos.Text.Length > 0 && msk_horarioInicial.Text.Length == 5 && diasSemana.Count() > 0 && msk_inicio.Text.Length == 10))
+            if (!(txt_maxAlunos.Text.Length > 0 && msk_horarioInicial.Text.Length == 5 && diasSemana.Count() > 0 && msk_inicio.Text.Length == 10))
             {
                 MessageBox.Show("Verifique se todos os campos foram preenchidos corretamente e/ou se nenhum campo foi deixado em branco.", "Erro!");
                 return;
@@ -54,7 +56,6 @@ namespace EscolaIdiomas
             string[] professor = cmb_professor.SelectedItem.ToString().Split('(');
             string horarioInicial = msk_horarioInicial.Text.Trim();
             string inicioAulas = msk_inicio.Text.Trim();
-            int minAluno = int.Parse(txt_minAlunos.Text.Trim());
             int maxAluno = int.Parse(txt_maxAlunos.Text.Trim());
             string modulo = GerenciadorBanco.GetCodModuloReal(cmb_modulos.SelectedItem.ToString(), curso);
             
@@ -66,8 +67,10 @@ namespace EscolaIdiomas
                 return;
             }
 
-            if (GerenciadorBanco.CadastrarTurma(int.Parse(modulo), minAluno, maxAluno, diasSemana, horarioInicial, GerenciadorBanco.GetCodProfPorNome(professor[0]), inicioAulas))
+            if (GerenciadorBanco.CadastrarTurma(int.Parse(modulo), maxAluno, diasSemana, horarioInicial, GerenciadorBanco.GetCodProfPorNome(professor[0]), inicioAulas))
                 MessageBox.Show("Turma cadastrada com sucesso!");
+            else
+                MessageBox.Show("Erro ao cadastrar turma!");
         }
         
 

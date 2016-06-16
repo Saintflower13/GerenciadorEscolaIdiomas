@@ -12,19 +12,33 @@ namespace EscolaIdiomas
 {
     public partial class FormAluno : Form
     {
-        public string caminhoImagem = @"C:\Projeto\user.png";
-        public Button btn_salvar;
+        public string caminhoImagem = @"C:\Projeto\EscolaIdiomas\Fotos\user.png";
 
         public FormAluno(string texto)
         {
             InitializeComponent();
-            pic_fotoAluno.ImageLocation = @"C:\Projeto\user.png";
+            pic_fotoAluno.ImageLocation = caminhoImagem;
             this.Text = texto;
             txt_codAluno.Text = (GerenciadorBanco.GetCodAluno() + 1).ToString();
+            rd_I.Checked = true;
         }
 
         private void btn_salvarAluno_Click(object sender, EventArgs e)
         {
+            // Realiza as verificações obrigatórias
+            if (!(txt_nomeAluno.Text.Trim().Length > 0 && msk_rgALuno.Text.Trim().Length > 0 && 
+                 txt_emailAluno.Text.Trim().Length > 0 &&
+                 Verifica.DDDeTelefone(msk_dddAluno.Text.Trim(), msk_telAluno.Text.Trim()) &&
+                 Verifica.DDDeTelefoneALT(msk_dddAltAluno.Text.Trim(), msk_telAltAluno.Text.Trim()) &&
+                 (rd_F.Checked || rd_M.Checked)))
+            {
+
+                MessageBox.Show("Verifique se todos os campos foram preenchidos corretamente " +
+                                "e se nenhum campo obrigatório foi deixado em branco",
+                                "Erro! Campos com erros!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             string nomeALuno = txt_nomeAluno.Text.Trim(),
                    rg = msk_rgALuno.Text.Trim(),
                    cpf = msk_cpfAluno.Text.Trim(),
@@ -45,20 +59,6 @@ namespace EscolaIdiomas
                    telPai = msk_telPai.Text.Trim();
 
             char sexo = ' ';
-
-            // Realiza as verificações obrigatórias
-            if (!(nomeALuno.Length > 0 && rg.Length > 0 &&
-                  cpf.Length > 0 && email.Length > 0 &&
-                  Verifica.DDDeTelefone(dddAluno, telAluno) &&
-                  Verifica.DDDeTelefoneALT(dddAltAluno, telAltAluno) &&
-                  rd_F.Checked || rd_M.Checked))
-            {
-
-                MessageBox.Show("Verifique se todos os campos foram preenchidos corretamente " +
-                                "e se nenhum campo obrigatório foi deixado em branco",
-                                "Erro! Campos com erros!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
 
             if (rd_F.Checked) sexo = 'f';
             if (rd_M.Checked) sexo = 'm';
@@ -152,6 +152,7 @@ namespace EscolaIdiomas
                             nomePai, telMae, telPai, caminhoImagem))
                         {
                             MessageBox.Show("Aluno cadastrado com sucesso!");
+                            this.Close();
                             return;
                         }
                         else
@@ -171,6 +172,8 @@ namespace EscolaIdiomas
                 }
         }
 
+
+        // Carrega foto do aluno
         private void btn_fotoAluno_Click(object sender, EventArgs e)
         {
             OpenFileDialog p = new OpenFileDialog();
@@ -182,6 +185,9 @@ namespace EscolaIdiomas
 
         }
 
+
+
+        // Se o aluno for de menor, habilita o grupo de responsáveis
         private void msk_nascAluno_Leave(object sender, EventArgs e)
         {
             if (msk_nascAluno.Text.Trim().Length == 0)
@@ -190,16 +196,11 @@ namespace EscolaIdiomas
             string Ano = GerenciadorBanco.GetAno(msk_nascAluno.Text.Trim());
 
             if (!Verifica.Maioridade(msk_nascAluno.Text.Trim()))
-            {
                 GrupoResponsaveisLegais.Enabled = true;
-                MessageBox.Show("Menor");
-            }
             else
-            {
                 GrupoResponsaveisLegais.Enabled = false;
-                MessageBox.Show("Maior");
-            }
         }
+        
 
 
         // 65 a 90, letras caixa alta. 97 a 122, letras caixa baixas. 8, backspace. 32, espaço.

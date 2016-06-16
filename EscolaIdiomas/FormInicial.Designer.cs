@@ -101,6 +101,7 @@
             this.enviarMensagemToolStripMenuItem.Name = "enviarMensagemToolStripMenuItem";
             this.enviarMensagemToolStripMenuItem.Size = new System.Drawing.Size(131, 19);
             this.enviarMensagemToolStripMenuItem.Text = "Enviar Mensagem...";
+            this.enviarMensagemToolStripMenuItem.Click += new System.EventHandler(this.enviarMensagemToolStripMenuItem_Click);
             // 
             // cadastrarProfessorToolStripMenuItem
             // 
@@ -178,13 +179,6 @@
             this.matriculaToolStripMenuItem.Size = new System.Drawing.Size(131, 19);
             this.matriculaToolStripMenuItem.Text = "Matricula";
             this.matriculaToolStripMenuItem.Click += new System.EventHandler(this.matriculaToolStripMenuItem_Click);
-            // 
-            // pagamentoToolStripMenuItem
-            // 
-            this.pagamentoToolStripMenuItem.Name = "pagamentoToolStripMenuItem";
-            this.pagamentoToolStripMenuItem.Size = new System.Drawing.Size(131, 19);
-            this.pagamentoToolStripMenuItem.Text = "Pagamento";
-            this.pagamentoToolStripMenuItem.Click += new System.EventHandler(this.pagamentoToolStripMenuItem_Click);
             // 
             // relatóriosToolStripMenuItem
             // 

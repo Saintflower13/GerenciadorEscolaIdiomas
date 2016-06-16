@@ -20,19 +20,12 @@ namespace EscolaIdiomas
 
         private void btn_salvarCurso_Click(object sender, EventArgs e)
         {
-            string nome = txt_nomeCurso.Text.Trim(),
-                   matricula = txt_vMatricula.Text.Trim(),
-                   total = txt_vTotal.Text.Trim(),
-                   multa = txt_vMulta.Text.Trim(),
-                   rescisao = txt_vRescisao.Text.Trim(),
-                   meses = txt_meses.Text.Trim(),
-                   horas = msk_horas.Text.Trim(),
-                   aulaSem = (cmb_dias.SelectedIndex + 1).ToString();
-            int modulos = int.Parse(txt_modulos.Text.Trim());
-
-            if (!(nome.Length != 0 && Verifica.Moeda(matricula) && Verifica.Moeda(total) &&
-                  multa.ToString().Length != 0 && Verifica.Moeda(rescisao) && meses.Length != 0 &&
-                  modulos.ToString().Length != 0 && horas.Length != 0 && aulaSem.Length != 0))
+            if (!(txt_nomeCurso.Text.Trim().Length != 0 && Verifica.Moeda(txt_vMatricula.Text.Trim()) && 
+                   Verifica.Moeda(txt_vTotal.Text.Trim()) &&
+                   txt_vMulta.Text.Trim().ToString().Length != 0 && Verifica.Moeda(txt_vRescisao.Text.Trim()) && 
+                   txt_meses.Text.Trim().Length != 0 &&
+                   txt_modulos.Text.Trim().Length != 0 && msk_horas.Text.Trim().Length != 0 && 
+                   (cmb_dias.SelectedIndex + 1).ToString().Length != 0))
             {
                 MessageBox.Show("Verifique se todos os campos foram preenchidos corretamente " +
                                 "e se nenhum campo obrigatório foi deixado em branco",
@@ -40,14 +33,21 @@ namespace EscolaIdiomas
                 return;
             }
 
-            int codCurso = GerenciadorBanco.GetCodCurso() + 1;
-
-            if (!(GerenciadorBanco.CadastrarCurso(codCurso, nome, meses, horas, modulos, aulaSem, matricula,
-                                            float.Parse(total), float.Parse(multa), float.Parse(rescisao))))
-                return;
+            string nome = txt_nomeCurso.Text.Trim(),
+                   vMatricula = txt_vMatricula.Text.Trim(),
+                   total = txt_vTotal.Text.Trim(),
+                   multa = txt_vMulta.Text.Trim(),
+                   rescisao = txt_vRescisao.Text.Trim(),
+                   meses = txt_meses.Text.Trim(),
+                   horas = msk_horas.Text.Trim(),
+                   aulaSem = (cmb_dias.SelectedIndex + 1).ToString(),
+                   descricao = txt_descricaoCurso.Text.Trim(), 
+                   modulos = txt_modulos.Text.Trim();
             
-            FormModulo form = new FormModulo(modulos, codCurso);
+            FormModulo form = new FormModulo(int.Parse(modulos), GerenciadorBanco.GetCodCurso() + 1, nome, descricao, meses, horas, 
+                                             aulaSem, vMatricula, float.Parse(total), float.Parse(multa), float.Parse(rescisao));
             form.ShowDialog();
+            return;
         }
 
         // 48 a 57, números. 8, backspace. 46, ponto final. 44, virgula.

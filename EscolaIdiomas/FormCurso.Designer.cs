@@ -55,6 +55,8 @@
             this.txt_meses = new System.Windows.Forms.TextBox();
             this.cmb_dias = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txt_descricaoCurso = new System.Windows.Forms.TextBox();
             this.btn_salvarCurso = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -238,7 +240,7 @@
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(17, 97);
+            this.groupBox1.Location = new System.Drawing.Point(17, 153);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(247, 171);
             this.groupBox1.TabIndex = 26;
@@ -295,7 +297,7 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(270, 97);
+            this.groupBox2.Location = new System.Drawing.Point(270, 153);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(247, 171);
             this.groupBox2.TabIndex = 27;
@@ -338,6 +340,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label15);
+            this.groupBox3.Controls.Add(this.txt_descricaoCurso);
             this.groupBox3.Controls.Add(this.txt_nomeCurso);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.txt_codCurso);
@@ -345,14 +349,32 @@
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(17, 12);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(500, 79);
+            this.groupBox3.Size = new System.Drawing.Size(500, 126);
             this.groupBox3.TabIndex = 28;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Identificadores";
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(10, 64);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(105, 13);
+            this.label15.TabIndex = 13;
+            this.label15.Text = "Descrição do curso: ";
+            // 
+            // txt_descricaoCurso
+            // 
+            this.txt_descricaoCurso.Location = new System.Drawing.Point(121, 64);
+            this.txt_descricaoCurso.Multiline = true;
+            this.txt_descricaoCurso.Name = "txt_descricaoCurso";
+            this.txt_descricaoCurso.Size = new System.Drawing.Size(363, 51);
+            this.txt_descricaoCurso.TabIndex = 12;
+            // 
             // btn_salvarCurso
             // 
-            this.btn_salvarCurso.Location = new System.Drawing.Point(401, 274);
+            this.btn_salvarCurso.Location = new System.Drawing.Point(401, 330);
             this.btn_salvarCurso.Name = "btn_salvarCurso";
             this.btn_salvarCurso.Size = new System.Drawing.Size(116, 23);
             this.btn_salvarCurso.TabIndex = 29;
@@ -364,7 +386,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(534, 309);
+            this.ClientSize = new System.Drawing.Size(534, 360);
             this.Controls.Add(this.btn_salvarCurso);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -413,5 +435,7 @@
         private System.Windows.Forms.TextBox txt_vMatricula;
         public System.Windows.Forms.TextBox txt_modulos;
         private System.Windows.Forms.TextBox txt_meses;
+        private System.Windows.Forms.TextBox txt_descricaoCurso;
+        private System.Windows.Forms.Label label15;
     }
 }
