@@ -45,6 +45,7 @@
             this.consultarModuloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.matriculaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pagamentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.relatóriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,7 +68,8 @@
             this.consultaTurmasToolStripMenuItem,
             this.consultarModuloToolStripMenuItem,
             this.matriculaToolStripMenuItem,
-            this.pagamentoToolStripMenuItem});
+            this.pagamentoToolStripMenuItem,
+            this.relatóriosToolStripMenuItem});
             this.Menu.Location = new System.Drawing.Point(1200, 0);
             this.Menu.Name = "Menu";
             this.Menu.Size = new System.Drawing.Size(144, 721);
@@ -184,6 +186,13 @@
             this.pagamentoToolStripMenuItem.Text = "Pagamento";
             this.pagamentoToolStripMenuItem.Click += new System.EventHandler(this.pagamentoToolStripMenuItem_Click);
             // 
+            // relatóriosToolStripMenuItem
+            // 
+            this.relatóriosToolStripMenuItem.Name = "relatóriosToolStripMenuItem";
+            this.relatóriosToolStripMenuItem.Size = new System.Drawing.Size(131, 19);
+            this.relatóriosToolStripMenuItem.Text = "Relatórios";
+            this.relatóriosToolStripMenuItem.Click += new System.EventHandler(this.relatóriosToolStripMenuItem_Click);
+            // 
             // FormInicial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -224,6 +233,7 @@
         private System.Windows.Forms.ToolStripMenuItem consultarModuloToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem matriculaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pagamentoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem relatóriosToolStripMenuItem;
     }
 }
 

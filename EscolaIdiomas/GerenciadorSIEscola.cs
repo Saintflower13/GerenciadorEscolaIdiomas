@@ -166,5 +166,26 @@ namespace EscolaIdiomas
 
             return false;
         }
+
+        public static bool PodeMatricular(string codTurma)
+        {
+            if (GerenciadorBanco.GetQtdMatriculas(codTurma) >= GerenciadorBanco.GetQtdAluno(codTurma))
+                return false;
+
+            return true;
+        }
+
+        public static bool AlunoCadastrado(string codAluno, string codTurma)
+        {
+            List<string> listaMatriculas = GerenciadorBanco.getListaMatriculados(codTurma);
+
+            for (int i = 0; i < listaMatriculas.Count(); ++i)
+            {
+                if (listaMatriculas[i] == codAluno)
+                    return true;
+            }
+
+            return false;
+        }
     }
 }

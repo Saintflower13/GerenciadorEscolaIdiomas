@@ -41,6 +41,18 @@ namespace EscolaIdiomas
             string[] codTurma = cmb_codTurma.SelectedItem.ToString().Split('|');
             string[] codAluno = cmb_aluno.SelectedItem.ToString().Split('|');
 
+            if (Verifica.AlunoCadastrado(codAluno[0].Trim(), codTurma[0].Trim()))
+            {
+                MessageBox.Show("Aluno já matriculado nesta turma.", "Impossível cadastrar!");
+                return;
+            }
+
+            if (!(Verifica.PodeMatricular(codTurma[0].Trim())))
+            {
+                MessageBox.Show("Limite máximo de alunos atingidos.", "Impossível cadastrar!");
+                return;
+            }
+
             if (GerenciadorBanco.CadastrarMatricula(dia, int.Parse(codTurma[0]), int.Parse(codAluno[0])))
                 MessageBox.Show("Aluno matriculado com sucesso!");
         }

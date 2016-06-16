@@ -43,6 +43,7 @@ namespace EscolaIdiomas
                 return;
             }
 
+
             if (!(txt_minAlunos.Text.Length > 0 && txt_maxAlunos.Text.Length > 0 && msk_horarioInicial.Text.Length == 5 && diasSemana.Count() > 0 && msk_inicio.Text.Length == 10))
             {
                 MessageBox.Show("Verifique se todos os campos foram preenchidos corretamente e/ou se nenhum campo foi deixado em branco.", "Erro!");
@@ -55,8 +56,9 @@ namespace EscolaIdiomas
             string inicioAulas = msk_inicio.Text.Trim();
             int minAluno = int.Parse(txt_minAlunos.Text.Trim());
             int maxAluno = int.Parse(txt_maxAlunos.Text.Trim());
-            int modulos = int.Parse(cmb_modulos.SelectedItem.ToString());
+            string modulo = GerenciadorBanco.GetCodModuloReal(cmb_modulos.SelectedItem.ToString(), curso);
             
+
             if (diasClicados < diasCadastrados)
             {
                 int dias = diasCadastrados - diasClicados;
@@ -64,7 +66,7 @@ namespace EscolaIdiomas
                 return;
             }
 
-            if (GerenciadorBanco.CadastrarTurma(modulos, minAluno, maxAluno, diasSemana, horarioInicial, GerenciadorBanco.GetCodProfPorNome(professor[0]), inicioAulas))
+            if (GerenciadorBanco.CadastrarTurma(int.Parse(modulo), minAluno, maxAluno, diasSemana, horarioInicial, GerenciadorBanco.GetCodProfPorNome(professor[0]), inicioAulas))
                 MessageBox.Show("Turma cadastrada com sucesso!");
         }
         

@@ -327,7 +327,10 @@ namespace EscolaIdiomas
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexao;
                 cmd.CommandText = "INSERT INTO Matricula (vencimento_parcela, cod_turma, cod_aluno) VALUES " +
-                                  "(@diaVencimento, @codTurma, @codAluno)";
+                                  "(@diaVencimento, @codTurma, @codAluno) " +
+                                  "UPDATE Aluno SET situacao_aluno = 'a' FROM Aluno INNER JOIN Matricula " +
+                                  "ON ALuno.cod_aluno = Matricula.cod_aluno " +
+                                  "WHERE Matricula.cod_aluno = @codAluno";
 
                 cmd.Parameters.Add(new SqlParameter("@diaVencimento", diaVencimento));
                 cmd.Parameters.Add(new SqlParameter("@codTurma", codTurma));
@@ -344,7 +347,6 @@ namespace EscolaIdiomas
             {
                 MessageBox.Show(ex.Message);
                 return false;
-
             }
             finally
             {
@@ -352,7 +354,7 @@ namespace EscolaIdiomas
             }
         }
 
-        public static bool CadastrarPagamento(string diaVencimento, int codTurma, int codAluno)
+        public static bool CadastrarPagamento(string dataPagamento, int codMatricula)
         {
             SqlConnection conexao = new SqlConnection(strConexao);
             try
@@ -360,12 +362,12 @@ namespace EscolaIdiomas
                 conexao.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexao;
-                cmd.CommandText = "INSERT INTO Matricula (vencimento_parcela, cod_turma, cod_aluno) VALUES " +
-                                  "(@diaVencimento, @codTurma, @codAluno)";
+                cmd.CommandText = "SET DATEFORMAT DMY " +
+                                  "INSERT INTO Pagamento (data_pagamento, cod_matricula) VALUES " +
+                                  "(@dataPagamento, @codMatricula)";
 
-                cmd.Parameters.Add(new SqlParameter("@diaVencimento", diaVencimento));
-                cmd.Parameters.Add(new SqlParameter("@codTurma", codTurma));
-                cmd.Parameters.Add(new SqlParameter("@codAluno", codAluno));
+                cmd.Parameters.Add(new SqlParameter("@dataPagamento", dataPagamento));
+                cmd.Parameters.Add(new SqlParameter("@codMatricula", codMatricula));
 
                 cmd.CommandType = CommandType.Text;
 
@@ -385,6 +387,9 @@ namespace EscolaIdiomas
                 conexao.Close();
             }
         }
+
+
+
 
 
         public static int GetIdade(string dataNasc, int dias)
@@ -553,8 +558,39 @@ namespace EscolaIdiomas
             return cod;
         }
 
+        public static string GetCodModuloReal(string codVisual, string nomeCurso)
+        {
+            string cod = "";
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
 
-        
+                cmd.CommandText = "SELECT cod_modulo FROM Modulo INNER JOIN Curso " +
+                                  "ON Curso.cod_curso = Modulo.cod_curso " +
+                                  "WHERE cod_moduloVisual = @codVisual AND nome_curso = @nomeCurso";
+
+                cmd.Parameters.Add(new SqlParameter("@codVisual", codVisual));
+                cmd.Parameters.Add(new SqlParameter("@nomeCurso", nomeCurso));
+
+                cmd.CommandType = CommandType.Text;
+                cod = Convert.ToString(cmd.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+
+            return cod;
+        }
+
+
 
         public static int GetCodCursoPorNome(string nome)
         {
@@ -687,7 +723,36 @@ namespace EscolaIdiomas
             return id;
         }
 
-        public static int GetQtdMod(string nomeCurso)
+        // Quantidade de matriculas em uma turma
+        public static int GetQtdMatriculas(string codTurma)
+        {
+            int qtdMatriculas = 0;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+
+                cmd.CommandText = "SELECT COUNT(*) FROM Matricula INNER JOIN Turma " +
+                                  "ON Matricula.cod_turma = Turma.cod_turma WHERE Turma.cod_turma = @codCurso";
+                cmd.Parameters.Add(new SqlParameter("@codCurso", codTurma));
+                cmd.CommandType = CommandType.Text;
+                qtdMatriculas = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+
+            return qtdMatriculas;
+        }
+
+        public static int GetQtdAluno(string codTurma)
         {
             int qtdMod = 0;
             SqlConnection conexao = new SqlConnection(strConexao);
@@ -697,8 +762,8 @@ namespace EscolaIdiomas
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexao;
 
-                cmd.CommandText = "SELECT qtd_modulos FROM Curso WHERE nome_curso = @nomeCurso";
-                cmd.Parameters.Add(new SqlParameter("@nomeCurso", nomeCurso));
+                cmd.CommandText = "SELECT qtd_max_aluno FROM Turma WHERE cod_turma = @codTurma";
+                cmd.Parameters.Add(new SqlParameter("@codTurma", codTurma));
                 cmd.CommandType = CommandType.Text;
                 qtdMod = Convert.ToInt32(cmd.ExecuteScalar());
             }
@@ -936,9 +1001,9 @@ namespace EscolaIdiomas
             }
             finally
             {
-
                 conexao.Close();
             }
+            
             return lista;
         }
 
@@ -1020,6 +1085,37 @@ namespace EscolaIdiomas
             }
             return lista;
         }
+
+        public static List<string> getListaMatriculados(string codTurma)
+        {
+            SqlConnection conexao = new SqlConnection(strConexao);
+            List<string> lista = new List<string>();
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandType = CommandType.Text;
+
+                cmd.CommandText = "SELECT CONVERT(VARCHAR, cod_aluno) FROM matricula WHERE cod_turma = @codTurma";
+                cmd.Parameters.Add(new SqlParameter("@codTurma", codTurma));
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                    lista.Add(dr.GetString(0));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+
+            return lista;
+        }
+
 
         // Para Pagamentos
         public static List<string> getListaMatriculas()
@@ -1476,8 +1572,10 @@ namespace EscolaIdiomas
                 conexao.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexao;
-                cmd.CommandText = "SELECT CONVERT(VARCHAR, cod_turma) AS 'Código da Turma' "+
-                                  "FROM Turma ORDER BY cod_turma";
+                cmd.CommandText = "SELECT CONVERT(VARCHAR, cod_turma) AS 'Código da Turma', nome_curso AS 'Nome do Curso' FROM Turma INNER JOIN Modulo " +
+                                  "ON Turma.cod_modulo = Modulo.cod_modulo INNER JOIN Curso " +
+                                  "ON Curso.cod_curso = Modulo.cod_curso " +
+                                  "ORDER BY nome_curso, cod_turma";
                 cmd.CommandType = CommandType.Text;
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -1600,6 +1698,119 @@ namespace EscolaIdiomas
             }
         }
 
+
+
+        // Relatórios
+        
+        // Alunos, lista de todos os cursos e todas as situações
+        public static DataTable rAlunoTodosCurso()
+        {
+            DataTable dt = null;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandText = "SELECT situacao_aluno AS 'Situação do Aluno', nome_aluno AS 'Nome do Aluno', " +
+                                  "cpf_aluno AS 'CPF do ALuno', tel_aluno AS 'Telefone do Aluno', " +
+                                  "email_aluno AS 'Email do Aluno' FROM ALuno";
+
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
+        // Alunos, lista de todos os cursos por situação
+        public static DataTable rAlunoTodosCursoSituacao(string situacaoAluno)
+        {
+            DataTable dt = null;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandText = "SELECT situacao_aluno AS 'Situação do Aluno', nome_aluno AS 'Nome do Aluno', " +
+                                  "cpf_aluno AS 'CPF do ALuno', tel_aluno AS 'Telefone do Aluno', " +
+                                  "email_aluno AS 'Email do Aluno' FROM ALuno WHERE situacao_aluno = @situacaoAluno";
+                cmd.Parameters.Add(new SqlParameter("@situacaoAluno", situacaoAluno));
+
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
+        // Alunos, lista de alunos ativos do curso selecionado
+        public static DataTable rAlunosAtivosCurso(string nomeCurso)
+        {
+            DataTable dt = null;
+            SqlConnection conexao = new SqlConnection(strConexao);
+            try
+            {
+                conexao.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexao;
+                cmd.CommandText = "SELECT situacao_aluno AS 'Situação do Aluno', nome_aluno AS 'Nome do Aluno', " +
+                                  "cpf_aluno AS 'CPF do ALuno', tel_aluno AS 'Telefone do Aluno', " +
+                                  "email_aluno AS 'Email do Aluno' FROM ALuno INNER JOIN Matricula " +
+                                  "ON Aluno.cod_aluno = Matricula.cod_aluno INNER JOIN Turma " +
+                                  "ON Matricula.cod_turma = Turma.cod_turma INNER JOIN Modulo " +
+                                  "ON Modulo.cod_modulo = Turma.cod_modulo INNER JOIN Curso " +
+                                  "ON Curso.cod_curso = Modulo.cod_curso " +
+                                  "WHERE situacao_aluno = @situacaoAluno AND nome_curso = @nomeCurso";
+                cmd.Parameters.Add(new SqlParameter("@situacaoAluno", "a"));
+                cmd.Parameters.Add(new SqlParameter("@nomeCurso", nomeCurso));
+
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
 
     }
 }

@@ -20,6 +20,7 @@ namespace EscolaIdiomas
         {
             InitializeComponent();
             ck_incluiMulta.Checked = true;
+            msk_dataHoje.Text = DateTime.Now.ToString();
         }
 
         private void btn_selecionar_Click(object sender, EventArgs e)
@@ -45,6 +46,9 @@ namespace EscolaIdiomas
                 if (ck_incluiMulta.Checked)
                     txt_vMulta.Text = (vMulta * dias).ToString();
             }
+
+
+
     }
 
 
