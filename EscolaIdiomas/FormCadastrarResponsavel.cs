@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace EscolaIdiomas
 {
-    public partial class FormResponsavel : Form
+    public partial class FormCadastrarResponsavel : Form
     {
         public int codResp;
 
-        public FormResponsavel()
+        public FormCadastrarResponsavel()
         {
             InitializeComponent();
             this.Text = "Cadastrar Responsável";

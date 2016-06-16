@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace EscolaIdiomas
 {
-    public partial class FormAluno : Form
+    public partial class FormCadastradarAluno : Form
     {
         public string caminhoImagem = @"C:\Projeto\EscolaIdiomas\Fotos\user.png";
 
-        public FormAluno(string texto)
+        public FormCadastradarAluno(string texto)
         {
             InitializeComponent();
             pic_fotoAluno.ImageLocation = caminhoImagem;
@@ -141,7 +141,7 @@ namespace EscolaIdiomas
                    
                 if (resultado.Equals(DialogResult.Yes))
                     {
-                        FormResponsavel form = new FormResponsavel();
+                        FormCadastrarResponsavel form = new FormCadastrarResponsavel();
                         form.ShowDialog();
 
                         string telefoneAlt = dddAltAluno + telAltAluno;

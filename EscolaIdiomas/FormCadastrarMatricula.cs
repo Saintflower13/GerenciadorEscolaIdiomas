@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace EscolaIdiomas
 {
-    public partial class FormMatricula : Form
+    public partial class FormCadastrarMatricula : Form
     {
-        public FormMatricula()
+        public FormCadastrarMatricula()
         {
             InitializeComponent();
         }

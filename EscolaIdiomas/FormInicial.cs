@@ -20,7 +20,7 @@ namespace EscolaIdiomas
         private void cadastrarAlunoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string texto = "Cadastrar Aluno";
-            FormAluno form = new FormAluno(texto);
+            FormCadastradarAluno form = new FormCadastradarAluno(texto);
             form.MdiParent = this;
             form.Show();
         }
@@ -34,14 +34,14 @@ namespace EscolaIdiomas
 
         private void cadastrarProfessorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormProfessor form = new FormProfessor();
+            FormCadastrarProfessor form = new FormCadastrarProfessor();
             form.MdiParent = this;
             form.Show();
         }
 
         private void cadastrarCursoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormCurso form = new FormCurso();
+            FormCadastrarCurso form = new FormCadastrarCurso();
             form.MdiParent = this;
             form.Show();
         }
@@ -49,7 +49,7 @@ namespace EscolaIdiomas
         private void cadastrarTurmaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
-            FormTurma form = new FormTurma();
+            FormCadastrarTurma form = new FormCadastrarTurma();
             form.MdiParent = this;
             form.Show();
         }
@@ -110,7 +110,7 @@ namespace EscolaIdiomas
 
         private void matriculaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormMatricula form = new FormMatricula();
+            FormCadastrarMatricula form = new FormCadastrarMatricula();
             form.MdiParent = this;
             form.Show();
         }

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace EscolaIdiomas
 {
-    public partial class FormTurma : Form
+    public partial class FormCadastrarTurma : Form
     {
         public string diasSemana = "";
         public int diasClicados = 0;
@@ -18,7 +18,7 @@ namespace EscolaIdiomas
         public bool modulos = false;
         
 
-        public FormTurma()
+        public FormCadastrarTurma()
         {
             InitializeComponent();
             rd_I.Checked = true;

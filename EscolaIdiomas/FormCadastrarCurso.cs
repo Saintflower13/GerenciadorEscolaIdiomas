@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace EscolaIdiomas
 {
-    public partial class FormCurso : Form
+    public partial class FormCadastrarCurso : Form
     {
-        public FormCurso()
+        public FormCadastrarCurso()
         {
             InitializeComponent();
             txt_codCurso.Text = (GerenciadorBanco.GetCodCurso() + 1).ToString();
@@ -44,7 +44,7 @@ namespace EscolaIdiomas
                    descricao = txt_descricaoCurso.Text.Trim(), 
                    modulos = txt_modulos.Text.Trim();
             
-            FormModulo form = new FormModulo(int.Parse(modulos), GerenciadorBanco.GetCodCurso() + 1, nome, descricao, meses, horas, 
+            FormCadastrarModulo form = new FormCadastrarModulo(int.Parse(modulos), GerenciadorBanco.GetCodCurso() + 1, nome, descricao, meses, horas, 
                                              aulaSem, vMatricula, float.Parse(total), float.Parse(multa), float.Parse(rescisao));
             form.ShowDialog();
             return;

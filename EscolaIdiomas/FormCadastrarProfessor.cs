@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace EscolaIdiomas
 {
-    public partial class FormProfessor : Form
+    public partial class FormCadastrarProfessor : Form
     {
 
         string caminhoImagem = @"C:\Projeto\user.png";
 
-        public FormProfessor()
+        public FormCadastrarProfessor()
         {
             InitializeComponent();
             msk_admissaoProf.Text = DateTime.Now.ToString();

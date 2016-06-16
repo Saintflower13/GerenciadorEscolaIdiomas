@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace EscolaIdiomas
 {
-    public partial class FormModulo : Form
+    public partial class FormCadastrarModulo : Form
     {
         int qtd_modulos, cod_curso;
         int i = 1;
@@ -19,7 +19,7 @@ namespace EscolaIdiomas
         float totalCurso, multaCurso, rescisaoCurso;
         int modulosCurso;
 
-        public FormModulo(int qtdMod, int codCurso, string cursoNome, string cursoDescricao, string cursoMeses, string cursoHoras, 
+        public FormCadastrarModulo(int qtdMod, int codCurso, string cursoNome, string cursoDescricao, string cursoMeses, string cursoHoras, 
                           string cursoAulaSem, string cursoVMatricula, float cursoTotal, float cursoMulta, float cursoRescisao)
         {
             InitializeComponent();

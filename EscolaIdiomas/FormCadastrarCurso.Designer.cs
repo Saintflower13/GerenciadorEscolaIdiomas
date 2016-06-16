@@ -1,6 +1,6 @@
 ﻿namespace EscolaIdiomas
 {
-    partial class FormCurso
+    partial class FormCadastrarCurso
     {
         /// <summary>
         /// Required designer variable.
